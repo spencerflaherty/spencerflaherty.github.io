@@ -504,11 +504,14 @@ https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-418
 ### High Priority
 - [x] Add "The Stack" sections to each item on the Automation page (use bulleted format)
 - [x] **Create image prompts for all projects** — All 31 projects now have complete image-prompt.md files (Automation: 8, Media: 5, Paid Ads: 4, Reporting: 3, Resources: 5, Websites: 6)
-- [ ] **Generate images from prompts** — Use AI image generation tool to create visuals for each project
+- [x] **Generate images for Automation page** — All 8 automation project images created and added to HTML
+- [x] **Update Automation.html with images** — Synced contentSegments and dropdownBodyContent with current .md structure, added all image URLs
+- [ ] **Image-specific and template-level formatting refinements** — Address any visual/layout issues with images and overall template structure
+- [ ] **Generate images for remaining pages** — Media, Paid Ads, Reporting, Resources, Websites (23 remaining)
 - [ ] Add Year to all pieces
 - [ ] **Add descriptive image alt text** — All images need SEO-optimized alt attributes describing the content
 - [ ] **Websites page:** Make all entries have actual URL as H3, add button links
-- [ ] **Update web pages with HTML files and confirm SEO compliance**
+- [ ] **Update remaining web pages with HTML files and confirm SEO compliance**
 
 ### SEO & Accessibility
 - [x] **Convert CSS heading classes to semantic HTML tags** — Created versions with `<h1>`, `<h2>`, `<h3>` tags
