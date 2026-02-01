@@ -6,20 +6,25 @@
     <title>Marketing Automation Portfolio | Spencer Flaherty</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation.">
+    <meta name="description"
+        content="AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation.">
 
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Marketing Automation Portfolio | Spencer Flaherty">
-    <meta property="og:description" content="AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation.">
+    <meta property="og:description"
+        content="AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.spencerflaherty.com/automation">
-    <meta property="og:image" content="https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-4186-4b41-826b-b67ce7c95d71/OG+Image.png?content-type=image%2Fpng">
+    <meta property="og:image"
+        content="https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-4186-4b41-826b-b67ce7c95d71/OG+Image.png?content-type=image%2Fpng">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Marketing Automation Portfolio | Spencer Flaherty">
-    <meta name="twitter:description" content="AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation.">
-    <meta name="twitter:image" content="https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-4186-4b41-826b-b67ce7c95d71/OG+Image.png?content-type=image%2Fpng">
+    <meta name="twitter:description"
+        content="AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation.">
+    <meta name="twitter:image"
+        content="https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-4186-4b41-826b-b67ce7c95d71/OG+Image.png?content-type=image%2Fpng">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,23 +33,29 @@
 
 <body>
     <div class="window-container">
-    <div class="window-frame">
-        <div class="window-header">
-            <div class="traffic-lights">
-                <span class="light red"></span>
-                <span class="light yellow"></span>
-                <span class="light green"></span>
-            </div>
-            <div class="window-title">/Automation/</div>
-            <div class="theme-toggle-container">
-                <span class="toggle-label">B/W</span>
-                <div class="theme-toggle" id="themeToggle">
-                    <div class="toggle-knob"></div>
+        <div class="window-frame">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <span class="light red"></span>
+                    <span class="light yellow"></span>
+                    <span class="light green"></span>
+                </div>
+                <div class="window-title">/Automation/</div>
+                <div class="theme-toggle-container">
+                    <span class="toggle-label">B/W</span>
+                    <div class="theme-toggle" id="themeToggle">
+                        <div class="toggle-knob"></div>
+                    </div>
                 </div>
             </div>
+            <div class="terminal-screen terminal-loading"><span id="terminal-text"></span><span class="user-input"
+                    id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span
+                    id="press-enter"></span>
+                <form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="numeric"
+                        enterkeyhint="go" id="mobile-input" autocomplete="off" autocorrect="off" autocapitalize="off"
+                        spellcheck="false"></form>
+            </div>
         </div>
-        <div class="terminal-screen terminal-loading"><span id="terminal-text"></span><span class="user-input" id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span id="press-enter"></span><form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="numeric" enterkeyhint="go" id="mobile-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></form></div>
-    </div>
     </div>
 
     <style>
@@ -86,7 +97,8 @@
 
         /* Container ensures glow is never clipped - horizontal padding only */
         .window-container {
-            padding: 0 25px; /* 0 top/bottom, 25px left/right */
+            padding: 0 25px;
+            /* 0 top/bottom, 25px left/right */
         }
 
         .window-frame {
@@ -377,6 +389,7 @@
             0% {
                 clip-path: inset(0 0 100% 0);
             }
+
             100% {
                 clip-path: inset(0 0 0% 0);
             }
@@ -495,10 +508,14 @@
         }
 
         @keyframes blink {
-            0%, 50% {
+
+            0%,
+            50% {
                 opacity: 1;
             }
-            50.01%, 100% {
+
+            50.01%,
+            100% {
                 opacity: 0;
             }
         }
@@ -517,11 +534,10 @@
             height: 1px;
             opacity: 0;
         }
-
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const toggle = document.getElementById('themeToggle');
             const body = document.body;
 
@@ -531,7 +547,7 @@
                 body.classList.add('classic-theme');
             }
 
-            toggle.addEventListener('click', function() {
+            toggle.addEventListener('click', function () {
                 body.classList.toggle('classic-theme');
 
                 // Save preference
@@ -544,45 +560,29 @@
 
             // Dropdown body content (populated after typing completes to avoid typing delay)
             const dropdownBodyContent = [
-                // Geospatial Prospecting
-                "Architected an end-to-end pipeline to identify high-value EV infrastructure leads by filtering physical land attributes, resolving ownership, and automating executive outreach." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/004f6c78-e79c-436b-aabf-24e760a2c829/Geospatial+Prospecting.png?content-type=image%2Fpng' alt='Geospatial Prospecting'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• AI Logic: Agentic Workflows<br>• Spatial Data: OpenStreetMap<br>• Property Data: Public Land Records<br>• B2B Intelligence: ZoomInfo<br>• Execution Layer: Apollo",
+                // Geospatial Prospecting Workflow
+                "Created an automated geospatial lead pipeline that isolates high-intent targets by filtering MCAtlas GIS data for specific property attributes (e.g., parking lots with 30+ spaces). The workflow transforms raw GPS coordinates into verified addresses, maps them to corporate entities via ZoomInfo, and programmatically reaches out to key decision makers via outbound sequences in Apollo." +
+                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/c9d01dc8-0436-42d8-b9e9-131b06fbc874/Geospatial+Prospecting+Workflow+.png?content-type=image%2Fpng' alt='Geospatial Prospecting Workflow'></div>",
 
-                // Gov-Procurement Pipeline
-                "Engineered a public-sector lead generation engine by scraping public procurement datasets, collecting agency persona contact info, and automating high-intent outbound sequences." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/01aab19c-7d15-4a9e-bd84-ee8e58a5f5a6/Gov-Procurement+Pipeline.png?content-type=image%2Fpng' alt='Gov-Procurement Pipeline'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Ingestion Layer: Scraper Agent<br>• Enrichment Layer: ZoomInfo<br>• Execution Layer: AI Logic + Apollo.io",
+                // Automated Public Sector Prospecting Engine
+                "Engineered an automated lead generation workflow that scrapes public procurement data to identify high-intent government prospects. The system utilizes an AI-enrichment layer to prioritize targets by demographic data, programmatically maps agencies to corporate entities via ZoomInfo, and exports decision-maker personas to Apollo for automated outbound sequences." +
+                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/6a6cca35-0432-4270-a548-71b35597af4e/Automated+Public+Sector+Prospecting+Engine+.png?content-type=image%2Fpng' alt='Automated Public Sector Prospecting Engine'></div>",
 
-                // Arcadia Run Outreach Campaign
-                "Automated personalized outreach to peer properties by pulling CRM history for each contact, generating tailored emails referencing past interactions, and embedding case study links—making each message feel hand-written while scaling across the mid-Atlantic." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/f96cfd2d-7dd0-4bf8-a550-7a2eeeec2dd8/Arcadia+Run+Outreach+Campaign.png?content-type=image%2Fpng' alt='Arcadia Run Outreach Campaign'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Data Source: CRM Customer History<br>• AI Logic: Dynamic Email Personalization<br>• Content Asset: Video Case Study<br>• Execution Layer: Automated Sequence Delivery",
+                // Intent-to-Sales Conversion Engine
+                "Architected an end-to-end inbound funnel that captures high-intent traffic from Google and LLM searches. Visitor ID intelligence de-anonymizes visitors in real-time, synchronizes identified profiles with custom lead-capture forms, and employs Zapier to effectively route prospects directly into the sales pipeline based on company attributes." +
+                "<div class='media-dialup-container'><iframe src='https://www.youtube-nocookie.com/embed/EmeirH2SBcU?rel=0&modestbranding=1' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div>",
 
-                // Intent Conversion Engine
-                "Built an inbound funnel that turns anonymous website traffic into qualified leads by identifying visitors through IP-to-company matching, layering in third-party intent signals to gauge buying readiness, and auto-routing high-fit prospects to sales." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/7679a8a8-804e-4fbd-85a6-56080d6030a5/Intent-to-Sales+Conversion+Engine.png?content-type=image%2Fpng' alt='Intent Conversion Engine'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Identity Resolution: Visitor De-anonymization (RB2B, Warmly, etc.)<br>• Intent Layer: Bidstream + Co-op Data (Bombora, Demandbase)<br>• Orchestration Layer: Zapier",
+                // Multi-Channel Paid Acquisition Engine
+                "Designed a high speed-to-lead paid acquisition system that synchronizes Facebook and LinkedIn Ads form submission data directly into CRM architecture. The workflow leverages Zapier-automation to eliminate manual data entry, ensuring real-time lead validation and routing during the peak-intent window.",
 
-                // Paid Acquisition Engine
-                "Designed a high speed-to-lead system by synchronizing Facebook and LinkedIn form submissions into CRM, routing validated leads via Zapier, and triggering instant rep notifications to maximize peak-intent conversion." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/caff4676-8b3b-4b6a-807f-366fbfae0d33/Paid+Acquisition+Engine.png?content-type=image%2Fpng' alt='Paid Acquisition Engine'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Platforms: Facebook, LinkedIn<br>• Orchestration Layer: Zapier<br>• Notification Layer: Slack/Email/SMS<br>• Pipeline Integration: CRM",
+                // RAG-Driven Lifecycle Personalization Pipeline/Engine
+                "Developed a sophisticated RAG (Retrieval-Augmented Generation) system that autonomously reactivates dormant CRM leads by referencing historical customer data for hyper-personalized outreach. The engine programmatically retrieves historical customer context, then leverages Apollo to execute automated, high-relevancy email sequences that reactivate churned customers and drive upsell opportunities.",
 
-                // RAG Reactivation Engine
-                "Developed RAG-based reactivation system by retrieving historical customer context from CRM, generating hyper-personalized outreach sequences, and executing automated email campaigns via Apollo to reactivate churned accounts and drive upsell opportunities." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/c0218682-5681-470e-a653-bde13e1bb4d6/RAG+Reactivation+Engine.png?content-type=image%2Fpng' alt='RAG Reactivation Engine'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Data Source: CRM<br>• Retrieval Layer: RAG Architecture<br>• AI Logic: LLM Generation<br>• Execution Layer: Apollo",
+                // Custom Software Solutions
+                "Built custom software solutions to bridge operational gaps, including an AI-driven CRM interaction layer. Additionally engineered a media recovery pipeline to identify and resolve corrupted video file headers at scale.",
 
-                // Custom Internal Tools
-                "Built lightweight apps to solve specific operational problems that previously required expensive software or went unsolved using AI-assisted development to move from idea to working tool in hours." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/d3508d37-8399-4305-9c02-6e756f53830d/Custom+Internal+Tools.png?content-type=image%2Fpng' alt='Custom Internal Tools'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Development: AI-Assisted Coding (Claude Code)<br>• Deployment: Local + Cloud Functions<br>• Use Cases: CRM Chat Interface, Video Recovery Pipeline, Data Cleanup Scripts",
-
-                // EV Feasibility Engine
-                "Developed an agentic workflow that transforms raw survey data into ROI/NOI projections, calculating asset value increases, and prioritizing state/local/utility incentives to drive decision-maker buy-in." +
-                "<div class='media-dialup-container'><img src='https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/53842093-c9bb-4c54-8054-2b827fe7f52b/EV+Feasibility+Engine.png?content-type=image%2Fpng' alt='EV Feasibility Engine'></div>" +
-                "<br><br><strong>The Stack:</strong><br>• Data Source: Resident Surveys<br>• AI Logic: Agentic Workflow<br>• Analysis Layer: Financial Modeling"
+                // Agentic EV Feasibility & ROI Engine
+                "Developed an agentic workflow that autonomously transforms a multifamily property resident survey into a comprehensive EV investment roadmap. The system transforms real-world demand data into ROI/NOI calculations, projected asset value increases, and a prioritized list of state, local, and utility incentives to drive stakeholder buy-in."
             ];
 
             // Auto-typing animation with instant DOM element injection
@@ -595,21 +595,20 @@
                 { type: 'element', tag: 'span', className: 'prompt-arrow', text: '$' },
                 { type: 'type', content: " ./display_projects\n\n" },
                 { type: 'element', tag: 'h1', className: 'h1', text: 'AUTOMATION' },
-                { type: 'element', tag: 'h2', className: 'h2', text: '// Outbound Lead Gen' },
-                { type: 'dropdown', text: '[+]  Geospatial Prospecting' },
-                { type: 'dropdown', text: '[+]  Gov-Procurement Pipeline' },
-                { type: 'dropdown', text: '[+]  Arcadia Run Outreach Campaign' },
+                { type: 'element', tag: 'h2', className: 'h2', text: '// Outbound Lead Generation' },
+                { type: 'dropdown', text: '[+]  Geospatial Prospecting Workflow' },
+                { type: 'dropdown', text: '[+]  Automated Public Sector Prospecting Engine' },
                 { type: 'inject', html: "<span class='line-break'></span>" },
-                { type: 'element', tag: 'h2', className: 'h2', text: '// Inbound Lead Gen + Management' },
-                { type: 'dropdown', text: '[+]  Intent Conversion Engine' },
-                { type: 'dropdown', text: '[+]  Paid Acquisition Engine' },
+                { type: 'element', tag: 'h2', className: 'h2', text: '// Inbound Lead Generation' },
+                { type: 'dropdown', text: '[+]  Intent-to-Sales Conversion Engine' },
+                { type: 'dropdown', text: '[+]  Multi-Channel Paid Acquisition Engine' },
                 { type: 'inject', html: "<span class='line-break'></span>" },
                 { type: 'element', tag: 'h2', className: 'h2', text: '// AI-Driven Personalization & Content Tools' },
-                { type: 'dropdown', text: '[+]  RAG Reactivation Engine' },
-                { type: 'dropdown', text: '[+]  Custom Internal Tools' },
+                { type: 'dropdown', text: '[+]  RAG-Driven Lifecycle Personalization Engine' },
+                { type: 'dropdown', text: '[+]  Custom Software Solutions' },
                 { type: 'inject', html: "<span class='line-break'></span>" },
                 { type: 'element', tag: 'h2', className: 'h2', text: '// Client-Facing Sales Enablement' },
-                { type: 'dropdown', text: '[+]  EV Feasibility Engine' },
+                { type: 'dropdown', text: '[+]  Agentic EV Feasibility & ROI Engine' },
                 { type: 'inject', html: "<span class='line-break'></span>" },
                 { type: 'element', tag: 'h2', className: 'h2', text: 'Navigate' },
                 { type: 'type', content: "root@spencer-portfolio:~\n" },
@@ -645,7 +644,7 @@
 
                 if (segment.type === 'type') {
                     // Type plain text character by character
-                    typeContent(segment.content, 0, function() {
+                    typeContent(segment.content, 0, function () {
                         processNextSegment();
                     });
                 } else if (segment.type === 'element') {
@@ -654,7 +653,7 @@
                     if (segment.className) el.className = segment.className;
                     terminalText.appendChild(el);
                     const speed = segment.speed || 1;
-                    typeIntoElement(el, segment.text, 0, speed, function() {
+                    typeIntoElement(el, segment.text, 0, speed, function () {
                         if (segment.addBreak) terminalText.appendChild(document.createElement('br'));
                         processNextSegment();
                     });
@@ -675,8 +674,8 @@
                     dropdown.appendChild(content);
                     terminalText.appendChild(dropdown);
                     // Type the text with [+] in strong, rest in span
-                    typeIntoElement(strong, '[+]', 0, 1, function() {
-                        typeIntoElement(textSpan, segment.text.substring(3), 0, 1, function() {
+                    typeIntoElement(strong, '[+]', 0, 1, function () {
+                        typeIntoElement(textSpan, segment.text.substring(3), 0, 1, function () {
                             processNextSegment();
                         });
                     });
@@ -692,8 +691,8 @@
                     terminalText.appendChild(link);
                     // Type [N] into strong, rest into span
                     const bracketEnd = segment.text.indexOf(']') + 1;
-                    typeIntoElement(strong, segment.text.substring(0, bracketEnd), 0, 1, function() {
-                        typeIntoElement(textSpan, segment.text.substring(bracketEnd), 0, 1, function() {
+                    typeIntoElement(strong, segment.text.substring(0, bracketEnd), 0, 1, function () {
+                        typeIntoElement(textSpan, segment.text.substring(bracketEnd), 0, 1, function () {
                             terminalText.appendChild(document.createElement('br'));
                             if (segment.extraBreak) terminalText.appendChild(document.createElement('br'));
                             processNextSegment();
@@ -705,7 +704,7 @@
                     link.href = segment.href;
                     link.className = 'terminal-link-inline';
                     terminalText.appendChild(link);
-                    typeIntoElement(link, segment.text, 0, 1, function() {
+                    typeIntoElement(link, segment.text, 0, 1, function () {
                         processNextSegment();
                     });
                 } else if (segment.type === 'inject') {
@@ -715,17 +714,6 @@
                     while (temp.firstChild) {
                         terminalText.appendChild(temp.firstChild);
                     }
-                    // Apply dialup-reveal animation to images
-                    const images = terminalText.querySelectorAll('.media-dialup-container img');
-                    images.forEach(function(img) {
-                        if (img.complete) {
-                            img.classList.add('dialup-reveal');
-                        } else {
-                            img.addEventListener('load', function() {
-                                img.classList.add('dialup-reveal');
-                            });
-                        }
-                    });
                     processNextSegment();
                 }
             }
@@ -741,7 +729,7 @@
                 } else {
                     terminalText.appendChild(document.createTextNode(char));
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                     typeContent(content, index + 1, callback);
                 }, typeSpeed);
             }
@@ -752,13 +740,13 @@
                     return;
                 }
                 element.textContent += text[index];
-                setTimeout(function() {
+                setTimeout(function () {
                     typeIntoElement(element, text, index + 1, speed, callback);
                 }, typeSpeed * speed);
             }
 
             // Start the animation
-            setTimeout(function() {
+            setTimeout(function () {
                 terminalScreen.classList.remove('terminal-loading');
                 initDropdowns();
                 processNextSegment();
@@ -795,7 +783,7 @@
                     } else if (currentInput.trim() !== "") {
                         inputDisplay.textContent = 'Error';
                         inputDisplay.classList.add('error');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             currentInput = "";
                             inputDisplay.textContent = currentInput;
                             inputDisplay.classList.remove('error');
@@ -822,14 +810,14 @@
                 // Function to scroll cursor into view when keyboard opens
                 function scrollCursorIntoView() {
                     // Wait for keyboard to appear, then scroll
-                    setTimeout(function() {
+                    setTimeout(function () {
                         cursor.scrollIntoView({
                             behavior: 'smooth',
                             block: 'center',
                             inline: 'nearest'
                         });
                         // Secondary scroll attempt after keyboard fully opens
-                        setTimeout(function() {
+                        setTimeout(function () {
                             cursor.scrollIntoView({
                                 behavior: 'smooth',
                                 block: 'center',
@@ -840,25 +828,25 @@
                 }
 
                 // Click on cursor or input display area to focus mobile input
-                cursor.addEventListener('click', function(e) {
+                cursor.addEventListener('click', function (e) {
                     e.stopPropagation();
                     mobileInput.focus();
                     scrollCursorIntoView();
                 });
 
-                inputDisplay.addEventListener('click', function(e) {
+                inputDisplay.addEventListener('click', function (e) {
                     e.stopPropagation();
                     mobileInput.focus();
                     scrollCursorIntoView();
                 });
 
                 // Also scroll when input receives focus (handles programmatic focus)
-                mobileInput.addEventListener('focus', function() {
+                mobileInput.addEventListener('focus', function () {
                     scrollCursorIntoView();
                 });
 
                 // Handle input from mobile keyboard
-                mobileInput.addEventListener('input', function(e) {
+                mobileInput.addEventListener('input', function (e) {
                     if (inputDisplay.classList.contains('error')) {
                         this.value = "";
                         return;
@@ -880,7 +868,7 @@
                     } else if (currentInput.trim() !== "") {
                         inputDisplay.textContent = 'Error';
                         inputDisplay.classList.add('error');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             currentInput = "";
                             inputDisplay.textContent = currentInput;
                             inputDisplay.classList.remove('error');
@@ -890,13 +878,13 @@
                 }
 
                 // Handle form submit (mobile Go/Enter button)
-                mobileForm.addEventListener('submit', function(e) {
+                mobileForm.addEventListener('submit', function (e) {
                     e.preventDefault();
                     handleMobileSubmit();
                 });
 
                 // Backup: handle keydown Enter on the input itself
-                mobileInput.addEventListener('keydown', function(e) {
+                mobileInput.addEventListener('keydown', function (e) {
                     if (e.key === 'Enter') {
                         e.preventDefault();
                         handleMobileSubmit();
@@ -904,7 +892,7 @@
                 });
 
                 // Handle iOS "Done" checkmark (dismisses keyboard, triggers blur)
-                mobileInput.addEventListener('blur', function(e) {
+                mobileInput.addEventListener('blur', function (e) {
                     if (currentInput.trim() !== "") {
                         handleMobileSubmit();
                     }
@@ -914,7 +902,7 @@
             // Initialize dropdowns using event delegation (works on dropdowns as they appear during typing)
             function initDropdowns() {
                 // Use event delegation on terminal screen so dropdowns work immediately as they're typed
-                terminalScreen.addEventListener('click', function(e) {
+                terminalScreen.addEventListener('click', function (e) {
                     const dropdownToggle = e.target.closest('.dropdown-toggle');
                     if (!dropdownToggle) return;
 
@@ -933,7 +921,7 @@
                         // Find the index of this dropdown
                         const allDropdowns = document.querySelectorAll('.dropdown');
                         let dropdownIndex = -1;
-                        allDropdowns.forEach(function(d, i) {
+                        allDropdowns.forEach(function (d, i) {
                             if (d === dropdown) dropdownIndex = i;
                         });
                         if (dropdownIndex >= 0 && dropdownBodyContent[dropdownIndex]) {
@@ -944,7 +932,7 @@
                             const strong = dropdownToggle.querySelector('strong');
                             if (strong) strong.textContent = '[-]';
                             // Close other dropdowns
-                            document.querySelectorAll('.dropdown.open').forEach(function(openDropdown) {
+                            document.querySelectorAll('.dropdown.open').forEach(function (openDropdown) {
                                 if (openDropdown !== dropdown) {
                                     openDropdown.classList.remove('open');
                                     const openStrong = openDropdown.querySelector('.dropdown-toggle strong');
@@ -952,7 +940,7 @@
                                 }
                             });
                             // Type the content with animation
-                            typeDropdownContent(content, dropdownBodyContent[dropdownIndex], function() {
+                            typeDropdownContent(content, dropdownBodyContent[dropdownIndex], function () {
                                 dropdown.dataset.animating = 'false';
                                 initSliders();
                             });
@@ -961,7 +949,7 @@
                     }
 
                     // Close all other open dropdowns
-                    document.querySelectorAll('.dropdown.open').forEach(function(openDropdown) {
+                    document.querySelectorAll('.dropdown.open').forEach(function (openDropdown) {
                         if (openDropdown !== dropdown) {
                             openDropdown.classList.remove('open');
                             const openStrong = openDropdown.querySelector('.dropdown-toggle strong');
@@ -1080,7 +1068,7 @@
 
                 // Find all images and iframes within the element
                 const mediaElements = element.querySelectorAll('img, iframe');
-                mediaElements.forEach(function(media) {
+                mediaElements.forEach(function (media) {
                     media.classList.add('dialup-reveal');
                 });
 
@@ -1100,7 +1088,7 @@
 
             // Initialize media sliders
             function initSliders() {
-                document.querySelectorAll('[data-slider]').forEach(function(slider) {
+                document.querySelectorAll('[data-slider]').forEach(function (slider) {
                     const track = slider.querySelector('.media-slider-track');
                     const slides = slider.querySelectorAll('.media-slider-slide');
                     const prevBtn = slider.querySelector('[data-slider-prev]');
@@ -1130,7 +1118,7 @@
                     }
 
                     if (prevBtn) {
-                        prevBtn.addEventListener('click', function(e) {
+                        prevBtn.addEventListener('click', function (e) {
                             e.preventDefault();
                             e.stopPropagation();
                             goPrev();
@@ -1138,7 +1126,7 @@
                     }
 
                     if (nextBtn) {
-                        nextBtn.addEventListener('click', function(e) {
+                        nextBtn.addEventListener('click', function (e) {
                             e.preventDefault();
                             e.stopPropagation();
                             goNext();
@@ -1149,12 +1137,12 @@
                     let startX = 0;
                     let isDragging = false;
 
-                    track.addEventListener('touchstart', function(e) {
+                    track.addEventListener('touchstart', function (e) {
                         startX = e.touches[0].clientX;
                         isDragging = true;
                     }, { passive: true });
 
-                    track.addEventListener('touchend', function(e) {
+                    track.addEventListener('touchend', function (e) {
                         if (!isDragging) return;
                         const endX = e.changedTouches[0].clientX;
                         const diff = startX - endX;
