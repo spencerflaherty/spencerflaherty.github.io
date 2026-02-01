@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Production & Media Portfolio | Spencer Flaherty</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Commercial video production, podcast studio builds, and documentary filmmaking. From case studies to AI-enhanced archival projects in Baltimore and beyond.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Video Production & Media Portfolio | Spencer Flaherty">
+    <meta property="og:description" content="Commercial video production, podcast studio builds, and documentary filmmaking. From case studies to AI-enhanced archival projects in Baltimore and beyond.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.spencerflaherty.com/media">
+    <meta property="og:image" content="https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-4186-4b41-826b-b67ce7c95d71/OG+Image.png?content-type=image%2Fpng">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Video Production & Media Portfolio | Spencer Flaherty">
+    <meta name="twitter:description" content="Commercial video production, podcast studio builds, and documentary filmmaking. From case studies to AI-enhanced archival projects in Baltimore and beyond.">
+    <meta name="twitter:image" content="https://images.squarespace-cdn.com/content/67758c2dcfaa0679c00768d7/4d19da35-4186-4b41-826b-b67ce7c95d71/OG+Image.png?content-type=image%2Fpng">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="window-container">
+    <div class="window-frame">
+        <div class="window-header">
+            <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+            </div>
+            <div class="window-title">/Media/</div>
+            <div class="theme-toggle-container">
+                <span class="toggle-label">B/W</span>
+                <div class="theme-toggle" id="themeToggle">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
+        </div>
+        <div class="terminal-screen terminal-loading"><span id="terminal-text"></span><span class="user-input" id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span id="press-enter"></span><form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="numeric" enterkeyhint="go" id="mobile-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></form></div>
+    </div>
+    </div>
+
+    <style>
+        /* --- CSS RESET --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* --- CSS VARIABLES FOR THEMING --- */
+        :root {
+            /* Cyberpunk Theme (default) */
+            --frame-border: #ff00bb;
+            --frame-shadow: rgba(255, 0, 187, 0.4);
+            --header-bg: #2a0036;
+            --terminal-bg: #1a0022;
+            --text-color: #00ffff;
+            --accent-color: #ff00bb;
+            --link-border: #00ffff;
+            --link-hover-bg: #00ffff;
+            --link-hover-text: #1a0022;
+        }
+
+        body.classic-theme {
+            /* Classic Black & White Theme - window only */
+            --frame-border: #666666;
+            --frame-shadow: rgba(0, 0, 0, 0.3);
+            --header-bg: #2d2d2d;
+            --terminal-bg: #000000;
+            --text-color: #ffffff;
+            --accent-color: #ffffff;
+            --link-border: #ffffff;
+            --link-hover-bg: #ffffff;
+            --link-hover-text: #000000;
+        }
+
+        /* --- BASE STYLES --- */
+
+        /* Container ensures glow is never clipped - horizontal padding only */
+        .window-container {
+            padding: 0 25px; /* 0 top/bottom, 25px left/right */
+        }
+
+        .window-frame {
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            border: 2px solid var(--frame-border);
+            box-shadow: 0 0 20px var(--frame-shadow), 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            background-color: var(--terminal-bg);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+        }
+
+        .window-header {
+            background-color: var(--header-bg);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--frame-border);
+            position: relative;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .red {
+            background-color: #ff5f56;
+        }
+
+        .yellow {
+            background-color: #ffbd2e;
+        }
+
+        .green {
+            background-color: #27c93f;
+        }
+
+        body.classic-theme .red,
+        body.classic-theme .yellow,
+        body.classic-theme .green {
+            background-color: #666666;
+        }
+
+        .window-title {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 14px;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        /* --- THEME TOGGLE (iOS Style) --- */
+        .theme-toggle-container {
+            position: absolute;
+            right: 15px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            color: var(--accent-color);
+            opacity: 0.7;
+            transition: color 0.4s ease;
+        }
+
+        .theme-toggle {
+            width: 34px;
+            height: 20px;
+            background-color: #ff00bb;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.9;
+        }
+
+        .toggle-knob {
+            width: 16px;
+            height: 16px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.04);
+        }
+
+        body.classic-theme .toggle-knob {
+            transform: translateX(14px);
+        }
+
+        body.classic-theme .theme-toggle {
+            background-color: #e5e5e5;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .terminal-screen {
+            background-color: var(--terminal-bg);
+            color: var(--text-color);
+            padding: 10px 25px 10px 25px;
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            overflow-x: hidden;
+            min-height: 50px;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Hide terminal content area until typing begins to prevent background flash */
+        .terminal-screen.terminal-loading {
+            min-height: 0;
+            padding: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* Button-style links (inline) */
+        .terminal-link {
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 5px 10px 5px 0;
+            border: 1px solid var(--link-border);
+            transition: all 0.3s ease;
+        }
+
+        .terminal-link:hover {
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-text);
+            box-shadow: 0 0 10px var(--frame-shadow);
+        }
+
+        .terminal-link:hover strong {
+            color: var(--link-hover-text);
+        }
+
+        /* Menu-style links (full width) */
+        .terminal-link-menu {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .terminal-link-menu:hover {
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-text);
+        }
+
+        .terminal-link-menu:hover strong {
+            color: var(--link-hover-text);
+        }
+
+        .terminal-link-menu:hover h3 {
+            color: var(--link-hover-text);
+        }
+
+        /* Inline text links (flow with text, no button styling) */
+        .terminal-link-inline {
+            color: var(--accent-color);
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .terminal-link-inline:hover {
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-text);
+        }
+
+        /* --- DROPDOWN --- */
+        .dropdown {
+            display: block;
+        }
+
+        .dropdown.open {
+            margin-bottom: 15px;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            border-left: 2px solid var(--accent-color);
+            margin: 10px 12px 10px 12px;
+            padding: 0 0 0 15px;
+            line-height: 1.8;
+            transition: border-color 0.4s ease;
+        }
+
+        .dropdown-content .terminal-link:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown.open .dropdown-content {
+            display: block;
+        }
+
+        /* --- TEXT HIERARCHY --- */
+        .terminal-screen h1 {
+            color: var(--accent-color);
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            transition: color 0.4s ease;
+        }
+
+        .terminal-screen h2 {
+            color: var(--accent-color);
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            transition: color 0.4s ease;
+        }
+
+        .terminal-screen h3 {
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: bold;
+            display: inline;
+            transition: color 0.4s ease;
+        }
+
+        .terminal-screen strong {
+            color: var(--accent-color);
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+
+        .terminal-screen img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            display: block;
+        }
+
+        .terminal-screen iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            margin: 15px 0;
+            display: block;
+            border: none;
+        }
+
+        /* --- DIAL-UP STYLE REVEAL ANIMATION --- */
+        .dialup-reveal {
+            clip-path: inset(0 0 100% 0);
+            animation: dialupReveal 1.5s steps(30) forwards;
+        }
+
+        @keyframes dialupReveal {
+            0% {
+                clip-path: inset(0 0 100% 0);
+            }
+            100% {
+                clip-path: inset(0 0 0% 0);
+            }
+        }
+
+        /* Container for media with dial-up effect */
+        .media-dialup-container {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .media-dialup-container img,
+        .media-dialup-container iframe {
+            margin: 0;
+        }
+
+        /* --- MEDIA SLIDER --- */
+        .media-slider {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: 15px 0;
+        }
+
+        .media-slider-btn {
+            background: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            color: var(--terminal-bg);
+            font-size: 14px;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            transition: opacity 0.3s ease, background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .media-slider-btn:hover {
+            opacity: 0.7;
+        }
+
+        .media-slider-btn:disabled {
+            opacity: 0.2;
+            cursor: default;
+        }
+
+        .media-slider-viewport {
+            width: 70%;
+            max-width: 70%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .media-slider-track {
+            display: flex;
+            transition: transform 0.3s ease;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .media-slider-slide {
+            min-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .media-slider-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .line-break {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--text-color);
+            margin: 25px 0;
+        }
+
+        .prompt-arrow {
+            color: var(--accent-color);
+            transition: color 0.4s ease;
+        }
+
+        .user-input {
+            color: var(--accent-color);
+            font-weight: bold;
+            transition: color 0.4s ease;
+        }
+
+        .user-input.error {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 0 4px;
+        }
+
+        body.classic-theme .user-input.error {
+            background-color: #666666;
+        }
+
+        .typed-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.1em;
+            background-color: var(--accent-color);
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            transition: background-color 0.4s ease;
+            cursor: pointer;
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            50.01%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* Hidden mobile input */
+        #mobile-form {
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+
+        #mobile-input {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('themeToggle');
+            const body = document.body;
+
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'classic') {
+                body.classList.add('classic-theme');
+            }
+
+            toggle.addEventListener('click', function() {
+                body.classList.toggle('classic-theme');
+
+                // Save preference
+                if (body.classList.contains('classic-theme')) {
+                    localStorage.setItem('theme', 'classic');
+                } else {
+                    localStorage.setItem('theme', 'cyberpunk');
+                }
+            });
+
+            // Dropdown body content (populated after typing completes to avoid typing delay)
+            const dropdownBodyContent = [
+                // Station House x Xeal Case Study
+                "Produced a co-branded case study video highlighting a successful installation where cell signal limitations required a unique hardware solution. Used by both sales teams and featured on partner marketing channels." +
+                "<br><br><strong>The Stack:</strong><br>• Sony Cameras<br>• DaVinci Resolve<br>• Sales Enablement + Partner Co-Marketing<br>",
+
+                // eCommerce Masters Podcast
+                "Built a podcast studio from scratch: selecting and installing audio/video gear, painting walls, running track lighting. Operated the full production pipeline from recording through publishing." +
+                "<br><br><strong>The Stack:</strong><br>• Custom Lighting, Acoustic Treatment, Set Design<br>• Shure Mics, Rodecaster<br>• Blackmagic Studio Cameras (PoE)<br>• eCamm<br>",
+
+                // Industrial Job Site Documentation
+                "Captured photo and video documentation across high-profile electrical projects to fuel social media content and ad creative while doubling as sales collateral for proposals." +
+                "<br><br><strong>The Stack:</strong><br>• Sony Mirrorless<br>• Gimbal<br>• Wireless Lav/Receiver<br>• DaVinci Resolve<br>",
+
+                // Bowie, MD: 50 Years In The Making
+                "Digitized my grandfather's 8mm home films through professional transfer, then overlaid present-day shots to create a now/then video showing how Bowie, MD has transformed over 50 years. Footage was later featured in a local documentary shown in museums and public displays." +
+                "<br><br><strong>The Stack:</strong><br>• Canon Cameras<br>• Adobe Premiere Pro<br>• Archival + Modern Footage Overlay<br>",
+
+                // Canton, Baltimore
+                "Developing a documentary-style narrative about Canton, Baltimore by sourcing historical media from archives and using AI tools to restore, animate, and voice archival content—building on techniques from the Bowie project with a heavier AI-native workflow." +
+                "<br><br><strong>The Stack:</strong><br>• Sony Cameras<br>• DaVinci Resolve<br>• Kling 2.5/2.6<br>• Inworld TTS 1 Max<br>• Google AI Studio" +
+                "<br><br><em>(Publishing Summer 2026)</em><br>"
+            ];
+
+            // Auto-typing animation with instant DOM element injection
+            const terminalScreen = document.querySelector('.terminal-screen');
+            const terminalText = document.getElementById('terminal-text');
+
+            // Content segments: 'type' for plain text, 'element' for interactive elements with typed text
+            const contentSegments = [
+                { type: 'type', content: "root@spencer-portfolio:~/media\n" },
+                { type: 'element', tag: 'span', className: 'prompt-arrow', text: '$' },
+                { type: 'type', content: " ./display_projects\n\n" },
+                { type: 'element', tag: 'h1', className: 'h1', text: 'MEDIA' },
+                { type: 'element', tag: 'h2', className: 'h2', text: '// Video' },
+                { type: 'dropdown', text: '[+]  Station House x Xeal Case Study' },
+                { type: 'dropdown', text: '[+]  eCommerce Masters Podcast' },
+                { type: 'inject', html: "<span class='line-break'></span>" },
+                { type: 'element', tag: 'h2', className: 'h2', text: '// Sales Enablement' },
+                { type: 'dropdown', text: '[+]  Industrial Job Site Documentation' },
+                { type: 'inject', html: "<span class='line-break'></span>" },
+                { type: 'element', tag: 'h2', className: 'h2', text: '// Personal Projects' },
+                { type: 'dropdown', text: '[+]  Bowie, MD: 50 Years In The Making' },
+                { type: 'dropdown', text: '[+]  Canton, Baltimore' },
+                { type: 'inject', html: "<span class='line-break'></span>" },
+                { type: 'element', tag: 'h2', className: 'h2', text: 'Navigate' },
+                { type: 'type', content: "root@spencer-portfolio:~\n" },
+                { type: 'element', tag: 'span', className: 'prompt-arrow', text: '$' },
+                { type: 'type', content: " ./display_categories\n\n" },
+                { type: 'element', tag: 'strong', text: 'ID   MODULE', addBreak: true },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com', text: '[0]  ~Root/ (Home)' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/about', text: '[1]  About/' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/automation', text: '[2]  Automation/' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/media', text: '[3]  Media/' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/paid-ads', text: '[4]  Paid_Ads/' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/reporting', text: '[5]  Reporting/' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/resources', text: '[6]  Resources/' },
+                { type: 'navlink', href: 'https://www.spencerflaherty.com/websites', text: '[7]  Websites/', extraBreak: true },
+                { type: 'type', content: "Enter module ID [0-7]:" }
+            ];
+
+            let currentSegment = 0;
+            const typeSpeed = 5;
+
+            function processNextSegment() {
+                if (currentSegment >= contentSegments.length) {
+                    // All done
+                    document.getElementById('cursor').style.display = 'inline-block';
+                    document.getElementById('press-enter').innerHTML = '<br>(Press Enter)';
+                    document.addEventListener('keydown', handleInput);
+                    setupMobileInput();
+                    return;
+                }
+
+                const segment = contentSegments[currentSegment];
+                currentSegment++;
+
+                if (segment.type === 'type') {
+                    // Type plain text character by character
+                    typeContent(segment.content, 0, function() {
+                        processNextSegment();
+                    });
+                } else if (segment.type === 'element') {
+                    // Create element immediately (interactive), type its text content
+                    const el = document.createElement(segment.tag);
+                    if (segment.className) el.className = segment.className;
+                    terminalText.appendChild(el);
+                    const speed = segment.speed || 1;
+                    typeIntoElement(el, segment.text, 0, speed, function() {
+                        if (segment.addBreak) terminalText.appendChild(document.createElement('br'));
+                        processNextSegment();
+                    });
+                } else if (segment.type === 'dropdown') {
+                    // Create dropdown structure immediately (interactive), type visible text
+                    const dropdown = document.createElement('div');
+                    dropdown.className = 'dropdown';
+                    const toggle = document.createElement('a');
+                    toggle.className = 'terminal-link-menu dropdown-toggle';
+                    const strong = document.createElement('strong');
+                    toggle.appendChild(strong);
+                    const textSpan = document.createElement('h3');
+                    textSpan.className = 'h3';
+                    toggle.appendChild(textSpan);
+                    dropdown.appendChild(toggle);
+                    const content = document.createElement('div');
+                    content.className = 'dropdown-content';
+                    dropdown.appendChild(content);
+                    terminalText.appendChild(dropdown);
+                    // Type the text with [+] in strong, rest in span
+                    typeIntoElement(strong, '[+]', 0, 1, function() {
+                        typeIntoElement(textSpan, segment.text.substring(3), 0, 1, function() {
+                            processNextSegment();
+                        });
+                    });
+                } else if (segment.type === 'navlink') {
+                    // Create link immediately (interactive), type its text content
+                    const link = document.createElement('a');
+                    link.href = segment.href;
+                    link.className = 'terminal-link-menu';
+                    const strong = document.createElement('strong');
+                    const textSpan = document.createElement('span');
+                    link.appendChild(strong);
+                    link.appendChild(textSpan);
+                    terminalText.appendChild(link);
+                    // Type [N] into strong, rest into span
+                    const bracketEnd = segment.text.indexOf(']') + 1;
+                    typeIntoElement(strong, segment.text.substring(0, bracketEnd), 0, 1, function() {
+                        typeIntoElement(textSpan, segment.text.substring(bracketEnd), 0, 1, function() {
+                            terminalText.appendChild(document.createElement('br'));
+                            if (segment.extraBreak) terminalText.appendChild(document.createElement('br'));
+                            processNextSegment();
+                        });
+                    });
+                } else if (segment.type === 'inlinelink') {
+                    // Create inline text link (flows with text), type its text content
+                    const link = document.createElement('a');
+                    link.href = segment.href;
+                    link.className = 'terminal-link-inline';
+                    terminalText.appendChild(link);
+                    typeIntoElement(link, segment.text, 0, 1, function() {
+                        processNextSegment();
+                    });
+                } else if (segment.type === 'inject') {
+                    // Inject HTML instantly (no typing animation)
+                    const temp = document.createElement('div');
+                    temp.innerHTML = segment.html;
+                    while (temp.firstChild) {
+                        terminalText.appendChild(temp.firstChild);
+                    }
+                    processNextSegment();
+                }
+            }
+
+            function typeContent(content, index, callback) {
+                if (index >= content.length) {
+                    callback();
+                    return;
+                }
+                const char = content[index];
+                if (char === '\n') {
+                    terminalText.appendChild(document.createElement('br'));
+                } else {
+                    terminalText.appendChild(document.createTextNode(char));
+                }
+                setTimeout(function() {
+                    typeContent(content, index + 1, callback);
+                }, typeSpeed);
+            }
+
+            function typeIntoElement(element, text, index, speed, callback) {
+                if (index >= text.length) {
+                    callback();
+                    return;
+                }
+                element.textContent += text[index];
+                setTimeout(function() {
+                    typeIntoElement(element, text, index + 1, speed, callback);
+                }, typeSpeed * speed);
+            }
+
+            // Start the animation
+            setTimeout(function() {
+                terminalScreen.classList.remove('terminal-loading');
+                initDropdowns();
+                processNextSegment();
+            }, 500);
+
+            // Hide cursor until typing is complete
+            document.getElementById('cursor').style.display = 'none';
+
+            // Navigation map
+            const navigationMap = {
+                '0': 'https://www.spencerflaherty.com',
+                '1': 'https://www.spencerflaherty.com/about',
+                '2': 'https://www.spencerflaherty.com/automation',
+                '3': 'https://www.spencerflaherty.com/media',
+                '4': 'https://www.spencerflaherty.com/paid-ads',
+                '5': 'https://www.spencerflaherty.com/reporting',
+                '6': 'https://www.spencerflaherty.com/resources',
+                '7': 'https://www.spencerflaherty.com/websites'
+            };
+
+            // User input handling
+            let currentInput = "";
+            const inputDisplay = document.getElementById('user-input-display');
+            const mobileInput = document.getElementById('mobile-input');
+            const cursor = document.getElementById('cursor');
+
+            function handleInput(event) {
+                const key = event.key;
+                if (inputDisplay.classList.contains('error')) return;
+
+                if (key === 'Enter') {
+                    if (navigationMap.hasOwnProperty(currentInput)) {
+                        window.location.href = navigationMap[currentInput];
+                    } else if (currentInput.trim() !== "") {
+                        inputDisplay.textContent = 'Error';
+                        inputDisplay.classList.add('error');
+                        setTimeout(function() {
+                            currentInput = "";
+                            inputDisplay.textContent = currentInput;
+                            inputDisplay.classList.remove('error');
+                            mobileInput.value = "";
+                        }, 2000);
+                    }
+                    return;
+                }
+                if (key === 'Backspace') {
+                    currentInput = currentInput.slice(0, -1);
+                    inputDisplay.textContent = currentInput;
+                    return;
+                }
+                if (key.length === 1 && currentInput.length < 2) {
+                    currentInput += key;
+                    inputDisplay.textContent = currentInput;
+                }
+            }
+
+            // Mobile input handling
+            function setupMobileInput() {
+                const mobileForm = document.getElementById('mobile-form');
+
+                // Function to scroll cursor into view when keyboard opens
+                function scrollCursorIntoView() {
+                    // Wait for keyboard to appear, then scroll
+                    setTimeout(function() {
+                        cursor.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center',
+                            inline: 'nearest'
+                        });
+                        // Secondary scroll attempt after keyboard fully opens
+                        setTimeout(function() {
+                            cursor.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center',
+                                inline: 'nearest'
+                            });
+                        }, 300);
+                    }, 100);
+                }
+
+                // Click on cursor or input display area to focus mobile input
+                cursor.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileInput.focus();
+                    scrollCursorIntoView();
+                });
+
+                inputDisplay.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileInput.focus();
+                    scrollCursorIntoView();
+                });
+
+                // Also scroll when input receives focus (handles programmatic focus)
+                mobileInput.addEventListener('focus', function() {
+                    scrollCursorIntoView();
+                });
+
+                // Handle input from mobile keyboard
+                mobileInput.addEventListener('input', function(e) {
+                    if (inputDisplay.classList.contains('error')) {
+                        this.value = "";
+                        return;
+                    }
+                    // Limit to 2 characters
+                    if (this.value.length > 2) {
+                        this.value = this.value.slice(0, 2);
+                    }
+                    currentInput = this.value;
+                    inputDisplay.textContent = currentInput;
+                });
+
+                // Shared submit handler
+                function handleMobileSubmit() {
+                    if (inputDisplay.classList.contains('error')) return;
+
+                    if (navigationMap.hasOwnProperty(currentInput)) {
+                        window.location.href = navigationMap[currentInput];
+                    } else if (currentInput.trim() !== "") {
+                        inputDisplay.textContent = 'Error';
+                        inputDisplay.classList.add('error');
+                        setTimeout(function() {
+                            currentInput = "";
+                            inputDisplay.textContent = currentInput;
+                            inputDisplay.classList.remove('error');
+                            mobileInput.value = "";
+                        }, 2000);
+                    }
+                }
+
+                // Handle form submit (mobile Go/Enter button)
+                mobileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleMobileSubmit();
+                });
+
+                // Backup: handle keydown Enter on the input itself
+                mobileInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleMobileSubmit();
+                    }
+                });
+
+                // Handle iOS "Done" checkmark (dismisses keyboard, triggers blur)
+                mobileInput.addEventListener('blur', function(e) {
+                    if (currentInput.trim() !== "") {
+                        handleMobileSubmit();
+                    }
+                });
+            }
+
+            // Initialize dropdowns using event delegation (works on dropdowns as they appear during typing)
+            function initDropdowns() {
+                // Use event delegation on terminal screen so dropdowns work immediately as they're typed
+                terminalScreen.addEventListener('click', function(e) {
+                    const dropdownToggle = e.target.closest('.dropdown-toggle');
+                    if (!dropdownToggle) return;
+
+                    e.preventDefault();
+                    const dropdown = dropdownToggle.closest('.dropdown');
+                    if (!dropdown) return;
+
+                    // Check if dropdown is currently being animated
+                    if (dropdown.dataset.animating === 'true') return;
+
+                    // Populate dropdown content on first open (lazy loading) with typing animation
+                    const content = dropdown.querySelector('.dropdown-content');
+                    const needsContent = content && content.innerHTML.trim() === '' && !content.dataset.loaded;
+
+                    if (needsContent) {
+                        // Find the index of this dropdown
+                        const allDropdowns = document.querySelectorAll('.dropdown');
+                        let dropdownIndex = -1;
+                        allDropdowns.forEach(function(d, i) {
+                            if (d === dropdown) dropdownIndex = i;
+                        });
+                        if (dropdownIndex >= 0 && dropdownBodyContent[dropdownIndex]) {
+                            content.dataset.loaded = 'true';
+                            dropdown.dataset.animating = 'true';
+                            // Open dropdown first, then type content
+                            dropdown.classList.add('open');
+                            const strong = dropdownToggle.querySelector('strong');
+                            if (strong) strong.textContent = '[-]';
+                            // Close other dropdowns
+                            document.querySelectorAll('.dropdown.open').forEach(function(openDropdown) {
+                                if (openDropdown !== dropdown) {
+                                    openDropdown.classList.remove('open');
+                                    const openStrong = openDropdown.querySelector('.dropdown-toggle strong');
+                                    if (openStrong) openStrong.textContent = '[+]';
+                                }
+                            });
+                            // Type the content with animation
+                            typeDropdownContent(content, dropdownBodyContent[dropdownIndex], function() {
+                                dropdown.dataset.animating = 'false';
+                                initSliders();
+                            });
+                            return;
+                        }
+                    }
+
+                    // Close all other open dropdowns
+                    document.querySelectorAll('.dropdown.open').forEach(function(openDropdown) {
+                        if (openDropdown !== dropdown) {
+                            openDropdown.classList.remove('open');
+                            const openStrong = openDropdown.querySelector('.dropdown-toggle strong');
+                            if (openStrong) openStrong.textContent = '[+]';
+                        }
+                    });
+
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('open');
+                    const strong = dropdownToggle.querySelector('strong');
+                    if (strong) {
+                        if (dropdown.classList.contains('open')) {
+                            strong.textContent = '[-]';
+                        } else {
+                            strong.textContent = '[+]';
+                        }
+                    }
+                });
+            }
+
+            // Type dropdown content with animation - types text, injects HTML elements instantly
+            function typeDropdownContent(container, htmlContent, callback) {
+                let index = 0;
+                const dropdownTypeSpeed = 5;
+
+                function processNext() {
+                    if (index >= htmlContent.length) {
+                        callback();
+                        return;
+                    }
+
+                    // Check if we're at an HTML tag (but not an entity like &lt;)
+                    if (htmlContent[index] === '<' && htmlContent[index + 1] !== '!' && /[a-zA-Z\/]/.test(htmlContent[index + 1])) {
+                        // Find the tag name
+                        const tagMatch = htmlContent.substring(index).match(/^<(\/?)([\w-]+)/);
+                        if (tagMatch && !tagMatch[1]) { // Opening tag (not closing)
+                            const tagName = tagMatch[2].toLowerCase();
+                            const selfClosingTags = ['br', 'img', 'input', 'hr', 'meta', 'link'];
+
+                            if (selfClosingTags.includes(tagName)) {
+                                // Self-closing tag - find the end
+                                const endIndex = htmlContent.indexOf('>', index) + 1;
+                                const htmlElement = htmlContent.substring(index, endIndex);
+                                const temp = document.createElement('div');
+                                temp.innerHTML = htmlElement;
+                                while (temp.firstChild) {
+                                    const child = temp.firstChild;
+                                    container.appendChild(child);
+                                    // Add dial-up animation to images
+                                    if (child.tagName === 'IMG') {
+                                        child.classList.add('dialup-reveal');
+                                    }
+                                }
+                                index = endIndex;
+                                setTimeout(processNext, dropdownTypeSpeed);
+                                return;
+                            }
+
+                            // Find matching closing tag using a proper stack approach
+                            const closingTag = '</' + tagName + '>';
+                            let depth = 0;
+                            let endIndex = -1;
+                            let i = index;
+
+                            while (i < htmlContent.length) {
+                                // Look for opening tag of same type
+                                const openMatch = htmlContent.substring(i).match(new RegExp('^<' + tagName + '(\\s|>)', 'i'));
+                                if (openMatch) {
+                                    depth++;
+                                    i += tagName.length + 1;
+                                    continue;
+                                }
+
+                                // Look for closing tag
+                                if (htmlContent.substring(i, i + closingTag.length).toLowerCase() === closingTag) {
+                                    depth--;
+                                    if (depth === 0) {
+                                        endIndex = i + closingTag.length;
+                                        break;
+                                    }
+                                }
+                                i++;
+                            }
+
+                            if (endIndex > index) {
+                                // Inject the complete HTML element
+                                const htmlElement = htmlContent.substring(index, endIndex);
+                                const temp = document.createElement('div');
+                                temp.innerHTML = htmlElement;
+                                while (temp.firstChild) {
+                                    const child = temp.firstChild;
+                                    container.appendChild(child);
+                                    // Add dial-up animation to media elements
+                                    applyDialupAnimation(child);
+                                }
+                                index = endIndex;
+                                // Small delay after injecting element
+                                setTimeout(processNext, dropdownTypeSpeed * 3);
+                                return;
+                            }
+                        }
+                    }
+
+                    // Regular character - type it
+                    container.appendChild(document.createTextNode(htmlContent[index]));
+                    index++;
+                    setTimeout(processNext, dropdownTypeSpeed);
+                }
+
+                processNext();
+            }
+
+            // Apply dial-up animation to images and iframes
+            function applyDialupAnimation(element) {
+                if (!element || !element.querySelectorAll) return;
+
+                // Find all images and iframes within the element
+                const mediaElements = element.querySelectorAll('img, iframe');
+                mediaElements.forEach(function(media) {
+                    media.classList.add('dialup-reveal');
+                });
+
+                // Also check if the element itself is an img or iframe
+                if (element.tagName === 'IMG' || element.tagName === 'IFRAME') {
+                    element.classList.add('dialup-reveal');
+                }
+
+                // Check direct children that are media containers
+                if (element.classList && element.classList.contains('media-dialup-container')) {
+                    const childMedia = element.querySelector('img, iframe');
+                    if (childMedia) {
+                        childMedia.classList.add('dialup-reveal');
+                    }
+                }
+            }
+
+            // Initialize media sliders
+            function initSliders() {
+                document.querySelectorAll('[data-slider]').forEach(function(slider) {
+                    const track = slider.querySelector('.media-slider-track');
+                    const slides = slider.querySelectorAll('.media-slider-slide');
+                    const prevBtn = slider.querySelector('[data-slider-prev]');
+                    const nextBtn = slider.querySelector('[data-slider-next]');
+
+                    let currentIndex = 0;
+                    const totalSlides = slides.length;
+
+                    function updateSlider() {
+                        track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+                        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                        if (nextBtn) nextBtn.disabled = currentIndex === totalSlides - 1;
+                    }
+
+                    function goNext() {
+                        if (currentIndex < totalSlides - 1) {
+                            currentIndex++;
+                            updateSlider();
+                        }
+                    }
+
+                    function goPrev() {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateSlider();
+                        }
+                    }
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goPrev();
+                        });
+                    }
+
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goNext();
+                        });
+                    }
+
+                    // Swipe support
+                    let startX = 0;
+                    let isDragging = false;
+
+                    track.addEventListener('touchstart', function(e) {
+                        startX = e.touches[0].clientX;
+                        isDragging = true;
+                    }, { passive: true });
+
+                    track.addEventListener('touchend', function(e) {
+                        if (!isDragging) return;
+                        const endX = e.changedTouches[0].clientX;
+                        const diff = startX - endX;
+
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0) {
+                                goNext();
+                            } else {
+                                goPrev();
+                            }
+                        }
+                        isDragging = false;
+                    }, { passive: true });
+
+                    // Initial state
+                    updateSlider();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
