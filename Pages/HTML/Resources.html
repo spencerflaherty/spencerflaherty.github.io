@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Marketing & SEO Portfolio | Spencer Flaherty</title>
 
     <!-- SEO Meta Tags -->
@@ -49,6 +50,15 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
         :root {
             --frame-border: #ff00bb;
             --frame-shadow: rgba(255, 0, 187, 0.4);
@@ -173,8 +183,8 @@
         .dropdown-content { display: none; border-left: 2px solid var(--accent-color); margin: 10px 12px 10px 12px; padding: 0 0 0 15px; line-height: 1.8; transition: border-color 0.4s ease; }
         .dropdown-content .terminal-link:last-child { margin-bottom: 0; }
         .dropdown.open .dropdown-content { display: block; }
-        .terminal-screen h1 { color: var(--accent-color); font-size: 24px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; transition: color 0.4s ease; }
-        .terminal-screen h2 { color: var(--accent-color); font-size: 18px; font-weight: bold; display: block; transition: color 0.4s ease; }
+        .terminal-screen h1 { color: var(--accent-color); font-size: 24px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; margin: 0; transition: color 0.4s ease; }
+        .terminal-screen h2 { color: var(--accent-color); font-size: 18px; font-weight: bold; display: block; margin: 0; transition: color 0.4s ease; }
         .terminal-screen h3 { color: var(--text-color); font-size: 16px; font-weight: bold; display: inline; transition: color 0.4s ease; }
         .terminal-screen strong { color: var(--accent-color); font-weight: bold; text-decoration: none; transition: color 0.4s ease; }
         .terminal-screen img { max-width: 100%; height: auto; margin: 15px 0; display: block; }
@@ -208,23 +218,23 @@
             const dropdownBodyContent = [
                 // Process Documentation System
                 "Built onboarding handbooks and living wikis documenting end-to-end processes, with agents handling updates where reliable. Used across departments to optimize workflows, cutting man-hours per project by up to 80%." +
-                "<br><br><strong>The Stack:</strong><br>• Handbooks + Internal Wiki (Google Docs)<br>• Agentic Updates<br>",
+                "<br><br><strong>The Stack:</strong><br>• Handbooks + Internal Wiki (Google Docs)<br>• Agentic Updates",
 
                 // Agentic Workflow Automation
                 "Identified repetitive tasks and built small agentic workflows to handle them such as proposals, ROI calculators, incentive lookups. This frees the team to focus on creative, high-value work." +
-                "<br><br><strong>The Stack:</strong><br>• Claude + MCP<br>• Zapier<br>",
+                "<br><br><strong>The Stack:</strong><br>• Claude + MCP<br>• Zapier",
 
                 // Gated Lead Magnets
                 "Wrote and published lead-gen eBooks to capturing intent signals for instant sales routing while building organic search authority. Made PDFs crawlable, now cited in ChatGPT and Gemini responses." +
-                "<br><br><strong>The Stack:</strong><br>• Google Docs<br>• Adobe InDesign<br>• Organic + Paid Distribution (Crawlable PDFs)<br>",
+                "<br><br><strong>The Stack:</strong><br>• Google Docs<br>• Adobe InDesign<br>• Organic + Paid Distribution (Crawlable PDFs)",
 
                 // Groove Commerce Blog
                 "Managed production of hundreds of keyword-focused blog articles per year using writers, AI tools, and editorial systems. Drove 300%+ increase in organic traffic." +
-                "<br><br><strong>The Stack:</strong><br>• Third-Party Writers + AI Tools<br>• Editorial Calendar + CMS<br>",
+                "<br><br><strong>The Stack:</strong><br>• Third-Party Writers + AI Tools<br>• Editorial Calendar + CMS",
 
                 // Blue Whale EV Blog
                 "Video-forward content strategy tied to real client work and social proof." +
-                "<br><br><strong>The Stack:</strong><br>• Written + Video Case Studies<br>• Quality Over Quantity<br>• Real Work, Real Proof<br>"
+                "<br><br><strong>The Stack:</strong><br>• Written + Video Case Studies<br>• Quality Over Quantity<br>• Real Work, Real Proof"
             ];
 
             const terminalScreen = document.querySelector('.terminal-screen');

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paid Advertising Campaigns Portfolio | Spencer Flaherty</title>
 
     <!-- SEO Meta Tags -->
@@ -53,6 +54,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
         }
 
         /* --- CSS VARIABLES FOR THEMING --- */
@@ -326,6 +335,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             display: block;
+            margin: 0;
             transition: color 0.4s ease;
         }
 
@@ -334,6 +344,7 @@
             font-size: 18px;
             font-weight: bold;
             display: block;
+            margin: 0;
             transition: color 0.4s ease;
         }
 
@@ -546,19 +557,19 @@
             const dropdownBodyContent = [
                 // Cooperative Purchasing Explainer
                 "Produced a video explaining how public agencies can bypass traditional RFPs and procure EV charging through Blue Whale's Sourcewell contract—blending AI-generated visuals with traditional editing to keep it engaging while clearly communicating a complex procurement process." +
-                "<br><br><strong>The Stack:</strong><br>• Kling 2.6 (start/end frame + motion control)<br>• Nano Banana<br>• Claude<br>• DaVinci Resolve<br>",
+                "<br><br><strong>The Stack:</strong><br>• Kling 2.6 (start/end frame + motion control)<br>• Nano Banana<br>• Claude<br>• DaVinci Resolve",
 
                 // Automated ROI Report Funnel
                 "Created a full-funnel ad campaign promoting a property-specific ROI report as a lead magnet—ad creative shows sample results, landing page captures survey responses via Google Form, and an MCP agent automatically generates a custom report that makes the value proposition impossible to ignore, improving quote-to-close rate." +
-                "<br><br><strong>The Stack:</strong><br>• DaVinci Resolve<br>• Custom Landing Page Design + Copy<br>• Google Forms<br>• Claude Skill + MCP Agent<br>",
+                "<br><br><strong>The Stack:</strong><br>• DaVinci Resolve<br>• Custom Landing Page Design + Copy<br>• Google Forms<br>• Claude Skill + MCP Agent",
 
                 // $20 CPL Photo Campaign
                 "Achieved $20 average CPL by shooting real technicians on real job sites, overlaying authentic Google reviews, and creating dozens of photo/copy variations to let Facebook's algorithm find the winners—all targeted to specific service areas via Conversions API." +
-                "<br><br><strong>The Stack:</strong><br>• Facebook Ads<br>• Real Job Site Photography + Review Overlays<br>• Dozens of Photo/Review/Style Variations<br>• Geo-Fenced Service Areas<br>• Conversions API + Maximize Conversions<br>",
+                "<br><br><strong>The Stack:</strong><br>• Facebook Ads<br>• Real Job Site Photography + Review Overlays<br>• Dozens of Photo/Review/Style Variations<br>• Geo-Fenced Service Areas<br>• Conversions API + Maximize Conversions",
 
                 // B2B Retainer Acquisition
                 "Designed and ran graphic-based LinkedIn ad campaigns that converted eCommerce brands into retainer clients for a Baltimore-based digital agency—landing notable accounts including Dippin' Dots." +
-                "<br><br><strong>The Stack:</strong><br>• LinkedIn Ads<br>• Adobe Photoshop + Illustrator<br>"
+                "<br><br><strong>The Stack:</strong><br>• LinkedIn Ads<br>• Adobe Photoshop + Illustrator"
             ];
 
             // Auto-typing animation with instant DOM element injection

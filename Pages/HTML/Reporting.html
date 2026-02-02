@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BI Dashboards & Analytics Portfolio | Spencer Flaherty</title>
 
     <!-- SEO Meta Tags -->
@@ -49,6 +50,15 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
         :root {
             --frame-border: #ff00bb;
             --frame-shadow: rgba(255, 0, 187, 0.4);
@@ -173,8 +183,8 @@
         .dropdown-content { display: none; border-left: 2px solid var(--accent-color); margin: 10px 12px 10px 12px; padding: 0 0 0 15px; line-height: 1.8; transition: border-color 0.4s ease; }
         .dropdown-content .terminal-link:last-child { margin-bottom: 0; }
         .dropdown.open .dropdown-content { display: block; }
-        .terminal-screen h1 { color: var(--accent-color); font-size: 24px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; transition: color 0.4s ease; }
-        .terminal-screen h2 { color: var(--accent-color); font-size: 18px; font-weight: bold; display: block; transition: color 0.4s ease; }
+        .terminal-screen h1 { color: var(--accent-color); font-size: 24px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; margin: 0; transition: color 0.4s ease; }
+        .terminal-screen h2 { color: var(--accent-color); font-size: 18px; font-weight: bold; display: block; margin: 0; transition: color 0.4s ease; }
         .terminal-screen h3 { color: var(--text-color); font-size: 16px; font-weight: bold; display: inline; transition: color 0.4s ease; }
         .terminal-screen strong { color: var(--accent-color); font-weight: bold; text-decoration: none; transition: color 0.4s ease; }
         .terminal-screen img { max-width: 100%; height: auto; margin: 15px 0; display: block; }
@@ -208,15 +218,15 @@
             const dropdownBodyContent = [
                 // Custom Attribution System
                 "Built a multi-touch attribution model connecting lead sources, sales activity, and online behavior to revenue—enabling smarter ad spend and rep accountability." +
-                "<br><br><strong>The Stack:</strong><br>• Microsoft Power BI<br>• Vibe-Coded Dashboard<br>• CRM, Ad Platforms, Web Analytics<br>",
+                "<br><br><strong>The Stack:</strong><br>• Microsoft Power BI<br>• Vibe-Coded Dashboard<br>• CRM, Ad Platforms, Web Analytics",
 
                 // Pipeline & Churn Dashboards
                 "Built Power BI dashboards with automated alerts for pipeline health, churn risk, and sales activity—delivering insights via email, Slack, and in-app notifications." +
-                "<br><br><strong>The Stack:</strong><br>• Microsoft Power BI<br>• Email, Slack, In-Dashboard Notifications<br>• CRM + Sales Activity + Job History<br>",
+                "<br><br><strong>The Stack:</strong><br>• Microsoft Power BI<br>• Email, Slack, In-Dashboard Notifications<br>• CRM + Sales Activity + Job History",
 
                 // Automated Review Request Pipeline
                 "Pulls recent customers from CRM, filters out existing reviewers, and sends AI-varied email requests for Google reviews. Increased both review volume and average rating." +
-                "<br><br><strong>The Stack:</strong><br>• SimPro (CRM) + Power BI<br>• iContact<br>• Claude (RAG personalization)<br>"
+                "<br><br><strong>The Stack:</strong><br>• SimPro (CRM) + Power BI<br>• iContact<br>• Claude (RAG personalization)"
             ];
 
             const terminalScreen = document.querySelector('.terminal-screen');

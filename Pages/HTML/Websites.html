@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Design & Development Portfolio | Spencer Flaherty</title>
 
     <!-- SEO Meta Tags -->
@@ -49,6 +50,15 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
         :root {
             --frame-border: #ff00bb;
             --frame-shadow: rgba(255, 0, 187, 0.4);
@@ -173,8 +183,8 @@
         .dropdown-content .terminal-link:last-child { margin-bottom: 0; }
         .dropdown.open .dropdown-content { display: block; }
         .dropdown.open { margin-bottom: 15px; }
-        .terminal-screen h1 { color: var(--accent-color); font-size: 24px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; transition: color 0.4s ease; }
-        .terminal-screen h2 { color: var(--accent-color); font-size: 18px; font-weight: bold; display: block; transition: color 0.4s ease; }
+        .terminal-screen h1 { color: var(--accent-color); font-size: 24px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: block; margin: 0; transition: color 0.4s ease; }
+        .terminal-screen h2 { color: var(--accent-color); font-size: 18px; font-weight: bold; display: block; margin: 0; transition: color 0.4s ease; }
         .terminal-screen h3 { color: var(--text-color); font-size: 16px; font-weight: bold; display: inline; transition: color 0.4s ease; }
         .terminal-screen strong { color: var(--accent-color); font-weight: bold; text-decoration: none; transition: color 0.4s ease; }
         .terminal-screen img { max-width: 100%; height: auto; margin: 15px 0; display: block; }
