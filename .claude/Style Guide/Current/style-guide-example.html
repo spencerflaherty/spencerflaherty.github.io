@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lorem Ipsum Test - Spencer Flaherty's Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,6 +39,14 @@
             box-sizing: border-box;
         }
 
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
         /* --- CSS VARIABLES FOR THEMING --- */
         :root {
             /* Cyberpunk Theme (default) */
@@ -67,21 +76,9 @@
 
         /* --- BASE STYLES --- */
 
-        /* Container ensures glow is never clipped - padding matches box-shadow blur radius + buffer */
+        /* Container ensures glow is never clipped - horizontal padding only */
         .window-container {
-            padding: 25px;
-        }
-
-        /* Mobile: reduce horizontal padding to match top/bottom feel */
-        @media (max-width: 600px) {
-            .window-container {
-                padding: 0;
-            }
-            .window-frame {
-                border-radius: 0;
-                border-left: none;
-                border-right: none;
-            }
+            padding: 0 25px; /* 0 top/bottom, 25px left/right */
         }
 
         .window-frame {
