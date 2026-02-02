@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spencer Flaherty | Marketing, Media & AI Portfolio</title>
 
     <!-- SEO Meta Tags -->
@@ -53,6 +54,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
         }
 
         /* --- CSS VARIABLES FOR THEMING --- */
@@ -278,6 +287,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             display: block;
+            margin: 0;
             transition: color 0.4s ease;
         }
 
@@ -286,6 +296,7 @@
             font-size: 18px;
             font-weight: bold;
             display: block;
+            margin: 0;
             transition: color 0.4s ease;
         }
 
