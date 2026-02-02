@@ -206,6 +206,39 @@ Every file must start with:
 
 **CRITICAL**: This reset must appear FIRST in your `<style>` block, before any other CSS rules.
 
+### Squarespace Container Overrides (CRITICAL)
+Squarespace applies width constraints to code block containers that vary by page, causing inconsistent mobile rendering. ALL pages must include these overrides immediately after the CSS reset.
+
+**Required CSS** (place after reset, before CSS variables):
+```css
+/* --- SQUARESPACE CONTAINER OVERRIDES --- */
+/* Force full-width on mobile to prevent Squarespace from constraining the code block */
+.sqs-block-content,
+.sqs-code-container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+```
+
+**Why this is required:**
+- Without these overrides, Squarespace constrains `.sqs-code-container` to 330px on some pages vs 375px on others
+- This creates wider magenta borders (~47px) instead of the intended 25px horizontal padding
+- The `!important` flag is necessary to override Squarespace's default styles
+- Ensures consistent full-width rendering across all pages at mobile breakpoints
+
+### Viewport Meta Tag (CRITICAL)
+ALL pages must include the viewport meta tag for proper mobile rendering.
+
+**Required meta tag** (in `<head>`, immediately after charset):
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+**Why this is required:**
+- Without this tag, mobile browsers render at desktop width (980px) and scale down
+- Causes the terminal window to appear narrower with wide magenta borders
+- Forces browsers to use device width and prevent user scaling issues
+
 ### Window Container Requirement
 Always wrap `.window-frame` in `.window-container` with horizontal padding to prevent glow effect clipping.
 
@@ -257,6 +290,28 @@ Window title (e.g., `/Automation/`) must match the page's H1 (e.g., `AUTOMATION`
 - **H1**: One per page, matches window title, 24px magenta uppercase
 - **H2**: Section headings with `//` prefix, 18px magenta (e.g., `// Outbound Lead Generation`)
 - **H3**: Dropdown titles, 16px cyan bold (inside dropdown toggle)
+
+**CRITICAL**: Both H1 and H2 elements must have `margin: 0` to eliminate default browser spacing.
+
+**Required CSS:**
+```css
+.terminal-screen h1 {
+    /* existing styles */
+    margin: 0;  /* REQUIRED */
+    /* remaining styles */
+}
+
+.terminal-screen h2 {
+    /* existing styles */
+    margin: 0;  /* REQUIRED */
+    /* remaining styles */
+}
+```
+
+**Why this is required:**
+- Browsers apply default vertical margins to heading elements (typically 16-20px top/bottom)
+- Without `margin: 0`, unwanted spacing appears between sections
+- Ensures consistent, tight spacing throughout the terminal interface
 
 ### YouTube Embeds
 Always use `youtube-nocookie.com` with `?rel=0&modestbranding=1` and wrap in `.media-dialup-container`.
@@ -363,7 +418,7 @@ The `.terminal-screen` element uses `white-space: pre-wrap`, so any whitespace/n
 const contentSegments = [
     { type: 'type', content: "root@spencer-portfolio:~/automation\n" },
     { type: 'element', tag: 'span', className: 'prompt-arrow', text: '$' },
-    { type: 'type', content: " ./display_projects\n\n" },
+    { type: 'type', content: " ./display_projects\n\n" },  // CRITICAL: Two \n for blank line before H1
     { type: 'element', tag: 'h1', className: 'h1', text: 'AUTOMATION' },
     { type: 'element', tag: 'h2', className: 'h2', text: '// Outbound Lead Generation' },
     { type: 'dropdown', text: '[+]  Geospatial Prospecting Workflow' },
@@ -376,24 +431,40 @@ const contentSegments = [
 ];
 ```
 
+**CRITICAL**: The display command must end with `\n\n` (two newline characters) to create a blank line between the command and the page title (H1). This provides visual breathing room and matches terminal UX conventions.
+
 ---
 
 ## Dropdown Content Example
 
+**CRITICAL CONTENT ORDER**: All dropdown entries MUST follow this exact structure:
+1. **Image/Media first** (wrapped in `.media-dialup-container`)
+2. **Description text** (the project description)
+3. **"The Stack" section** (with proper spacing)
+
 ```javascript
 const dropdownBodyContent = [
-    // First dropdown - index 0
-    "Description text here." +
-    "<div class='media-dialup-container'><img src='URL' alt='Alt'></div>",
+    // CORRECT ORDER: Image → Description → Stack
+    "<div class='media-dialup-container'><img src='URL' alt='Project Name'></div>" +
+    "Description text explaining what this project does and why it matters." +
+    "<br><br><strong>The Stack:</strong><br>• Tool 1<br>• Tool 2<br>• Tool 3",
 
-    // Second dropdown - index 1
-    "Another description with video." +
-    "<div class='media-dialup-container'><iframe src='youtube-nocookie...'></iframe></div>",
+    // Another example with video
+    "<div class='media-dialup-container'><iframe src='youtube-nocookie...'></iframe></div>" +
+    "Video description text." +
+    "<br><br><strong>The Stack:</strong><br>• Camera<br>• Editing Software",
 ];
 ```
 
+**Why this order matters:**
+- Images load first and are immediately visible when dropdown opens
+- Creates better visual hierarchy (visual → text → technical details)
+- Consistent user experience across all portfolio pages
+
 ### "The Stack" Section Format
 Each dropdown entry should include a "The Stack" section listing the tools/technologies used. Use bullet points with the `•` character:
+
+**CRITICAL**: Always use `<br><br>` (two line breaks) before "The Stack" to create visual separation.
 
 ```javascript
 "Description of the project." +
