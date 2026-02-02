@@ -56,6 +56,14 @@
             box-sizing: border-box;
         }
 
+        /* --- SQUARESPACE CONTAINER OVERRIDES --- */
+        /* Force full-width on mobile to prevent Squarespace from constraining the code block */
+        .sqs-block-content,
+        .sqs-code-container {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
         /* --- CSS VARIABLES FOR THEMING --- */
         :root {
             /* Cyberpunk Theme (default) */
