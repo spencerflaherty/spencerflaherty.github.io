@@ -1,0 +1,77 @@
+slug: paid-ads
+windowTitle: /Paid_Ads/
+h1: PAID_ADS
+
+seo:
+  title: "Paid Advertising Campaigns Portfolio | Spencer Flaherty"
+  description: "Facebook and LinkedIn ad campaigns for EV infrastructure, electrical services, and eCommerce. AI-generated creative, conversion optimization, and lead gen."
+  url: "https://www.spencerflaherty.com/paid-ads"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: paid-ads
+  command: ./display_projects
+
+content:
+  - type: section
+    heading: "// EV / Clean Energy"
+    projects:
+      - title: "Cooperative Purchasing Explainer"
+        order: [media, description, stack]
+        description: "Produced a video explaining how public agencies can bypass traditional RFPs and procure EV charging through Blue Whale's Sourcewell contract—blending AI-generated visuals with traditional editing to keep it engaging while clearly communicating a complex procurement process."
+        media:
+          - type: image
+            src: "/static/images/paid-ads/cooperative-purchasing-explainer.png"
+            alt: "Cooperative Purchasing Explainer"
+        stack:
+          - "AI Video: Kling 2.6 (start/end frame + motion control)"
+          - "AI Image: Nano Banana"
+          - "Script: Claude"
+          - "Post-Production: DaVinci Resolve"
+      - title: "Automated ROI Report Funnel"
+        order: [description, media, stack]
+        description: "Created a full-funnel ad campaign promoting a property-specific ROI report as a lead magnet—ad creative shows sample results, landing page captures survey responses via Google Form, and an MCP agent automatically generates a custom report that makes the value proposition impossible to ignore, improving quote-to-close rate."
+        media:
+          - type: linkedin
+            src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7423061288714555392?compact=1"
+            title: "Automated ROI Report Funnel"
+        stack:
+          - "Ad Creative: DaVinci Resolve"
+          - "Landing Page: Custom Design + Copy"
+          - "Data Capture: Google Forms"
+          - "Report Automation: Claude Skill + MCP Agent"
+
+  - type: section
+    heading: "// Electrical Services"
+    projects:
+      - title: "$20 CPL Photo Campaign"
+        order: [media, description, media, stack]
+        description: "Achieved $20 average CPL by shooting real technicians on real job sites, overlaying authentic Google reviews, and creating dozens of photo/copy variations to let Facebook's algorithm find the winners—all targeted to specific service areas via Conversions API."
+        media:
+          - type: image
+            src: "/static/images/paid-ads/20-cpl-photo-campaign.png"
+            alt: "$20 CPL Photo Campaign"
+          - type: image
+            src: "/static/images/paid-ads/residential-fb-jamal.jpeg"
+            alt: "Real Technician on Job Site"
+        stack:
+          - "Platform: Facebook Ads"
+          - "Creative: Real Job Site Photography + Review Overlays"
+          - "Variation Testing: Dozens of Photo/Review/Style Combinations"
+          - "Targeting: Geo-Fenced Service Areas"
+          - "Optimization: Conversions API + Maximize Conversions"
+
+  - type: section
+    heading: "// eCommerce Agency"
+    projects:
+      - title: "B2B Retainer Acquisition"
+        order: [description, media, stack]
+        description: "Designed and ran graphic-based LinkedIn ad campaigns that converted eCommerce brands into retainer clients for a Baltimore-based digital agency—landing notable accounts including Dippin' Dots."
+        media:
+          - type: image
+            src: "/static/images/paid-ads/bigcommerce-linkedin-ad.png"
+            alt: "B2B Retainer Acquisition LinkedIn Ad"
+        stack:
+          - "Platform: LinkedIn Ads"
+          - "Design: Adobe Photoshop + Illustrator"
+          - "Outcome: Retainer Client Acquisition"

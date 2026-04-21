@@ -1,0 +1,34 @@
+slug: about
+windowTitle: /About/
+h1: ABOUT
+
+seo:
+  title: "About Spencer Flaherty | Marketing & AI Engineer"
+  description: "15 years creating at the intersection of sales, media, and AI. Baltimore-based marketing professional with expertise in automation, video, and engineering."
+  url: "https://www.spencerflaherty.com/about"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: about
+  command: ./display_info
+
+content:
+  - type: image
+    src: "/static/images/about/portfolio-photo.png"
+    alt: "Spencer Flaherty"
+  - type: text
+    text: |
+      Creating for 15 years.
+      Sales & Marketing
+      Photo & Video
+      AI Engineering
+      Baltimore, MD
+
+      What the horse considers play, the monkey considers business.
+
+  - type: buttonlink
+    href: "https://www.linkedin.com/in/spencer-flaherty/"
+    text: "Connect on LinkedIn"
+  - type: buttonlink
+    href: "https://drive.google.com/file/d/1oyhFrIE2tdYwBczNnWckLWQ7llQzNg4G/view?usp=sharing"
+    text: "My Resume"

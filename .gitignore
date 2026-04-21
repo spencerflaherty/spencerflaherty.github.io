@@ -3,3 +3,13 @@
 
 # Archive directory
 Archive/
+
+# Node / Eleventy
+node_modules/
+_site/
+.cache/
+
+# Playwright MCP test output
+.playwright-mcp/
+Pages/.playwright-mcp/
+Pages/*.png

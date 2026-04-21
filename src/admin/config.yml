@@ -1,0 +1,589 @@
+backend:
+  name: github
+  repo: spencerflaherty/spencerflaherty.github.io
+  branch: main
+  # Sveltia uses PKCE, no OAuth proxy required; register a GitHub OAuth app
+  # and put its Client ID here (PKCE flow only needs Client ID, not secret).
+  # site_domain: www.spencerflaherty.com
+  # auth_endpoint: https://auth.sveltia.app/auth
+
+# Sveltia supports local editing via the File System Access API — click
+# "Work with Local Repository" on the login screen and pick this repo folder.
+
+media_folder: "src/static/images"
+public_folder: "/static/images"
+
+# Per-file collections — each YAML is its own editable "file".
+# Shared content item schemas are duplicated per collection because Sveltia
+# (like Decap) does not support YAML anchors in config.yml.
+
+collections:
+
+  - name: home
+    label: "Home page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/home.yml"
+        name: home
+        label: "Home"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: home }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Hero image"
+            name: content
+            widget: list
+            types:
+              - name: image
+                label: "Image"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: image }
+                  - { label: Source, name: src, widget: image }
+                  - { label: Alt, name: alt, widget: string, required: false }
+
+  - name: about
+    label: "About page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/about.yml"
+        name: about
+        label: "About"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: about }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Content"
+            name: content
+            widget: list
+            types:
+              - name: text
+                label: "Text"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: text }
+                  - { label: Text, name: text, widget: text }
+              - name: image
+                label: "Image"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: image }
+                  - { label: Source, name: src, widget: image }
+                  - { label: Alt, name: alt, widget: string, required: false }
+                  - { label: "Size variant", name: variant, widget: select, options: ["", sm, md, lg], required: false }
+              - name: buttonlink
+                label: "Button link"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: buttonlink }
+                  - { label: URL, name: href, widget: string }
+                  - { label: Text, name: text, widget: string }
+              - name: linebreak
+                label: "Line break"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: linebreak }
+
+  # Multi-project pages share the same schema.
+  - name: automation
+    label: "Automation page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/automation.yml"
+        name: automation
+        label: "Automation"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: automation }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: section }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: "Intro (optional)", name: intro, widget: text, required: false }
+                  - label: Projects
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - label: "Order (controls layout)"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [media, description, stack]
+                      - { label: Description, name: description, widget: text, required: false }
+                      - label: Media
+                        name: media
+                        widget: list
+                        required: false
+                        types:
+                          - name: image
+                            label: "Image"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: image }
+                              - { label: Source, name: src, widget: image }
+                              - { label: Alt, name: alt, widget: string, required: false }
+                          - name: youtube
+                            label: "YouTube"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: youtube }
+                              - { label: "Video ID", name: videoId, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: vimeo
+                            label: "Vimeo"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: vimeo }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: linkedin
+                            label: "LinkedIn"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: linkedin }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: html
+                            label: "Custom HTML"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: html }
+                              - { label: HTML, name: html, widget: text }
+                      - label: Stack
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: Item, name: item, widget: string }
+                      - label: "Button links"
+                        name: buttonlinks
+                        widget: list
+                        required: false
+                        fields:
+                          - { label: URL, name: href, widget: string }
+                          - { label: Text, name: text, widget: string }
+                      - { label: Note, name: note, widget: string, required: false }
+
+  - name: media
+    label: "Media page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/media.yml"
+        name: media
+        label: "Media"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: media }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: section }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: "Intro (optional)", name: intro, widget: text, required: false }
+                  - label: Projects
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - label: "Order (controls layout)"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [description, media, stack]
+                      - { label: Description, name: description, widget: text, required: false }
+                      - label: Media
+                        name: media
+                        widget: list
+                        required: false
+                        types:
+                          - name: image
+                            label: "Image"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: image }
+                              - { label: Source, name: src, widget: image }
+                              - { label: Alt, name: alt, widget: string, required: false }
+                          - name: youtube
+                            label: "YouTube"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: youtube }
+                              - { label: "Video ID", name: videoId, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: vimeo
+                            label: "Vimeo"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: vimeo }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: linkedin
+                            label: "LinkedIn"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: linkedin }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: html
+                            label: "Custom HTML"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: html }
+                              - { label: HTML, name: html, widget: text }
+                      - label: Stack
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: Item, name: item, widget: string }
+                      - label: "Button links"
+                        name: buttonlinks
+                        widget: list
+                        required: false
+                        fields:
+                          - { label: URL, name: href, widget: string }
+                          - { label: Text, name: text, widget: string }
+                      - { label: Note, name: note, widget: string, required: false }
+
+  - name: paid-ads
+    label: "Paid Ads page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/paid-ads.yml"
+        name: paid-ads
+        label: "Paid Ads"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: paid-ads }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: section }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: "Intro (optional)", name: intro, widget: text, required: false }
+                  - label: Projects
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - label: "Order (controls layout)"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [media, description, stack]
+                      - { label: Description, name: description, widget: text, required: false }
+                      - label: Media
+                        name: media
+                        widget: list
+                        required: false
+                        types:
+                          - name: image
+                            label: "Image"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: image }
+                              - { label: Source, name: src, widget: image }
+                              - { label: Alt, name: alt, widget: string, required: false }
+                          - name: youtube
+                            label: "YouTube"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: youtube }
+                              - { label: "Video ID", name: videoId, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: vimeo
+                            label: "Vimeo"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: vimeo }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: linkedin
+                            label: "LinkedIn"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: linkedin }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: Title, name: title, widget: string, required: false }
+                          - name: html
+                            label: "Custom HTML"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: html }
+                              - { label: HTML, name: html, widget: text }
+                      - label: Stack
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: Item, name: item, widget: string }
+                      - label: "Button links"
+                        name: buttonlinks
+                        widget: list
+                        required: false
+                        fields:
+                          - { label: URL, name: href, widget: string }
+                          - { label: Text, name: text, widget: string }
+                      - { label: Note, name: note, widget: string, required: false }
+
+  - name: reporting
+    label: "Reporting page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/reporting.yml"
+        name: reporting
+        label: "Reporting"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: reporting }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: section }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: "Intro (optional)", name: intro, widget: text, required: false }
+                  - label: Projects
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - label: "Order (controls layout)"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [description, media, stack]
+                      - { label: Description, name: description, widget: text, required: false }
+                      - label: Media
+                        name: media
+                        widget: list
+                        required: false
+                        types:
+                          - name: image
+                            label: "Image"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: image }
+                              - { label: Source, name: src, widget: image }
+                              - { label: Alt, name: alt, widget: string, required: false }
+                      - label: Stack
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: Item, name: item, widget: string }
+                      - { label: Note, name: note, widget: string, required: false }
+
+  - name: resources
+    label: "Resources page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/resources.yml"
+        name: resources
+        label: "Resources"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: resources }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: section }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: "Intro (optional)", name: intro, widget: text, required: false }
+                  - label: Projects
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - label: "Order (controls layout)"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [description, stack]
+                      - { label: Description, name: description, widget: text, required: false }
+                      - label: Stack
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: Item, name: item, widget: string }
+                      - label: "Button links"
+                        name: buttonlinks
+                        widget: list
+                        required: false
+                        fields:
+                          - { label: URL, name: href, widget: string }
+                          - { label: Text, name: text, widget: string }
+                      - { label: Note, name: note, widget: string, required: false }
+
+  - name: websites
+    label: "Websites page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/websites.yml"
+        name: websites
+        label: "Websites"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: websites }
+          - { label: "Window Title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG Image", name: ogImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: Type, name: type, widget: hidden, default: section }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: "Intro (optional)", name: intro, widget: text, required: false }
+                  - label: Projects
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - label: "Order (controls layout)"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [media, description, buttonlink, stack]
+                      - { label: Description, name: description, widget: text, required: false }
+                      - label: Media
+                        name: media
+                        widget: list
+                        required: false
+                        types:
+                          - name: image
+                            label: "Image"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: image }
+                              - { label: Source, name: src, widget: image }
+                              - { label: Alt, name: alt, widget: string, required: false }
+                          - name: html
+                            label: "Custom HTML"
+                            fields:
+                              - { label: Type, name: type, widget: hidden, default: html }
+                              - { label: HTML, name: html, widget: text }
+                      - label: Stack
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: Item, name: item, widget: string }
+                      - label: "Button links"
+                        name: buttonlinks
+                        widget: list
+                        required: false
+                        fields:
+                          - { label: URL, name: href, widget: string }
+                          - { label: Text, name: text, widget: string }

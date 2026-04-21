@@ -1,0 +1,17 @@
+slug: home
+windowTitle: /Home/
+
+seo:
+  title: "Spencer Flaherty | Marketing, Media & AI Portfolio"
+  description: "Baltimore-based marketer specializing in AI automation, video production, and paid ads. Explore work spanning marketing engineering, media, and web design."
+  url: "https://www.spencerflaherty.com"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: ""
+  command: ./display_categories
+
+content:
+  - type: image
+    src: "/static/images/home/laser-hero.png"
+    alt: "Hero Image"

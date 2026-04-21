@@ -1,0 +1,123 @@
+slug: automation
+windowTitle: /Automation/
+h1: AUTOMATION
+
+seo:
+  title: "Marketing Automation Portfolio | Spencer Flaherty"
+  description: "AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation."
+  url: "https://www.spencerflaherty.com/automation"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: automation
+  command: ./display_projects
+
+content:
+  - type: section
+    heading: "// Outbound Lead Gen"
+    projects:
+      - title: "Geospatial Prospecting"
+        order: [media, description, stack]
+        description: "Architected an end-to-end pipeline to identify high-value EV infrastructure leads by filtering physical land attributes, resolving ownership, and automating executive outreach."
+        media:
+          - type: image
+            src: "/static/images/automation/geospatial-prospecting.png"
+            alt: "Geospatial Prospecting"
+        stack:
+          - "AI Logic: Agentic Workflows"
+          - "Spatial Data: OpenStreetMap"
+          - "Property Data: Public Land Records"
+          - "B2B Intelligence: ZoomInfo"
+          - "Execution Layer: Apollo"
+      - title: "Gov-Procurement Pipeline"
+        order: [media, description, stack]
+        description: "Engineered a public-sector lead generation engine by scraping public procurement datasets, collecting agency persona contact info, and automating high-intent outbound sequences."
+        media:
+          - type: image
+            src: "/static/images/automation/gov-procurement-pipeline.png"
+            alt: "Gov-Procurement Pipeline"
+        stack:
+          - "Ingestion Layer: Scraper Agent"
+          - "Enrichment Layer: ZoomInfo"
+          - "Execution Layer: AI Logic + Apollo.io"
+      - title: "Arcadia Run Outreach Campaign"
+        order: [media, description, stack]
+        description: "Automated personalized outreach to peer properties by pulling CRM history for each contact, generating tailored emails referencing past interactions, and embedding case study links—making each message feel hand-written while scaling across the mid-Atlantic."
+        media:
+          - type: image
+            src: "/static/images/automation/arcadia-run-outreach-campaign.png"
+            alt: "Arcadia Run Outreach Campaign"
+        stack:
+          - "Data Source: CRM Customer History"
+          - "AI Logic: Dynamic Email Personalization"
+          - "Content Asset: Video Case Study"
+          - "Execution Layer: Automated Sequence Delivery"
+
+  - type: section
+    heading: "// Inbound Lead Gen + Management"
+    projects:
+      - title: "Intent Conversion Engine"
+        order: [media, description, stack]
+        description: "Built an inbound funnel that turns anonymous website traffic into qualified leads by identifying visitors through IP-to-company matching, layering in third-party intent signals to gauge buying readiness, and auto-routing high-fit prospects to sales."
+        media:
+          - type: image
+            src: "/static/images/automation/intent-conversion-engine.png"
+            alt: "Intent Conversion Engine"
+        stack:
+          - "Identity Resolution: Visitor De-anonymization (RB2B, Warmly, etc.)"
+          - "Intent Layer: Bidstream + Co-op Data (Bombora, Demandbase)"
+          - "Orchestration Layer: Zapier"
+      - title: "Paid Acquisition Engine"
+        order: [media, description, stack]
+        description: "Designed a high speed-to-lead system by synchronizing Facebook and LinkedIn form submissions into CRM, routing validated leads via Zapier, and triggering instant rep notifications to maximize peak-intent conversion."
+        media:
+          - type: image
+            src: "/static/images/automation/paid-acquisition-engine.png"
+            alt: "Paid Acquisition Engine"
+        stack:
+          - "Platforms: Facebook, LinkedIn"
+          - "Orchestration Layer: Zapier"
+          - "Notification Layer: Slack/Email/SMS"
+          - "Pipeline Integration: CRM"
+
+  - type: section
+    heading: "// AI-Driven Personalization & Content Tools"
+    projects:
+      - title: "RAG Reactivation Engine"
+        order: [media, description, stack]
+        description: "Developed RAG-based reactivation system by retrieving historical customer context from CRM, generating hyper-personalized outreach sequences, and executing automated email campaigns via Apollo to reactivate churned accounts and drive upsell opportunities."
+        media:
+          - type: image
+            src: "/static/images/automation/rag-reactivation-engine.png"
+            alt: "RAG Reactivation Engine"
+        stack:
+          - "Data Source: CRM"
+          - "Retrieval Layer: RAG Architecture"
+          - "AI Logic: LLM Generation"
+          - "Execution Layer: Apollo"
+      - title: "Custom Internal Tools"
+        order: [media, description, stack]
+        description: "Built lightweight apps to solve specific operational problems that previously required expensive software or went unsolved using AI-assisted development to move from idea to working tool in hours."
+        media:
+          - type: image
+            src: "/static/images/automation/custom-internal-tools.png"
+            alt: "Custom Internal Tools"
+        stack:
+          - "Development: AI-Assisted Coding (Claude Code)"
+          - "Deployment: Local + Cloud Functions"
+          - "Use Cases: CRM Chat Interface, Video Recovery Pipeline, Data Cleanup Scripts"
+
+  - type: section
+    heading: "// Client-Facing Sales Enablement"
+    projects:
+      - title: "EV Feasibility Engine"
+        order: [media, description, stack]
+        description: "Developed an agentic workflow that transforms raw survey data into ROI/NOI projections, calculating asset value increases, and prioritizing state/local/utility incentives to drive decision-maker buy-in."
+        media:
+          - type: image
+            src: "/static/images/automation/ev-feasibility-engine.png"
+            alt: "EV Feasibility Engine"
+        stack:
+          - "Data Source: Resident Surveys"
+          - "AI Logic: Agentic Workflow"
+          - "Analysis Layer: Financial Modeling"

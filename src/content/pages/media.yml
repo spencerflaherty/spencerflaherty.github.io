@@ -1,0 +1,82 @@
+slug: media
+windowTitle: /Media/
+h1: MEDIA
+
+seo:
+  title: "Video Production & Media Portfolio | Spencer Flaherty"
+  description: "Commercial video production, podcast studio builds, and documentary filmmaking. From case studies to AI-enhanced archival projects in Baltimore and beyond."
+  url: "https://www.spencerflaherty.com/media"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: media
+  command: ./display_projects
+
+content:
+  - type: section
+    heading: "// Video"
+    projects:
+      - title: "Station House x Xeal Case Study"
+        order: [description, media, stack]
+        description: "Produced a co-branded case study video highlighting a successful installation where cell signal limitations required a unique hardware solution. Used by both sales teams and featured on partner marketing channels."
+        media:
+          - type: youtube
+            videoId: "EmeirH2SBcU"
+            title: "Station House x Xeal Case Study"
+        stack:
+          - "Production: Sony Cameras"
+          - "Post-Production: DaVinci Resolve"
+          - "Distribution: Sales Enablement + Partner Co-Marketing"
+      - title: "eCommerce Masters Podcast"
+        order: [description, media, stack]
+        description: "Built a podcast studio from scratch: selecting and installing audio/video gear, painting walls, running track lighting. Operated the full production pipeline from recording through publishing."
+        media:
+          - type: youtube
+            videoId: "9knErxP3_do"
+            title: "eCommerce Masters Podcast"
+        stack:
+          - "Studio Build: Custom Lighting, Acoustic Treatment, Set Design"
+          - "Audio: Shure Mics, Rodecaster"
+          - "Video: Blackmagic Studio Cameras (PoE for power + data)"
+          - "Live Production: eCamm (recording, streaming, video calls)"
+
+  - type: section
+    heading: "// Sales Enablement"
+    projects:
+      - title: "Industrial Job Site Documentation"
+        order: [description, media, stack]
+        description: "Captured photo and video documentation across high-profile electrical projects to fuel social media content and ad creative while doubling as sales collateral for proposals."
+        media:
+          - type: linkedin
+            src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7386375602003476480?compact=1"
+            title: "Industrial Job Site Documentation"
+        stack:
+          - "Camera: Sony Mirrorless"
+          - "Stabilization: Gimbal"
+          - "Audio: Wireless Lav/Receiver"
+          - "Post-Production: DaVinci Resolve"
+
+  - type: section
+    heading: "// Personal Projects"
+    projects:
+      - title: "Bowie, MD: 50 Years In The Making"
+        order: [description, media, stack]
+        description: "Digitized my grandfather's 8mm home films through professional transfer, then overlaid present-day shots to create a now/then video showing how Bowie, MD has transformed over 50 years. Footage was later featured in a local documentary shown in museums and public displays."
+        media:
+          - type: vimeo
+            src: "https://player.vimeo.com/video/141480456?badge=0&autopause=0"
+            title: "Bowie, MD: 50 Years In The Making"
+        stack:
+          - "Production: Canon Cameras"
+          - "Post-Production: Adobe Premiere Pro"
+          - "Technique: Archival + Modern Footage Overlay"
+      - title: "Canton, Baltimore"
+        order: [description, stack]
+        description: "Developing a documentary-style narrative about Canton, Baltimore by sourcing historical media from archives and using AI tools to restore, animate, and voice archival content—building on techniques from the Bowie project with a heavier AI-native workflow."
+        stack:
+          - "Production: Sony Cameras"
+          - "Post-Production: DaVinci Resolve"
+          - "AI Video: Kling 2.5/2.6"
+          - "AI Voice: Inworld TTS 1 Max"
+          - "AI Workflow: Google AI Studio"
+        note: "(Not live—publishing Summer 2026)"

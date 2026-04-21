@@ -1,0 +1,530 @@
+---
+pagination:
+  data: pages
+  size: 1
+  alias: page
+permalink: "{% if page.slug == 'home' %}index.html{% else %}{{ page.slug }}/index.html{% endif %}"
+eleventyComputed:
+  title: "{{ page.seo.title }}"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.seo.title }}</title>
+    {%- if page.seo.description %}
+    <meta name="description" content="{{ page.seo.description }}">
+    {%- endif %}
+    <meta property="og:title" content="{{ page.seo.ogTitle or page.seo.title }}">
+    {%- if page.seo.description %}
+    <meta property="og:description" content="{{ page.seo.ogDescription or page.seo.description }}">
+    {%- endif %}
+    <meta property="og:type" content="website">
+    {%- if page.seo.url %}
+    <meta property="og:url" content="{{ page.seo.url }}">
+    {%- endif %}
+    {%- if page.seo.ogImage %}
+    <meta property="og:image" content="{{ page.seo.ogImage | absUrl(site.url) }}">
+    {%- endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.seo.twitterTitle or page.seo.title }}">
+    {%- if page.seo.description %}
+    <meta name="twitter:description" content="{{ page.seo.twitterDescription or page.seo.description }}">
+    {%- endif %}
+    {%- if page.seo.ogImage %}
+    <meta name="twitter:image" content="{{ (page.seo.twitterImage or page.seo.ogImage) | absUrl(site.url) }}">
+    {%- endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>{% include "styles.css" %}</style>
+</head>
+
+<body>
+    <div class="window-container">
+    <div class="window-frame">
+        <div class="window-header">
+            <div class="traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+            </div>
+            <div class="window-title">{{ page.windowTitle }}</div>
+            <div class="theme-toggle-container">
+                <span class="toggle-label">B/W</span>
+                <div class="theme-toggle" id="themeToggle">
+                    <div class="toggle-knob"></div>
+                </div>
+            </div>
+        </div>
+        <div class="terminal-screen terminal-loading"><span id="terminal-text"></span><span class="user-input" id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span id="press-enter"></span><form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="numeric" enterkeyhint="go" id="mobile-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></form></div>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('themeToggle');
+            const body = document.body;
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'classic') {
+                body.classList.add('classic-theme');
+            }
+
+            toggle.addEventListener('click', function() {
+                body.classList.toggle('classic-theme');
+                if (body.classList.contains('classic-theme')) {
+                    localStorage.setItem('theme', 'classic');
+                } else {
+                    localStorage.setItem('theme', 'cyberpunk');
+                }
+            });
+
+            const dropdownBodyContent = {{ page | buildDropdownBodies | jsonify | safe }};
+            const contentSegments = {{ page | buildSegments | jsonify | safe }};
+
+            const terminalScreen = document.querySelector('.terminal-screen');
+            const terminalText = document.getElementById('terminal-text');
+
+            let currentSegment = 0;
+            const typeSpeed = 5;
+
+            function processNextSegment() {
+                if (currentSegment >= contentSegments.length) {
+                    document.getElementById('cursor').style.display = 'inline-block';
+                    document.getElementById('press-enter').innerHTML = '<br>(Press Enter)';
+                    document.addEventListener('keydown', handleInput);
+                    setupMobileInput();
+                    return;
+                }
+
+                const segment = contentSegments[currentSegment];
+                currentSegment++;
+
+                if (segment.type === 'type') {
+                    typeContent(segment.content, 0, processNextSegment);
+                } else if (segment.type === 'element') {
+                    const el = document.createElement(segment.tag);
+                    if (segment.className) el.className = segment.className;
+                    terminalText.appendChild(el);
+                    const speed = segment.speed || 1;
+                    typeIntoElement(el, segment.text, 0, speed, function() {
+                        if (segment.addBreak) terminalText.appendChild(document.createElement('br'));
+                        processNextSegment();
+                    });
+                } else if (segment.type === 'dropdown') {
+                    const dropdown = document.createElement('div');
+                    dropdown.className = 'dropdown';
+                    const toggleLink = document.createElement('a');
+                    toggleLink.className = 'terminal-link-menu dropdown-toggle';
+                    const strong = document.createElement('strong');
+                    toggleLink.appendChild(strong);
+                    const textSpan = document.createElement('h3');
+                    textSpan.className = 'h3';
+                    toggleLink.appendChild(textSpan);
+                    dropdown.appendChild(toggleLink);
+                    const content = document.createElement('div');
+                    content.className = 'dropdown-content';
+                    dropdown.appendChild(content);
+                    terminalText.appendChild(dropdown);
+                    typeIntoElement(strong, '[+]', 0, 1, function() {
+                        typeIntoElement(textSpan, segment.text.substring(3), 0, 1, processNextSegment);
+                    });
+                } else if (segment.type === 'navlink') {
+                    const link = document.createElement('a');
+                    link.href = segment.href;
+                    link.className = 'terminal-link-menu';
+                    const strong = document.createElement('strong');
+                    const textSpan = document.createElement('span');
+                    link.appendChild(strong);
+                    link.appendChild(textSpan);
+                    terminalText.appendChild(link);
+                    const bracketEnd = segment.text.indexOf(']') + 1;
+                    typeIntoElement(strong, segment.text.substring(0, bracketEnd), 0, 1, function() {
+                        typeIntoElement(textSpan, segment.text.substring(bracketEnd), 0, 1, function() {
+                            terminalText.appendChild(document.createElement('br'));
+                            if (segment.extraBreak) terminalText.appendChild(document.createElement('br'));
+                            processNextSegment();
+                        });
+                    });
+                } else if (segment.type === 'inlinelink') {
+                    const link = document.createElement('a');
+                    link.href = segment.href;
+                    link.className = 'terminal-link-inline';
+                    terminalText.appendChild(link);
+                    typeIntoElement(link, segment.text, 0, 1, processNextSegment);
+                } else if (segment.type === 'buttonlink') {
+                    const link = document.createElement('a');
+                    link.href = segment.href;
+                    link.className = 'terminal-link';
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    terminalText.appendChild(link);
+                    typeIntoElement(link, segment.text, 0, 1, processNextSegment);
+                } else if (segment.type === 'inject') {
+                    const temp = document.createElement('div');
+                    temp.innerHTML = segment.html;
+                    while (temp.firstChild) {
+                        terminalText.appendChild(temp.firstChild);
+                    }
+                    const images = terminalText.querySelectorAll('.media-dialup-container img:not(.dialup-reveal)');
+                    images.forEach(function(img) {
+                        if (img.complete) {
+                            img.classList.add('dialup-reveal');
+                        } else {
+                            img.addEventListener('load', function() {
+                                img.classList.add('dialup-reveal');
+                            });
+                        }
+                    });
+                    processNextSegment();
+                } else {
+                    processNextSegment();
+                }
+            }
+
+            function typeContent(content, index, callback) {
+                if (index >= content.length) { callback(); return; }
+                const char = content[index];
+                if (char === '\n') {
+                    terminalText.appendChild(document.createElement('br'));
+                } else {
+                    terminalText.appendChild(document.createTextNode(char));
+                }
+                setTimeout(function() { typeContent(content, index + 1, callback); }, typeSpeed);
+            }
+
+            function typeIntoElement(element, text, index, speed, callback) {
+                if (index >= text.length) { callback(); return; }
+                element.textContent += text[index];
+                setTimeout(function() { typeIntoElement(element, text, index + 1, speed, callback); }, typeSpeed * speed);
+            }
+
+            setTimeout(function() {
+                terminalScreen.classList.remove('terminal-loading');
+                initDropdowns();
+                processNextSegment();
+            }, 500);
+
+            document.getElementById('cursor').style.display = 'none';
+
+            const navigationMap = {
+                '0': 'https://www.spencerflaherty.com',
+                '1': 'https://www.spencerflaherty.com/about',
+                '2': 'https://www.spencerflaherty.com/automation',
+                '3': 'https://www.spencerflaherty.com/media',
+                '4': 'https://www.spencerflaherty.com/paid-ads',
+                '5': 'https://www.spencerflaherty.com/reporting',
+                '6': 'https://www.spencerflaherty.com/resources',
+                '7': 'https://www.spencerflaherty.com/websites'
+            };
+
+            let currentInput = "";
+            const inputDisplay = document.getElementById('user-input-display');
+            const mobileInput = document.getElementById('mobile-input');
+            const cursor = document.getElementById('cursor');
+
+            function handleInput(event) {
+                const key = event.key;
+                if (inputDisplay.classList.contains('error')) return;
+
+                if (key === 'Enter') {
+                    if (navigationMap.hasOwnProperty(currentInput)) {
+                        window.location.href = navigationMap[currentInput];
+                    } else if (currentInput.trim() !== "") {
+                        inputDisplay.textContent = 'Error';
+                        inputDisplay.classList.add('error');
+                        setTimeout(function() {
+                            currentInput = "";
+                            inputDisplay.textContent = currentInput;
+                            inputDisplay.classList.remove('error');
+                            mobileInput.value = "";
+                        }, 2000);
+                    }
+                    return;
+                }
+                if (key === 'Backspace') {
+                    currentInput = currentInput.slice(0, -1);
+                    inputDisplay.textContent = currentInput;
+                    return;
+                }
+                if (key.length === 1 && currentInput.length < 2) {
+                    currentInput += key;
+                    inputDisplay.textContent = currentInput;
+                }
+            }
+
+            function setupMobileInput() {
+                const mobileForm = document.getElementById('mobile-form');
+
+                function scrollCursorIntoView() {
+                    setTimeout(function() {
+                        cursor.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+                        setTimeout(function() {
+                            cursor.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+                        }, 300);
+                    }, 100);
+                }
+
+                cursor.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileInput.focus();
+                    scrollCursorIntoView();
+                });
+
+                inputDisplay.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileInput.focus();
+                    scrollCursorIntoView();
+                });
+
+                mobileInput.addEventListener('focus', function() {
+                    scrollCursorIntoView();
+                });
+
+                mobileInput.addEventListener('input', function(e) {
+                    if (inputDisplay.classList.contains('error')) {
+                        this.value = "";
+                        return;
+                    }
+                    if (this.value.length > 2) {
+                        this.value = this.value.slice(0, 2);
+                    }
+                    currentInput = this.value;
+                    inputDisplay.textContent = currentInput;
+                });
+
+                function handleMobileSubmit() {
+                    if (inputDisplay.classList.contains('error')) return;
+                    if (navigationMap.hasOwnProperty(currentInput)) {
+                        window.location.href = navigationMap[currentInput];
+                    } else if (currentInput.trim() !== "") {
+                        inputDisplay.textContent = 'Error';
+                        inputDisplay.classList.add('error');
+                        setTimeout(function() {
+                            currentInput = "";
+                            inputDisplay.textContent = currentInput;
+                            inputDisplay.classList.remove('error');
+                            mobileInput.value = "";
+                        }, 2000);
+                    }
+                }
+
+                mobileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    handleMobileSubmit();
+                });
+
+                mobileInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleMobileSubmit();
+                    }
+                });
+
+                mobileInput.addEventListener('blur', function(e) {
+                    if (currentInput.trim() !== "") {
+                        handleMobileSubmit();
+                    }
+                });
+            }
+
+            function initDropdowns() {
+                terminalScreen.addEventListener('click', function(e) {
+                    const dropdownToggle = e.target.closest('.dropdown-toggle');
+                    if (!dropdownToggle) return;
+                    e.preventDefault();
+                    const dropdown = dropdownToggle.closest('.dropdown');
+                    if (!dropdown) return;
+                    if (dropdown.dataset.animating === 'true') return;
+
+                    const content = dropdown.querySelector('.dropdown-content');
+                    const needsContent = content && content.innerHTML.trim() === '' && !content.dataset.loaded;
+
+                    if (needsContent) {
+                        const allDropdowns = document.querySelectorAll('.dropdown');
+                        let dropdownIndex = -1;
+                        allDropdowns.forEach(function(d, i) { if (d === dropdown) dropdownIndex = i; });
+                        if (dropdownIndex >= 0 && dropdownBodyContent[dropdownIndex]) {
+                            content.dataset.loaded = 'true';
+                            dropdown.dataset.animating = 'true';
+                            dropdown.classList.add('open');
+                            const strong = dropdownToggle.querySelector('strong');
+                            if (strong) strong.textContent = '[-]';
+                            document.querySelectorAll('.dropdown.open').forEach(function(openDropdown) {
+                                if (openDropdown !== dropdown) {
+                                    openDropdown.classList.remove('open');
+                                    const openStrong = openDropdown.querySelector('.dropdown-toggle strong');
+                                    if (openStrong) openStrong.textContent = '[+]';
+                                }
+                            });
+                            typeDropdownContent(content, dropdownBodyContent[dropdownIndex], function() {
+                                dropdown.dataset.animating = 'false';
+                                initSliders();
+                            });
+                            return;
+                        }
+                    }
+
+                    document.querySelectorAll('.dropdown.open').forEach(function(openDropdown) {
+                        if (openDropdown !== dropdown) {
+                            openDropdown.classList.remove('open');
+                            const openStrong = openDropdown.querySelector('.dropdown-toggle strong');
+                            if (openStrong) openStrong.textContent = '[+]';
+                        }
+                    });
+
+                    dropdown.classList.toggle('open');
+                    const strong = dropdownToggle.querySelector('strong');
+                    if (strong) {
+                        strong.textContent = dropdown.classList.contains('open') ? '[-]' : '[+]';
+                    }
+                });
+            }
+
+            function typeDropdownContent(container, htmlContent, callback) {
+                let index = 0;
+                const dropdownTypeSpeed = 5;
+
+                function processNext() {
+                    if (index >= htmlContent.length) { callback(); return; }
+
+                    if (htmlContent[index] === '<' && htmlContent[index + 1] !== '!' && /[a-zA-Z\/]/.test(htmlContent[index + 1])) {
+                        const tagMatch = htmlContent.substring(index).match(/^<(\/?)([\w-]+)/);
+                        if (tagMatch && !tagMatch[1]) {
+                            const tagName = tagMatch[2].toLowerCase();
+                            const selfClosingTags = ['br', 'img', 'input', 'hr', 'meta', 'link'];
+
+                            if (selfClosingTags.includes(tagName)) {
+                                const endIndex = htmlContent.indexOf('>', index) + 1;
+                                const htmlElement = htmlContent.substring(index, endIndex);
+                                const temp = document.createElement('div');
+                                temp.innerHTML = htmlElement;
+                                while (temp.firstChild) {
+                                    const child = temp.firstChild;
+                                    container.appendChild(child);
+                                    if (child.tagName === 'IMG') {
+                                        child.classList.add('dialup-reveal');
+                                    }
+                                }
+                                index = endIndex;
+                                setTimeout(processNext, dropdownTypeSpeed);
+                                return;
+                            }
+
+                            const closingTag = '</' + tagName + '>';
+                            let depth = 0;
+                            let endIndex = -1;
+                            let i = index;
+                            while (i < htmlContent.length) {
+                                const openMatch = htmlContent.substring(i).match(new RegExp('^<' + tagName + '(\\s|>)', 'i'));
+                                if (openMatch) {
+                                    depth++;
+                                    i += tagName.length + 1;
+                                    continue;
+                                }
+                                if (htmlContent.substring(i, i + closingTag.length).toLowerCase() === closingTag) {
+                                    depth--;
+                                    if (depth === 0) { endIndex = i + closingTag.length; break; }
+                                }
+                                i++;
+                            }
+
+                            if (endIndex > index) {
+                                const htmlElement = htmlContent.substring(index, endIndex);
+                                const temp = document.createElement('div');
+                                temp.innerHTML = htmlElement;
+                                while (temp.firstChild) {
+                                    const child = temp.firstChild;
+                                    container.appendChild(child);
+                                    applyDialupAnimation(child);
+                                }
+                                index = endIndex;
+                                setTimeout(processNext, dropdownTypeSpeed * 3);
+                                return;
+                            }
+                        }
+                    }
+
+                    container.appendChild(document.createTextNode(htmlContent[index]));
+                    index++;
+                    setTimeout(processNext, dropdownTypeSpeed);
+                }
+
+                processNext();
+            }
+
+            function applyDialupAnimation(element) {
+                if (!element || !element.querySelectorAll) return;
+                const mediaElements = element.querySelectorAll('img, iframe');
+                mediaElements.forEach(function(media) {
+                    media.classList.add('dialup-reveal');
+                });
+                if (element.tagName === 'IMG' || element.tagName === 'IFRAME') {
+                    element.classList.add('dialup-reveal');
+                }
+                if (element.classList && element.classList.contains('media-dialup-container')) {
+                    const childMedia = element.querySelector('img, iframe');
+                    if (childMedia) childMedia.classList.add('dialup-reveal');
+                }
+            }
+
+            function initSliders() {
+                document.querySelectorAll('[data-slider]').forEach(function(slider) {
+                    if (slider.dataset.initialized) return;
+                    slider.dataset.initialized = 'true';
+                    const track = slider.querySelector('.media-slider-track');
+                    const slides = slider.querySelectorAll('.media-slider-slide');
+                    const prevBtn = slider.querySelector('[data-slider-prev]');
+                    const nextBtn = slider.querySelector('[data-slider-next]');
+
+                    let currentIndex = 0;
+                    const totalSlides = slides.length;
+
+                    function updateSlider() {
+                        track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+                        if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                        if (nextBtn) nextBtn.disabled = currentIndex === totalSlides - 1;
+                    }
+
+                    function goNext() {
+                        if (currentIndex < totalSlides - 1) { currentIndex++; updateSlider(); }
+                    }
+
+                    function goPrev() {
+                        if (currentIndex > 0) { currentIndex--; updateSlider(); }
+                    }
+
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function(e) {
+                            e.preventDefault(); e.stopPropagation(); goPrev();
+                        });
+                    }
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function(e) {
+                            e.preventDefault(); e.stopPropagation(); goNext();
+                        });
+                    }
+
+                    let startX = 0, isDragging = false;
+                    track.addEventListener('touchstart', function(e) {
+                        startX = e.touches[0].clientX; isDragging = true;
+                    }, { passive: true });
+                    track.addEventListener('touchend', function(e) {
+                        if (!isDragging) return;
+                        const endX = e.changedTouches[0].clientX;
+                        const diff = startX - endX;
+                        if (Math.abs(diff) > 50) {
+                            if (diff > 0) goNext(); else goPrev();
+                        }
+                        isDragging = false;
+                    }, { passive: true });
+
+                    updateSlider();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
