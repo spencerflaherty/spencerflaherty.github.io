@@ -5,7 +5,7 @@ h1: AUTOMATION
 seo:
   title: "Marketing Automation Portfolio | Spencer Flaherty"
   description: "AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation."
-  url: "https://www.spencerflaherty.com/automation"
+  url: "https://spencerflaherty.com/automation"
   ogImage: "/static/images/og/og-image.png"
 
 prompt:

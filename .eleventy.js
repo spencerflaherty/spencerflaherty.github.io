@@ -3,14 +3,14 @@ const fs = require("fs");
 const path = require("path");
 
 const NAV_LINKS = [
-  { href: "https://www.spencerflaherty.com", text: "[0]  ~Root/ (Home)" },
-  { href: "https://www.spencerflaherty.com/about", text: "[1]  About/" },
-  { href: "https://www.spencerflaherty.com/automation", text: "[2]  Automation/" },
-  { href: "https://www.spencerflaherty.com/media", text: "[3]  Media/" },
-  { href: "https://www.spencerflaherty.com/paid-ads", text: "[4]  Paid_Ads/" },
-  { href: "https://www.spencerflaherty.com/reporting", text: "[5]  Reporting/" },
-  { href: "https://www.spencerflaherty.com/resources", text: "[6]  Resources/" },
-  { href: "https://www.spencerflaherty.com/websites", text: "[7]  Websites/" },
+  { href: "https://spencerflaherty.com", text: "[0]  ~Root/ (Home)" },
+  { href: "https://spencerflaherty.com/about", text: "[1]  About/" },
+  { href: "https://spencerflaherty.com/automation", text: "[2]  Automation/" },
+  { href: "https://spencerflaherty.com/media", text: "[3]  Media/" },
+  { href: "https://spencerflaherty.com/paid-ads", text: "[4]  Paid_Ads/" },
+  { href: "https://spencerflaherty.com/reporting", text: "[5]  Reporting/" },
+  { href: "https://spencerflaherty.com/resources", text: "[6]  Resources/" },
+  { href: "https://spencerflaherty.com/websites", text: "[7]  Websites/" },
 ];
 
 function esc(str) {
@@ -212,6 +212,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy({ "src/static": "static" });
   eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
+  eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
 
   eleventyConfig.addFilter("buildSegments", buildSegments);
   eleventyConfig.addFilter("buildDropdownBodies", buildDropdownBodies);

@@ -4,7 +4,7 @@ backend:
   branch: main
   # Sveltia uses PKCE, no OAuth proxy required; register a GitHub OAuth app
   # and put its Client ID here (PKCE flow only needs Client ID, not secret).
-  # site_domain: www.spencerflaherty.com
+  # site_domain: spencerflaherty.com
   # auth_endpoint: https://auth.sveltia.app/auth
 
 # Sveltia supports local editing via the File System Access API — click
@@ -27,7 +27,7 @@ collections:
         name: site
         label: "Site-wide settings"
         fields:
-          - { label: "Base URL", name: url, widget: string, hint: "Full origin, e.g. https://www.spencerflaherty.com" }
+          - { label: "Base URL", name: url, widget: string, hint: "Full origin, e.g. https://spencerflaherty.com" }
           - label: "Layout & spacing"
             name: layout
             widget: object
