@@ -3,6 +3,7 @@
 
 # Archive directory
 Archive/
+.claude/
 
 # Node / Eleventy
 node_modules/
