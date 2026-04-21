@@ -1,1 +1,15 @@
 url: https://www.spencerflaherty.com
+
+layout:
+  logoLinkUrl: https://www.spencerflaherty.com
+  paddingAboveLogo: 30px
+  paddingBelowLogo: 20px
+  paddingBelowWindow: 60px
+  windowWidthDesktop: 800px
+  windowWidthMobile: 100%
+  spacing:
+    h1MarginTop: 0px
+    h1MarginBottom: 0px
+    h2MarginTop: 10px
+    h2MarginBottom: 5px
+    dropdownMarginBottom: 2px

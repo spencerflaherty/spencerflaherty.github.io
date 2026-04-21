@@ -19,6 +19,36 @@ public_folder: "/static/images"
 
 collections:
 
+  - name: site-settings
+    label: "Site Settings"
+    editor: { preview: false }
+    files:
+      - file: "src/_data/site.yml"
+        name: site
+        label: "Site-wide settings"
+        fields:
+          - { label: "Base URL", name: url, widget: string, hint: "Full origin, e.g. https://www.spencerflaherty.com" }
+          - label: "Layout & spacing"
+            name: layout
+            widget: object
+            fields:
+              - { label: "Logo link URL", name: logoLinkUrl, widget: string, hint: "Where clicking the logo takes you. Usually the home URL." }
+              - { label: "Padding above logo", name: paddingAboveLogo, widget: string, hint: "CSS value, e.g. 30px or 2rem" }
+              - { label: "Padding below logo (gap between logo and terminal)", name: paddingBelowLogo, widget: string }
+              - { label: "Padding below terminal window", name: paddingBelowWindow, widget: string }
+              - { label: "Terminal window width — desktop", name: windowWidthDesktop, widget: string, hint: "e.g. 800px or 90%. Applied above 600px viewport." }
+              - { label: "Terminal window width — mobile", name: windowWidthMobile, widget: string, hint: "e.g. 100% or 360px. Applied at 600px viewport or below." }
+              - label: "Terminal content spacing"
+                name: spacing
+                widget: object
+                hint: "Vertical margins for H1 / H2 / dropdown rows inside the terminal"
+                fields:
+                  - { label: "H1 margin top (e.g. RESOURCES heading)", name: h1MarginTop, widget: string }
+                  - { label: "H1 margin bottom", name: h1MarginBottom, widget: string }
+                  - { label: "H2 margin top (e.g. // Internal Training...)", name: h2MarginTop, widget: string }
+                  - { label: "H2 margin bottom", name: h2MarginBottom, widget: string }
+                  - { label: "Dropdown margin bottom (e.g. [+] Project rows)", name: dropdownMarginBottom, widget: string }
+
   - name: home
     label: "Home page"
     editor: { preview: false }

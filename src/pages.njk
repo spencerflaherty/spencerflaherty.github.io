@@ -38,12 +38,26 @@ eleventyComputed:
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --padding-above-logo: {{ site.layout.paddingAboveLogo or "30px" }};
+        --padding-below-logo: {{ site.layout.paddingBelowLogo or "20px" }};
+        --padding-below-window: {{ site.layout.paddingBelowWindow or "60px" }};
+        --window-width-desktop: {{ site.layout.windowWidthDesktop or "800px" }};
+        --window-width-mobile: {{ site.layout.windowWidthMobile or "100%" }};
+        --h1-margin-top: {{ site.layout.spacing.h1MarginTop or "0px" }};
+        --h1-margin-bottom: {{ site.layout.spacing.h1MarginBottom or "0px" }};
+        --h2-margin-top: {{ site.layout.spacing.h2MarginTop or "10px" }};
+        --h2-margin-bottom: {{ site.layout.spacing.h2MarginBottom or "5px" }};
+        --dropdown-margin-bottom: {{ site.layout.spacing.dropdownMarginBottom or "2px" }};
+      }
+    </style>
     <style>{% include "styles.css" %}</style>
 </head>
 
 <body>
     <header class="site-header">
-        <a href="{{ site.url }}" aria-label="Spencer Flaherty home">
+        <a href="{{ site.layout.logoLinkUrl or site.url }}" aria-label="Spencer Flaherty home">
             <img src="/static/images/header/logo-desktop.png" alt="Spencer Flaherty" class="logo-desktop" width="223" height="180">
             <img src="/static/images/header/logo-mobile.png" alt="Spencer Flaherty" class="logo-mobile" width="180" height="145">
         </a>

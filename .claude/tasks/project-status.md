@@ -72,23 +72,13 @@ Template already handles `ogTitle`, `ogDescription`, `twitterTitle`, `twitterDes
 
 ## DNS Cutover Plan
 
-1. Confirm parity + polish checklist above is complete
-2. In GitHub Pages settings: add `spencerflaherty.com` as custom domain on the `spencerflaherty.github.io` repo
-3. At GoDaddy: update DNS
-   - `A` records for apex → GitHub Pages IPs (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153)
-   - `CNAME` for `www` → `spencerflaherty.github.io`
-4. Enable "Enforce HTTPS" in GitHub Pages (after cert provisions)
-5. Monitor DNS propagation (24–48h)
-6. Keep Squarespace active ~30 days as safety buffer
-7. Cancel Squarespace subscription after stable period
+Full step-by-step plan (prechecks, exact GoDaddy records incl. IPv6, verification commands, rollback, gotchas) lives in `dns-cutover-plan.md`.
 
 ---
 
-## Post-Cutover (nice-to-have)
+## Improvement Ideas
 
-- Non-terminal accessibility version
-- Sitemap generation
-- Analytics migration (if any was on Squarespace)
+Prioritized (P0/P1/P2) list of post-cutover improvements across performance, SEO, accessibility, CMS UX, code quality, analytics, features, and resilience lives in `improvement-ideas.md`.
 
 ---
 
