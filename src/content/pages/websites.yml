@@ -3,7 +3,7 @@ windowTitle: /Websites/
 h1: WEBSITES
 
 navigation:
-  showInNavigation: false
+  showInNavigation: true
   label: "Websites/"
   order: 7
 
@@ -11,7 +11,7 @@ seo:
   title: "Web Design & Development Portfolio | Spencer Flaherty"
   description: "Custom web projects on Squarespace, WordPress, and HubSpot. Terminal-style portfolio site, local business SEO builds, and agency redesigns that triple traffic."
   url: "https://spencerflaherty.com/websites"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/images/collections/og/og-image.png"
 
 prompt:
   cwd: websites
@@ -39,8 +39,8 @@ content:
         description: "Built an SEO-focused Squarespace site for an auto shop with no prior web presence — now ranking in local Google search."
         media:
           - type: image
-            src: "/static/images/websites/auto-international.png"
-            alt: "Auto International Website"
+            src: "/static/images/collections/websites/auto-international.png"
+            alt: "Screenshot of the Auto International auto repair website homepage"
         buttonlinks:
           - href: "https://www.autointernationalrepair.com/"
             text: "View Site"
@@ -51,8 +51,8 @@ content:
         description: "Designed a content writer portfolio with custom animations and formatting to showcase writing samples — a clean link for her resume."
         media:
           - type: image
-            src: "/static/images/websites/annielauk.png"
-            alt: "Annie Laukaitis Website"
+            src: "/static/images/collections/websites/annielauk.png"
+            alt: "Screenshot of Annie Laukaitis portfolio website with a writing-focused layout"
         buttonlinks:
           - href: "https://www.annielauk.com/"
             text: "View Site"
@@ -63,8 +63,8 @@ content:
         description: "Led the redesign of my employer's site — handling design, copy, structure, and functionality — tripling organic traffic."
         media:
           - type: image
-            src: "/static/images/websites/groove-commerce.png"
-            alt: "Groove Commerce Website"
+            src: "/static/images/collections/websites/groove-commerce.png"
+            alt: "Screenshot of the Groove Commerce website redesign homepage"
         buttonlinks:
           - href: "https://www.groovecommerce.com/"
             text: "View Site"
@@ -75,8 +75,8 @@ content:
         description: "Made regular improvements at my current employer — added a reviews carousel pulling from the automated review pipeline and improved site performance."
         media:
           - type: image
-            src: "/static/images/websites/critical-peake.png"
-            alt: "Critical Peake Website"
+            src: "/static/images/collections/websites/critical-peake.png"
+            alt: "Screenshot of the Critical Peake website featuring service pages and review content"
         buttonlinks:
           - href: "https://criticalpeake.com/"
             text: "View Site"

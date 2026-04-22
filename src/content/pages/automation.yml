@@ -3,7 +3,7 @@ windowTitle: /Automation/
 h1: AUTOMATION
 
 navigation:
-  showInNavigation: false
+  showInNavigation: true
   label: "Automation/"
   order: 2
 
@@ -11,7 +11,7 @@ seo:
   title: "Marketing Automation Portfolio | Spencer Flaherty"
   description: "AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation."
   url: "https://spencerflaherty.com/automation"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/images/collections/og/og-image.png"
 
 prompt:
   cwd: automation
@@ -26,8 +26,8 @@ content:
         description: "Architected an end-to-end pipeline to identify high-value EV infrastructure leads by filtering physical land attributes, resolving ownership, and automating executive outreach."
         media:
           - type: image
-            src: "/static/images/automation/geospatial-prospecting.png"
-            alt: "Geospatial Prospecting"
+            src: "/static/images/collections/automation/geospatial-prospecting.png"
+            alt: "Map-based prospecting dashboard highlighting parcels and EV infrastructure lead targets"
         stack:
           - "AI Logic: Agentic Workflows"
           - "Spatial Data: OpenStreetMap"
@@ -39,8 +39,8 @@ content:
         description: "Engineered a public-sector lead generation engine by scraping public procurement datasets, collecting agency persona contact info, and automating high-intent outbound sequences."
         media:
           - type: image
-            src: "/static/images/automation/gov-procurement-pipeline.png"
-            alt: "Gov-Procurement Pipeline"
+            src: "/static/images/collections/automation/gov-procurement-pipeline.png"
+            alt: "Public procurement workflow diagram showing agency bid data flowing into outreach automation"
         stack:
           - "Ingestion Layer: Scraper Agent"
           - "Enrichment Layer: ZoomInfo"
@@ -50,8 +50,8 @@ content:
         description: "Automated personalized outreach to peer properties by pulling CRM history for each contact, generating tailored emails referencing past interactions, and embedding case study links—making each message feel hand-written while scaling across the mid-Atlantic."
         media:
           - type: image
-            src: "/static/images/automation/arcadia-run-outreach-campaign.png"
-            alt: "Arcadia Run Outreach Campaign"
+            src: "/static/images/collections/automation/arcadia-run-outreach-campaign.png"
+            alt: "Personalized outreach email sequence referencing prior CRM activity for Arcadia Run prospects"
         stack:
           - "Data Source: CRM Customer History"
           - "AI Logic: Dynamic Email Personalization"
@@ -66,8 +66,8 @@ content:
         description: "Built an inbound funnel that turns anonymous website traffic into qualified leads by identifying visitors through IP-to-company matching, layering in third-party intent signals to gauge buying readiness, and auto-routing high-fit prospects to sales."
         media:
           - type: image
-            src: "/static/images/automation/intent-conversion-engine.png"
-            alt: "Intent Conversion Engine"
+            src: "/static/images/collections/automation/intent-conversion-engine.png"
+            alt: "Lead routing workflow connecting anonymous website visitors, intent signals, and CRM handoff"
         stack:
           - "Identity Resolution: Visitor De-anonymization (RB2B, Warmly, etc.)"
           - "Intent Layer: Bidstream + Co-op Data (Bombora, Demandbase)"
@@ -77,8 +77,8 @@ content:
         description: "Designed a high speed-to-lead system by synchronizing Facebook and LinkedIn form submissions into CRM, routing validated leads via Zapier, and triggering instant rep notifications to maximize peak-intent conversion."
         media:
           - type: image
-            src: "/static/images/automation/paid-acquisition-engine.png"
-            alt: "Paid Acquisition Engine"
+            src: "/static/images/collections/automation/paid-acquisition-engine.png"
+            alt: "Automation diagram for Facebook and LinkedIn lead forms syncing into CRM and instant notifications"
         stack:
           - "Platforms: Facebook, LinkedIn"
           - "Orchestration Layer: Zapier"
@@ -93,8 +93,8 @@ content:
         description: "Developed RAG-based reactivation system by retrieving historical customer context from CRM, generating hyper-personalized outreach sequences, and executing automated email campaigns via Apollo to reactivate churned accounts and drive upsell opportunities."
         media:
           - type: image
-            src: "/static/images/automation/rag-reactivation-engine.png"
-            alt: "RAG Reactivation Engine"
+            src: "/static/images/collections/automation/rag-reactivation-engine.png"
+            alt: "CRM-powered RAG workflow generating personalized reactivation emails for dormant accounts"
         stack:
           - "Data Source: CRM"
           - "Retrieval Layer: RAG Architecture"
@@ -105,8 +105,8 @@ content:
         description: "Built lightweight apps to solve specific operational problems that previously required expensive software or went unsolved using AI-assisted development to move from idea to working tool in hours."
         media:
           - type: image
-            src: "/static/images/automation/custom-internal-tools.png"
-            alt: "Custom Internal Tools"
+            src: "/static/images/collections/automation/custom-internal-tools.png"
+            alt: "Dashboard of lightweight internal AI tools including CRM chat and data cleanup utilities"
         stack:
           - "Development: AI-Assisted Coding (Claude Code)"
           - "Deployment: Local + Cloud Functions"
@@ -120,8 +120,8 @@ content:
         description: "Developed an agentic workflow that transforms raw survey data into ROI/NOI projections, calculating asset value increases, and prioritizing state/local/utility incentives to drive decision-maker buy-in."
         media:
           - type: image
-            src: "/static/images/automation/ev-feasibility-engine.png"
-            alt: "EV Feasibility Engine"
+            src: "/static/images/collections/automation/ev-feasibility-engine.png"
+            alt: "Feasibility report interface showing ROI, NOI, and incentive analysis for EV charging projects"
         stack:
           - "Data Source: Resident Surveys"
           - "AI Logic: Agentic Workflow"
