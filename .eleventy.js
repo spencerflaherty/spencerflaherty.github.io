@@ -122,13 +122,32 @@ function renderLinkedMedia(mediaHtml, item) {
   return `<a href='${href}' class='media-link' target='${target}'${relAttr}>${mediaHtml}</a>`;
 }
 
+function buildMediaFrameStyle(item, fallbackRatio) {
+  return buildStyleAttribute({
+    width: item.width,
+    height: item.height,
+    "max-width": item.maxWidth,
+    "max-height": item.maxHeight,
+    "aspect-ratio": item.height ? undefined : item.aspectRatio || fallbackRatio,
+  });
+}
+
+function buildMediaElementStyle(item) {
+  return buildStyleAttribute({
+    height: item.height,
+    "max-height": item.maxHeight,
+    "object-fit": item.objectFit,
+  });
+}
+
 function renderMediaWrapper(innerHtml, item) {
   const classes = ["media-dialup-container"];
   if (item.variant) classes.push(`media-dialup-container--${item.variant}`);
   if (item.align) classes.push(`media-dialup-container--align-${item.align}`);
 
   const styleAttr = buildStyleAttribute({
-    "max-width": item.width,
+    width: item.width,
+    "max-width": item.maxWidth,
     "margin-top": item.spacingTop,
     "margin-bottom": item.spacingBottom,
   });
@@ -144,16 +163,16 @@ function renderMediaWrapper(innerHtml, item) {
 }
 
 function renderFramedEmbed(iframeHtml, item, fallbackRatio) {
-  const aspectRatio = item.aspectRatio || fallbackRatio;
-  const styleAttr = buildStyleAttribute({ "aspect-ratio": aspectRatio });
+  const styleAttr = buildMediaFrameStyle(item, fallbackRatio);
   return `<div class='media-frame'${styleAttr}>${iframeHtml}</div>`;
 }
 
 function renderMediaItem(item) {
   if (item.type === "image") {
+    const styleAttr = buildMediaElementStyle(item);
     const image = `<img src='${escapeHtml(item.src || "")}' alt='${escapeHtml(
       item.alt || "",
-    )}' loading='lazy'>`;
+    )}' loading='lazy'${styleAttr}>`;
     return renderMediaWrapper(image, item);
   }
 
@@ -187,6 +206,37 @@ function renderMediaItem(item) {
   }
 
   return "";
+}
+
+function appendContentItem(segments, item) {
+  if (item.type === "text") {
+    segments.push({ type: "type", content: item.text });
+  } else if (MEDIA_TYPES.includes(item.type)) {
+    segments.push({ type: "inject", html: renderMediaItem(item) });
+  } else if (item.type === "buttonlink") {
+    segments.push({
+      type: "buttonlink",
+      href: item.href,
+      text: item.text,
+      openInNewTab: item.openInNewTab !== false,
+    });
+    if (item.newline !== false) segments.push({ type: "type", content: "\n" });
+  } else if (item.type === "inlinelink") {
+    segments.push({ type: "inlinelink", href: item.href, text: item.text });
+  } else if (item.type === "linebreak") {
+    segments.push({ type: "inject", html: "<span class='line-break'></span>" });
+  } else if (item.type === "section") {
+    segments.push({ type: "element", tag: "h2", className: "h2", text: item.heading });
+    if (item.intro) {
+      segments.push({ type: "type", content: item.intro });
+    }
+    for (const project of item.projects || []) {
+      segments.push({ type: "dropdown", text: `[+]  ${project.title}` });
+    }
+    if (item.trailingLineBreak !== false) {
+      segments.push({ type: "inject", html: "<span class='line-break'></span>" });
+    }
+  }
 }
 
 function renderDropdownBody(project) {
@@ -274,9 +324,7 @@ function buildSegments(page) {
     segments.push({ type: "type", content: `${buildPromptLine(terminal)}\n` });
 
     for (const item of content) {
-      if (MEDIA_TYPES.includes(item.type)) {
-        segments.push({ type: "inject", html: renderMediaItem(item) });
-      }
+      appendContentItem(segments, item);
     }
 
     segments.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
@@ -302,34 +350,7 @@ function buildSegments(page) {
   }
 
   for (const item of content) {
-    if (item.type === "text") {
-      segments.push({ type: "type", content: item.text });
-    } else if (MEDIA_TYPES.includes(item.type)) {
-      segments.push({ type: "inject", html: renderMediaItem(item) });
-    } else if (item.type === "buttonlink") {
-      segments.push({
-        type: "buttonlink",
-        href: item.href,
-        text: item.text,
-        openInNewTab: item.openInNewTab !== false,
-      });
-      if (item.newline !== false) segments.push({ type: "type", content: "\n" });
-    } else if (item.type === "inlinelink") {
-      segments.push({ type: "inlinelink", href: item.href, text: item.text });
-    } else if (item.type === "linebreak") {
-      segments.push({ type: "inject", html: "<span class='line-break'></span>" });
-    } else if (item.type === "section") {
-      segments.push({ type: "element", tag: "h2", className: "h2", text: item.heading });
-      if (item.intro) {
-        segments.push({ type: "type", content: item.intro });
-      }
-      for (const project of item.projects || []) {
-        segments.push({ type: "dropdown", text: `[+]  ${project.title}` });
-      }
-      if (item.trailingLineBreak !== false) {
-        segments.push({ type: "inject", html: "<span class='line-break'></span>" });
-      }
-    }
+    appendContentItem(segments, item);
   }
 
   const last = content[content.length - 1];
