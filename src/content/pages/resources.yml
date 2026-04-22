@@ -3,6 +3,7 @@ windowTitle: /Resources/
 h1: RESOURCES
 
 navigation:
+  showInNavigation: false
   label: "Resources/"
   order: 6
 

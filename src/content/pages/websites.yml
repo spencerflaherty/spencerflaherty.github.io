@@ -3,6 +3,7 @@ windowTitle: /Websites/
 h1: WEBSITES
 
 navigation:
+  showInNavigation: false
   label: "Websites/"
   order: 7
 

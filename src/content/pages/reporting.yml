@@ -3,6 +3,7 @@ windowTitle: /Reporting/
 h1: REPORTING
 
 navigation:
+  showInNavigation: false
   label: "Reporting/"
   order: 5
 

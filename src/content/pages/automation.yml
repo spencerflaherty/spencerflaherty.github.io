@@ -3,6 +3,7 @@ windowTitle: /Automation/
 h1: AUTOMATION
 
 navigation:
+  showInNavigation: false
   label: "Automation/"
   order: 2
 

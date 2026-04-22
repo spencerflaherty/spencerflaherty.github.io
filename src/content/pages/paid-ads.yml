@@ -3,6 +3,7 @@ windowTitle: /Paid_Ads/
 h1: PAID_ADS
 
 navigation:
+  showInNavigation: false
   label: "Paid_Ads/"
   order: 4
 

@@ -7,8 +7,8 @@ navigation:
   order: 1
 
 seo:
-  title: "About Spencer Flaherty | Marketing & AI Engineer"
-  description: "15 years creating at the intersection of sales, media, and AI. Baltimore-based marketing professional with expertise in automation, video, and engineering."
+  title: "About Spencer Flaherty | Demand Gen, AI Systems & Digital Media"
+  description: "15 years creating at the intersection of growth, media, and AI. Baltimore-based marketer and builder working across demand gen, digital media, and AI systems."
   url: "https://spencerflaherty.com/about"
   ogImage: "/static/images/og/og-image.png"
 
@@ -25,9 +25,9 @@ content:
   - type: text
     text: |
       Creating for 15 years.
-      Sales & Marketing
-      Photo & Video
-      AI Engineering
+      Demand Gen
+      AI Systems
+      Digital Media
       Baltimore, MD
 
       What the horse considers play, the monkey considers business.

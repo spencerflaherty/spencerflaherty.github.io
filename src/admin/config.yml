@@ -349,17 +349,17 @@ collections:
                 fields:
                   - { label: "Type", name: type, widget: hidden, default: linebreak }
 
-  - name: automation
-    label: "Automation Page"
+  - name: demand-gen
+    label: "Demand Gen Page"
     editor: { preview: false }
     files:
-      - file: "src/content/pages/automation.yml"
-        name: automation
-        label: "Automation"
-        media_folder: "src/static/images/automation"
-        public_folder: "/static/images/automation"
+      - file: "src/content/pages/demand-gen.yml"
+        name: demand-gen
+        label: "Demand Gen"
+        media_folder: "src/static/images/demand-gen"
+        public_folder: "/static/images/demand-gen"
         fields:
-          - { label: "Slug", name: slug, widget: hidden, default: automation }
+          - { label: "Slug", name: slug, widget: hidden, default: demand-gen }
           - { label: "Window title", name: windowTitle, widget: string }
           - { label: "H1", name: h1, widget: string }
           - label: "Navigation"
@@ -508,17 +508,176 @@ collections:
                           - { label: "Open in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
                       - { label: "Note", name: note, widget: string, required: false }
 
-  - name: media
-    label: "Media Page"
+  - name: ai-systems
+    label: "AI Systems Page"
     editor: { preview: false }
     files:
-      - file: "src/content/pages/media.yml"
-        name: media
-        label: "Media"
-        media_folder: "src/static/images/media"
-        public_folder: "/static/images/media"
+      - file: "src/content/pages/ai-systems.yml"
+        name: ai-systems
+        label: "AI Systems"
+        media_folder: "src/static/images/ai-systems"
+        public_folder: "/static/images/ai-systems"
         fields:
-          - { label: "Slug", name: slug, widget: hidden, default: media }
+          - { label: "Slug", name: slug, widget: hidden, default: ai-systems }
+          - { label: "Window title", name: windowTitle, widget: string }
+          - { label: "H1", name: h1, widget: string }
+          - label: "Navigation"
+            name: navigation
+            widget: object
+            fields:
+              - { label: "Show in navigation", name: showInNavigation, widget: boolean, default: true, required: false }
+              - { label: "Menu label", name: label, widget: string }
+              - { label: "Menu order", name: order, widget: number, value_type: int, min: 0 }
+          - label: "SEO"
+            name: seo
+            widget: object
+            fields:
+              - { label: "Title", name: title, widget: string }
+              - { label: "Description", name: description, widget: text }
+              - { label: "Canonical URL", name: url, widget: string, required: false }
+              - { label: "OG image", name: ogImage, widget: image, required: false }
+              - { label: "OG title override", name: ogTitle, widget: string, required: false }
+              - { label: "OG description override", name: ogDescription, widget: text, required: false }
+              - { label: "Twitter title override", name: twitterTitle, widget: string, required: false }
+              - { label: "Twitter description override", name: twitterDescription, widget: text, required: false }
+              - { label: "Twitter image override", name: twitterImage, widget: image, required: false }
+          - label: "Prompt line"
+            name: prompt
+            widget: object
+            fields:
+              - { label: "Working directory", name: cwd, widget: string, required: false }
+              - { label: "Command", name: command, widget: string }
+          - label: "Sections"
+            name: content
+            widget: list
+            types:
+              - name: section
+                label: "Section"
+                fields:
+                  - { label: "Type", name: type, widget: hidden, default: section }
+                  - { label: "Heading", name: heading, widget: string }
+                  - { label: "Intro", name: intro, widget: text, required: false }
+                  - { label: "Add divider after section", name: trailingLineBreak, widget: boolean, default: true, required: false }
+                  - label: "Projects"
+                    name: projects
+                    widget: list
+                    fields:
+                      - { label: "Title", name: title, widget: string }
+                      - label: "Order"
+                        name: order
+                        widget: list
+                        allow_add: true
+                        default: [media, description, stack]
+                        hint: "Use any combination of media, description, stack, buttonlink, note"
+                      - { label: "Description", name: description, widget: text, required: false }
+                      - label: "Media"
+                        name: media
+                        widget: list
+                        required: false
+                        types:
+                          - name: image
+                            label: "Image"
+                            fields:
+                              - { label: "Type", name: type, widget: hidden, default: image }
+                              - { label: "Image", name: src, widget: image }
+                              - { label: "Alt text", name: alt, widget: string, required: false }
+                              - { label: "Caption", name: caption, widget: text, required: false }
+                              - { label: "Width", name: width, widget: string, required: false }
+                              - { label: "Max width", name: maxWidth, widget: string, required: false }
+                              - { label: "Height", name: height, widget: string, required: false }
+                              - { label: "Max height", name: maxHeight, widget: string, required: false }
+                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
+                              - { label: "Size variant", name: variant, widget: select, options: ["", sm, md, lg], required: false }
+                              - { label: "Object fit", name: objectFit, widget: select, options: ["", contain, cover, fill, none, scale-down], required: false }
+                              - { label: "Link URL", name: linkUrl, widget: string, required: false }
+                              - { label: "Open link in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
+                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
+                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
+                          - name: youtube
+                            label: "YouTube"
+                            fields:
+                              - { label: "Type", name: type, widget: hidden, default: youtube }
+                              - { label: "Video ID", name: videoId, widget: string }
+                              - { label: "Title", name: title, widget: string, required: false }
+                              - { label: "Caption", name: caption, widget: text, required: false }
+                              - { label: "Width", name: width, widget: string, required: false }
+                              - { label: "Max width", name: maxWidth, widget: string, required: false }
+                              - { label: "Height", name: height, widget: string, required: false }
+                              - { label: "Max height", name: maxHeight, widget: string, required: false }
+                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false, hint: "Example: 16 / 9 or 9 / 16" }
+                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
+                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
+                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
+                          - name: vimeo
+                            label: "Vimeo"
+                            fields:
+                              - { label: "Type", name: type, widget: hidden, default: vimeo }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: "Title", name: title, widget: string, required: false }
+                              - { label: "Caption", name: caption, widget: text, required: false }
+                              - { label: "Width", name: width, widget: string, required: false }
+                              - { label: "Max width", name: maxWidth, widget: string, required: false }
+                              - { label: "Height", name: height, widget: string, required: false }
+                              - { label: "Max height", name: maxHeight, widget: string, required: false }
+                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
+                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
+                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
+                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
+                          - name: linkedin
+                            label: "LinkedIn"
+                            fields:
+                              - { label: "Type", name: type, widget: hidden, default: linkedin }
+                              - { label: "Embed URL", name: src, widget: string }
+                              - { label: "Title", name: title, widget: string, required: false }
+                              - { label: "Caption", name: caption, widget: text, required: false }
+                              - { label: "Width", name: width, widget: string, required: false }
+                              - { label: "Max width", name: maxWidth, widget: string, required: false }
+                              - { label: "Height", name: height, widget: string, required: false }
+                              - { label: "Max height", name: maxHeight, widget: string, required: false }
+                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false, hint: "Example: 4 / 5" }
+                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
+                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
+                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
+                          - name: html
+                            label: "Custom HTML"
+                            fields:
+                              - { label: "Type", name: type, widget: hidden, default: html }
+                              - { label: "HTML", name: html, widget: text }
+                              - { label: "Caption", name: caption, widget: text, required: false }
+                              - { label: "Width", name: width, widget: string, required: false }
+                              - { label: "Max width", name: maxWidth, widget: string, required: false }
+                              - { label: "Height", name: height, widget: string, required: false }
+                              - { label: "Max height", name: maxHeight, widget: string, required: false }
+                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
+                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
+                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
+                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
+                      - label: "Stack"
+                        name: stack
+                        widget: list
+                        required: false
+                        field: { label: "Item", name: item, widget: string }
+                      - label: "Button links"
+                        name: buttonlinks
+                        widget: list
+                        required: false
+                        fields:
+                          - { label: "URL", name: href, widget: string }
+                          - { label: "Text", name: text, widget: string }
+                          - { label: "Open in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
+                      - { label: "Note", name: note, widget: string, required: false }
+
+  - name: digital-media
+    label: "Digital Media Page"
+    editor: { preview: false }
+    files:
+      - file: "src/content/pages/digital-media.yml"
+        name: digital-media
+        label: "Digital Media"
+        media_folder: "src/static/images/digital-media"
+        public_folder: "/static/images/digital-media"
+        fields:
+          - { label: "Slug", name: slug, widget: hidden, default: digital-media }
           - { label: "Window title", name: windowTitle, widget: string }
           - { label: "H1", name: h1, widget: string }
           - label: "Navigation"
@@ -604,7 +763,7 @@ collections:
                               - { label: "Max width", name: maxWidth, widget: string, required: false }
                               - { label: "Height", name: height, widget: string, required: false }
                               - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
+                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false, hint: "Example: 16 / 9 or 9 / 16" }
                               - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
                               - { label: "Spacing top", name: spacingTop, widget: string, required: false }
                               - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
@@ -634,619 +793,7 @@ collections:
                               - { label: "Max width", name: maxWidth, widget: string, required: false }
                               - { label: "Height", name: height, widget: string, required: false }
                               - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: html
-                            label: "Custom HTML"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: html }
-                              - { label: "HTML", name: html, widget: text }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                      - label: "Stack"
-                        name: stack
-                        widget: list
-                        required: false
-                        field: { label: "Item", name: item, widget: string }
-                      - label: "Button links"
-                        name: buttonlinks
-                        widget: list
-                        required: false
-                        fields:
-                          - { label: "URL", name: href, widget: string }
-                          - { label: "Text", name: text, widget: string }
-                          - { label: "Open in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                      - { label: "Note", name: note, widget: string, required: false }
-
-  - name: paid-ads
-    label: "Paid Ads Page"
-    editor: { preview: false }
-    files:
-      - file: "src/content/pages/paid-ads.yml"
-        name: paid-ads
-        label: "Paid Ads"
-        media_folder: "src/static/images/paid-ads"
-        public_folder: "/static/images/paid-ads"
-        fields:
-          - { label: "Slug", name: slug, widget: hidden, default: paid-ads }
-          - { label: "Window title", name: windowTitle, widget: string }
-          - { label: "H1", name: h1, widget: string }
-          - label: "Navigation"
-            name: navigation
-            widget: object
-            fields:
-              - { label: "Show in navigation", name: showInNavigation, widget: boolean, default: true, required: false }
-              - { label: "Menu label", name: label, widget: string }
-              - { label: "Menu order", name: order, widget: number, value_type: int, min: 0 }
-          - label: "SEO"
-            name: seo
-            widget: object
-            fields:
-              - { label: "Title", name: title, widget: string }
-              - { label: "Description", name: description, widget: text }
-              - { label: "Canonical URL", name: url, widget: string, required: false }
-              - { label: "OG image", name: ogImage, widget: image, required: false }
-              - { label: "OG title override", name: ogTitle, widget: string, required: false }
-              - { label: "OG description override", name: ogDescription, widget: text, required: false }
-              - { label: "Twitter title override", name: twitterTitle, widget: string, required: false }
-              - { label: "Twitter description override", name: twitterDescription, widget: text, required: false }
-              - { label: "Twitter image override", name: twitterImage, widget: image, required: false }
-          - label: "Prompt line"
-            name: prompt
-            widget: object
-            fields:
-              - { label: "Working directory", name: cwd, widget: string, required: false }
-              - { label: "Command", name: command, widget: string }
-          - label: "Sections"
-            name: content
-            widget: list
-            types:
-              - name: section
-                label: "Section"
-                fields:
-                  - { label: "Type", name: type, widget: hidden, default: section }
-                  - { label: "Heading", name: heading, widget: string }
-                  - { label: "Intro", name: intro, widget: text, required: false }
-                  - { label: "Add divider after section", name: trailingLineBreak, widget: boolean, default: true, required: false }
-                  - label: "Projects"
-                    name: projects
-                    widget: list
-                    fields:
-                      - { label: "Title", name: title, widget: string }
-                      - label: "Order"
-                        name: order
-                        widget: list
-                        allow_add: true
-                        default: [media, description, stack]
-                        hint: "Use any combination of media, description, stack, buttonlink, note"
-                      - { label: "Description", name: description, widget: text, required: false }
-                      - label: "Media"
-                        name: media
-                        widget: list
-                        required: false
-                        types:
-                          - name: image
-                            label: "Image"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: image }
-                              - { label: "Image", name: src, widget: image }
-                              - { label: "Alt text", name: alt, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Size variant", name: variant, widget: select, options: ["", sm, md, lg], required: false }
-                              - { label: "Link URL", name: linkUrl, widget: string, required: false }
-                              - { label: "Open link in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: youtube
-                            label: "YouTube"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: youtube }
-                              - { label: "Video ID", name: videoId, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                          - name: vimeo
-                            label: "Vimeo"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: vimeo }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                          - name: linkedin
-                            label: "LinkedIn"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: linkedin }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                          - name: html
-                            label: "Custom HTML"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: html }
-                              - { label: "HTML", name: html, widget: text }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                      - label: "Stack"
-                        name: stack
-                        widget: list
-                        required: false
-                        field: { label: "Item", name: item, widget: string }
-                      - label: "Button links"
-                        name: buttonlinks
-                        widget: list
-                        required: false
-                        fields:
-                          - { label: "URL", name: href, widget: string }
-                          - { label: "Text", name: text, widget: string }
-                          - { label: "Open in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                      - { label: "Note", name: note, widget: string, required: false }
-
-  - name: reporting
-    label: "Reporting Page"
-    editor: { preview: false }
-    files:
-      - file: "src/content/pages/reporting.yml"
-        name: reporting
-        label: "Reporting"
-        media_folder: "src/static/images/reporting"
-        public_folder: "/static/images/reporting"
-        fields:
-          - { label: "Slug", name: slug, widget: hidden, default: reporting }
-          - { label: "Window title", name: windowTitle, widget: string }
-          - { label: "H1", name: h1, widget: string }
-          - label: "Navigation"
-            name: navigation
-            widget: object
-            fields:
-              - { label: "Show in navigation", name: showInNavigation, widget: boolean, default: true, required: false }
-              - { label: "Menu label", name: label, widget: string }
-              - { label: "Menu order", name: order, widget: number, value_type: int, min: 0 }
-          - label: "SEO"
-            name: seo
-            widget: object
-            fields:
-              - { label: "Title", name: title, widget: string }
-              - { label: "Description", name: description, widget: text }
-              - { label: "Canonical URL", name: url, widget: string, required: false }
-              - { label: "OG image", name: ogImage, widget: image, required: false }
-              - { label: "OG title override", name: ogTitle, widget: string, required: false }
-              - { label: "OG description override", name: ogDescription, widget: text, required: false }
-              - { label: "Twitter title override", name: twitterTitle, widget: string, required: false }
-              - { label: "Twitter description override", name: twitterDescription, widget: text, required: false }
-              - { label: "Twitter image override", name: twitterImage, widget: image, required: false }
-          - label: "Prompt line"
-            name: prompt
-            widget: object
-            fields:
-              - { label: "Working directory", name: cwd, widget: string, required: false }
-              - { label: "Command", name: command, widget: string }
-          - label: "Sections"
-            name: content
-            widget: list
-            types:
-              - name: section
-                label: "Section"
-                fields:
-                  - { label: "Type", name: type, widget: hidden, default: section }
-                  - { label: "Heading", name: heading, widget: string }
-                  - { label: "Intro", name: intro, widget: text, required: false }
-                  - { label: "Add divider after section", name: trailingLineBreak, widget: boolean, default: true, required: false }
-                  - label: "Projects"
-                    name: projects
-                    widget: list
-                    fields:
-                      - { label: "Title", name: title, widget: string }
-                      - label: "Order"
-                        name: order
-                        widget: list
-                        allow_add: true
-                        default: [description, media, buttonlink, stack]
-                        hint: "Use any combination of media, description, stack, buttonlink, note"
-                      - { label: "Description", name: description, widget: text, required: false }
-                      - label: "Media"
-                        name: media
-                        widget: list
-                        required: false
-                        types:
-                          - name: image
-                            label: "Image"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: image }
-                              - { label: "Image", name: src, widget: image }
-                              - { label: "Alt text", name: alt, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Size variant", name: variant, widget: select, options: ["", sm, md, lg], required: false }
-                              - { label: "Object fit", name: objectFit, widget: select, options: ["", contain, cover, fill, none, scale-down], required: false }
-                              - { label: "Link URL", name: linkUrl, widget: string, required: false }
-                              - { label: "Open link in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: youtube
-                            label: "YouTube"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: youtube }
-                              - { label: "Video ID", name: videoId, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: vimeo
-                            label: "Vimeo"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: vimeo }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: linkedin
-                            label: "LinkedIn"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: linkedin }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: html
-                            label: "Custom HTML"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: html }
-                              - { label: "HTML", name: html, widget: text }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                      - label: "Stack"
-                        name: stack
-                        widget: list
-                        required: false
-                        field: { label: "Item", name: item, widget: string }
-                      - label: "Button links"
-                        name: buttonlinks
-                        widget: list
-                        required: false
-                        fields:
-                          - { label: "URL", name: href, widget: string }
-                          - { label: "Text", name: text, widget: string }
-                          - { label: "Open in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                      - { label: "Note", name: note, widget: string, required: false }
-
-  - name: resources
-    label: "Resources Page"
-    editor: { preview: false }
-    files:
-      - file: "src/content/pages/resources.yml"
-        name: resources
-        label: "Resources"
-        media_folder: "src/static/images/resources"
-        public_folder: "/static/images/resources"
-        fields:
-          - { label: "Slug", name: slug, widget: hidden, default: resources }
-          - { label: "Window title", name: windowTitle, widget: string }
-          - { label: "H1", name: h1, widget: string }
-          - label: "Navigation"
-            name: navigation
-            widget: object
-            fields:
-              - { label: "Show in navigation", name: showInNavigation, widget: boolean, default: true, required: false }
-              - { label: "Menu label", name: label, widget: string }
-              - { label: "Menu order", name: order, widget: number, value_type: int, min: 0 }
-          - label: "SEO"
-            name: seo
-            widget: object
-            fields:
-              - { label: "Title", name: title, widget: string }
-              - { label: "Description", name: description, widget: text }
-              - { label: "Canonical URL", name: url, widget: string, required: false }
-              - { label: "OG image", name: ogImage, widget: image, required: false }
-              - { label: "OG title override", name: ogTitle, widget: string, required: false }
-              - { label: "OG description override", name: ogDescription, widget: text, required: false }
-              - { label: "Twitter title override", name: twitterTitle, widget: string, required: false }
-              - { label: "Twitter description override", name: twitterDescription, widget: text, required: false }
-              - { label: "Twitter image override", name: twitterImage, widget: image, required: false }
-          - label: "Prompt line"
-            name: prompt
-            widget: object
-            fields:
-              - { label: "Working directory", name: cwd, widget: string, required: false }
-              - { label: "Command", name: command, widget: string }
-          - label: "Sections"
-            name: content
-            widget: list
-            types:
-              - name: section
-                label: "Section"
-                fields:
-                  - { label: "Type", name: type, widget: hidden, default: section }
-                  - { label: "Heading", name: heading, widget: string }
-                  - { label: "Intro", name: intro, widget: text, required: false }
-                  - { label: "Add divider after section", name: trailingLineBreak, widget: boolean, default: true, required: false }
-                  - label: "Projects"
-                    name: projects
-                    widget: list
-                    fields:
-                      - { label: "Title", name: title, widget: string }
-                      - label: "Order"
-                        name: order
-                        widget: list
-                        allow_add: true
-                        default: [description, media, buttonlink, stack]
-                        hint: "Use any combination of media, description, stack, buttonlink, note"
-                      - { label: "Description", name: description, widget: text, required: false }
-                      - label: "Media"
-                        name: media
-                        widget: list
-                        required: false
-                        types:
-                          - name: image
-                            label: "Image"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: image }
-                              - { label: "Image", name: src, widget: image }
-                              - { label: "Alt text", name: alt, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Size variant", name: variant, widget: select, options: ["", sm, md, lg], required: false }
-                              - { label: "Object fit", name: objectFit, widget: select, options: ["", contain, cover, fill, none, scale-down], required: false }
-                              - { label: "Link URL", name: linkUrl, widget: string, required: false }
-                              - { label: "Open link in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: youtube
-                            label: "YouTube"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: youtube }
-                              - { label: "Video ID", name: videoId, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: vimeo
-                            label: "Vimeo"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: vimeo }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: linkedin
-                            label: "LinkedIn"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: linkedin }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: html
-                            label: "Custom HTML"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: html }
-                              - { label: "HTML", name: html, widget: text }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                      - label: "Stack"
-                        name: stack
-                        widget: list
-                        required: false
-                        field: { label: "Item", name: item, widget: string }
-                      - label: "Button links"
-                        name: buttonlinks
-                        widget: list
-                        required: false
-                        fields:
-                          - { label: "URL", name: href, widget: string }
-                          - { label: "Text", name: text, widget: string }
-                          - { label: "Open in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                      - { label: "Note", name: note, widget: string, required: false }
-
-  - name: websites
-    label: "Websites Page"
-    editor: { preview: false }
-    files:
-      - file: "src/content/pages/websites.yml"
-        name: websites
-        label: "Websites"
-        media_folder: "src/static/images/websites"
-        public_folder: "/static/images/websites"
-        fields:
-          - { label: "Slug", name: slug, widget: hidden, default: websites }
-          - { label: "Window title", name: windowTitle, widget: string }
-          - { label: "H1", name: h1, widget: string }
-          - label: "Navigation"
-            name: navigation
-            widget: object
-            fields:
-              - { label: "Show in navigation", name: showInNavigation, widget: boolean, default: true, required: false }
-              - { label: "Menu label", name: label, widget: string }
-              - { label: "Menu order", name: order, widget: number, value_type: int, min: 0 }
-          - label: "SEO"
-            name: seo
-            widget: object
-            fields:
-              - { label: "Title", name: title, widget: string }
-              - { label: "Description", name: description, widget: text }
-              - { label: "Canonical URL", name: url, widget: string, required: false }
-              - { label: "OG image", name: ogImage, widget: image, required: false }
-              - { label: "OG title override", name: ogTitle, widget: string, required: false }
-              - { label: "OG description override", name: ogDescription, widget: text, required: false }
-              - { label: "Twitter title override", name: twitterTitle, widget: string, required: false }
-              - { label: "Twitter description override", name: twitterDescription, widget: text, required: false }
-              - { label: "Twitter image override", name: twitterImage, widget: image, required: false }
-          - label: "Prompt line"
-            name: prompt
-            widget: object
-            fields:
-              - { label: "Working directory", name: cwd, widget: string, required: false }
-              - { label: "Command", name: command, widget: string }
-          - label: "Sections"
-            name: content
-            widget: list
-            types:
-              - name: section
-                label: "Section"
-                fields:
-                  - { label: "Type", name: type, widget: hidden, default: section }
-                  - { label: "Heading", name: heading, widget: string }
-                  - { label: "Intro", name: intro, widget: text, required: false }
-                  - { label: "Add divider after section", name: trailingLineBreak, widget: boolean, default: true, required: false }
-                  - label: "Projects"
-                    name: projects
-                    widget: list
-                    fields:
-                      - { label: "Title", name: title, widget: string }
-                      - label: "Order"
-                        name: order
-                        widget: list
-                        allow_add: true
-                        default: [media, description, buttonlink, stack]
-                        hint: "Use any combination of media, description, stack, buttonlink, note"
-                      - { label: "Description", name: description, widget: text, required: false }
-                      - label: "Media"
-                        name: media
-                        widget: list
-                        required: false
-                        types:
-                          - name: image
-                            label: "Image"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: image }
-                              - { label: "Image", name: src, widget: image }
-                              - { label: "Alt text", name: alt, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Size variant", name: variant, widget: select, options: ["", sm, md, lg], required: false }
-                              - { label: "Object fit", name: objectFit, widget: select, options: ["", contain, cover, fill, none, scale-down], required: false }
-                              - { label: "Link URL", name: linkUrl, widget: string, required: false }
-                              - { label: "Open link in new tab", name: openInNewTab, widget: boolean, default: true, required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: youtube
-                            label: "YouTube"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: youtube }
-                              - { label: "Video ID", name: videoId, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: vimeo
-                            label: "Vimeo"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: vimeo }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
-                              - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
-                              - { label: "Spacing top", name: spacingTop, widget: string, required: false }
-                              - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }
-                          - name: linkedin
-                            label: "LinkedIn"
-                            fields:
-                              - { label: "Type", name: type, widget: hidden, default: linkedin }
-                              - { label: "Embed URL", name: src, widget: string }
-                              - { label: "Title", name: title, widget: string, required: false }
-                              - { label: "Caption", name: caption, widget: text, required: false }
-                              - { label: "Width", name: width, widget: string, required: false }
-                              - { label: "Max width", name: maxWidth, widget: string, required: false }
-                              - { label: "Height", name: height, widget: string, required: false }
-                              - { label: "Max height", name: maxHeight, widget: string, required: false }
-                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false }
+                              - { label: "Aspect ratio", name: aspectRatio, widget: string, required: false, hint: "Example: 4 / 5" }
                               - { label: "Alignment", name: align, widget: select, options: [left, center, right, full], required: false }
                               - { label: "Spacing top", name: spacingTop, widget: string, required: false }
                               - { label: "Spacing bottom", name: spacingBottom, widget: string, required: false }

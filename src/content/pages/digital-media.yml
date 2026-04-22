@@ -1,0 +1,154 @@
+slug: digital-media
+windowTitle: /Digital_Media/
+h1: DIGITAL_MEDIA
+
+navigation:
+  label: "Digital_Media/"
+  order: 4
+
+seo:
+  title: "Digital Media Portfolio | Spencer Flaherty"
+  description: "Digital media work spanning video production, photography, websites, interactive builds, and personal experiments."
+  url: "https://spencerflaherty.com/digital-media"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: digital-media
+  command: ./display_projects
+
+content:
+  - type: section
+    heading: "// Video & Production"
+    projects:
+      - title: "Station House x Xeal Case Study"
+        order: [description, media, stack]
+        description: "Produced a co-branded case study video highlighting a successful installation where cell signal limitations required a unique hardware solution. The piece was used by both sales teams and featured on partner marketing channels."
+        media:
+          - type: youtube
+            videoId: "EmeirH2SBcU"
+            title: "Station House x Xeal Case Study"
+        stack:
+          - "Production: Sony Cameras"
+          - "Post-Production: DaVinci Resolve"
+          - "Distribution: Sales Enablement + Partner Co-Marketing"
+      - title: "eCommerce Masters Podcast"
+        order: [description, media, stack]
+        description: "Built a podcast studio from scratch by selecting and installing audio and video gear, painting walls, and running track lighting. Operated the full production pipeline from recording through publishing."
+        media:
+          - type: youtube
+            videoId: "9knErxP3_do"
+            title: "eCommerce Masters Podcast"
+        stack:
+          - "Studio Build: Custom Lighting, Acoustic Treatment, Set Design"
+          - "Audio: Shure Mics, Rodecaster"
+          - "Video: Blackmagic Studio Cameras (PoE for power + data)"
+          - "Live Production: eCamm (recording, streaming, video calls)"
+      - title: "Industrial Job Site Documentation"
+        order: [description, media, stack]
+        description: "Captured photo and video documentation across high-profile electrical projects to fuel social content, ad creative, and proposal-ready sales collateral."
+        media:
+          - type: linkedin
+            src: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7386375602003476480?compact=1"
+            title: "Industrial Job Site Documentation"
+        stack:
+          - "Camera: Sony Mirrorless"
+          - "Stabilization: Gimbal"
+          - "Audio: Wireless Lav/Receiver"
+          - "Post-Production: DaVinci Resolve"
+
+  - type: section
+    heading: "// Websites & Interactive"
+    projects:
+      - title: "Auto International"
+        order: [media, description, buttonlink, stack]
+        description: "Built an SEO-focused Squarespace site for an auto shop with no prior web presence. The site now ranks in local Google search and gives the business a credible digital home."
+        media:
+          - type: image
+            src: "/static/images/websites/auto-international.png"
+            alt: "Auto International Website"
+        buttonlinks:
+          - href: "https://www.autointernationalrepair.com/"
+            text: "View Site"
+        stack:
+          - "Squarespace"
+      - title: "Annie Laukaitis"
+        order: [media, description, buttonlink, stack]
+        description: "Designed a content writer portfolio with custom animations and formatting to showcase writing samples and give her a clean, confident link for job applications."
+        media:
+          - type: image
+            src: "/static/images/websites/annielauk.png"
+            alt: "Annie Laukaitis Website"
+        buttonlinks:
+          - href: "https://www.annielauk.com/"
+            text: "View Site"
+        stack:
+          - "Squarespace"
+      - title: "Groove Commerce Website Redesign"
+        order: [media, description, buttonlink, stack]
+        description: "Led the redesign of my employer's site, handling design, copy, structure, and functionality to create a stronger brand presence and a more effective marketing site."
+        media:
+          - type: image
+            src: "/static/images/websites/groove-commerce.png"
+            alt: "Groove Commerce Website"
+        buttonlinks:
+          - href: "https://www.groovecommerce.com/"
+            text: "View Site"
+        stack:
+          - "HubSpot"
+      - title: "Critical Peake Website Improvements"
+        order: [media, description, buttonlink, stack]
+        description: "Made regular improvements to my current employer's website, including a live reviews carousel tied to the review-request pipeline and general performance and UX improvements."
+        media:
+          - type: image
+            src: "/static/images/websites/critical-peake.png"
+            alt: "Critical Peake Website"
+        buttonlinks:
+          - href: "https://criticalpeake.com/"
+            text: "View Site"
+        stack:
+          - "WordPress"
+      - title: "Splat"
+        order: [description, media, buttonlink, stack]
+        description: "Built a tool to create and view Gaussian splat 3D models locally with webcam head tracking, making the experience feel like you're actually inside the scene."
+        media:
+          - type: html
+            html: "<iframe src='https://www.youtube-nocookie.com/embed/6GVVqWriwTs?si=8FbpsdTl9jvRTyBM&controls=0&rel=0&modestbranding=1' title='Splat Demo' allowfullscreen style='aspect-ratio: 9/16; max-width: 400px; margin: 0 auto;'></iframe>"
+            width: "400px"
+            align: center
+        buttonlinks:
+          - href: "https://splat.spencerflaherty.com/"
+            text: "View Site"
+        stack:
+          - "WebGL, Three.js, Webcam APIs, Gaussian Splatting"
+      - title: "PNG to 3D Extrusion Tool"
+        order: [description, stack]
+        description: "Built a personal tool that converts flat PNG artwork into 3D extrusions for printing, bridging graphic assets and physical object creation with a fast experimental workflow."
+        stack:
+          - "Use Case: 2D Artwork to 3D Printable Geometry"
+          - "Focus: Rapid Prototyping + Fabrication Experiments"
+          - "Status: Personal Project"
+
+  - type: section
+    heading: "// Personal & Documentary Work"
+    projects:
+      - title: "Bowie, MD: 50 Years In The Making"
+        order: [description, media, stack]
+        description: "Digitized my grandfather's 8mm home films through professional transfer, then overlaid present-day shots to create a now-and-then video showing how Bowie, MD changed over 50 years. The footage was later featured in a local documentary shown in museums and public displays."
+        media:
+          - type: vimeo
+            src: "https://player.vimeo.com/video/141480456?badge=0&autopause=0"
+            title: "Bowie, MD: 50 Years In The Making"
+        stack:
+          - "Production: Canon Cameras"
+          - "Post-Production: Adobe Premiere Pro"
+          - "Technique: Archival + Modern Footage Overlay"
+      - title: "Canton, Baltimore"
+        order: [description, stack]
+        description: "Developing a documentary-style narrative about Canton, Baltimore by sourcing historical media from archives and using AI tools to restore, animate, and voice archival content."
+        stack:
+          - "Production: Sony Cameras"
+          - "Post-Production: DaVinci Resolve"
+          - "AI Video: Kling 2.5/2.6"
+          - "AI Voice: Inworld TTS 1 Max"
+          - "AI Workflow: Google AI Studio"
+        note: "(Not live—publishing Summer 2026)"

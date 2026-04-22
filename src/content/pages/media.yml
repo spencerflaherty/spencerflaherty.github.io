@@ -3,6 +3,7 @@ windowTitle: /Media/
 h1: MEDIA
 
 navigation:
+  showInNavigation: false
   label: "Media/"
   order: 3
 
