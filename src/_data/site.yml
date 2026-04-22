@@ -17,8 +17,8 @@ terminal:
   initialDelayMs: 500
 layout:
   logoLinkUrl: https://spencerflaherty.com
-  paddingAboveLogo: '20'
-  paddingBelowLogo: '20'
+  paddingAboveLogo: 20px
+  paddingBelowLogo: 20px
   paddingBelowWindow: 60px
   windowWidthDesktop: 600px
   windowWidthMobile: 100%
