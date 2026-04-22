@@ -1,26 +1,8 @@
 url: https://spencerflaherty.com
-
-branding:
-  homeAriaLabel: "Spencer Flaherty home"
-  logoAlt: "Spencer Flaherty"
-  logoDesktopSrc: "/static/images/header/logo-desktop.png"
-  logoDesktopWidth: 223
-  logoDesktopHeight: 180
-  logoMobileSrc: "/static/images/header/logo-mobile.png"
-  logoMobileWidth: 180
-  logoMobileHeight: 145
-
-terminal:
-  host: "root@spencer-portfolio"
-  rootPath: "~"
-  navigationCommand: "./display_categories"
-  navigationPrompt: "Enter module ID"
-  typeSpeed: 5
-  initialDelayMs: 500
 layout:
   logoLinkUrl: https://spencerflaherty.com
   paddingAboveLogo: 5px
-  paddingBelowLogo: '25'
+  paddingBelowLogo: 25px
   paddingBelowWindow: 60px
   windowWidthDesktop: 600px
   windowWidthMobile: 100%
@@ -30,3 +12,19 @@ layout:
     h2MarginTop: 10px
     h2MarginBottom: 5px
     dropdownMarginBottom: 2px
+branding:
+  logoMobileHeight: 145
+  logoMobileWidth: 180
+  logoMobileSrc: /static/images/header/logo-mobile.png
+  logoDesktopHeight: 180
+  logoDesktopWidth: 223
+  logoDesktopSrc: /static/images/header/logo-desktop.png
+  logoAlt: Spencer Flaherty
+  homeAriaLabel: Spencer Flaherty home
+terminal:
+  host: root@spencer-portfolio
+  rootPath: '~'
+  navigationCommand: ./display_categories
+  navigationPrompt: Enter module ID
+  typeSpeed: 5
+  initialDelayMs: 500
