@@ -24,8 +24,15 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function escapeHtmlText(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function escapeHtmlBlock(value) {
-  return escapeHtml(value).replace(/\n/g, "<br>");
+  return escapeHtmlText(value).replace(/\n/g, "<br>");
 }
 
 function buildStyleAttribute(styles) {
@@ -107,7 +114,7 @@ function renderButtonLink(link) {
 
 function renderStack(stack) {
   if (!stack || !stack.length) return "";
-  const lines = stack.map((item) => `• ${escapeHtml(item)}`).join("<br>");
+  const lines = stack.map((item) => `• ${escapeHtmlText(item)}`).join("<br>");
   return `<strong>The Stack:</strong><br>${lines}`;
 }
 
