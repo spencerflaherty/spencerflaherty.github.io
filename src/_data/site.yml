@@ -2,7 +2,7 @@ url: https://spencerflaherty.com
 layout:
   logoLinkUrl: https://spencerflaherty.com
   paddingAboveLogo: 5px
-  paddingBelowLogo: 70px
+  paddingBelowLogo: '25'
   paddingBelowWindow: 60px
   windowWidthDesktop: 600px
   windowWidthMobile: 100%
