@@ -1,0 +1,72 @@
+slug: ai-systems
+windowTitle: /AI_Systems/
+h1: AI_SYSTEMS
+
+navigation:
+  label: "AI_Systems/"
+  order: 3
+
+seo:
+  title: "AI Systems Portfolio | Spencer Flaherty"
+  description: "Custom AI systems for personalization, internal tooling, sales enablement, and workflow automation."
+  url: "https://spencerflaherty.com/ai-systems"
+  ogImage: "/static/images/og/og-image.png"
+
+prompt:
+  cwd: ai-systems
+  command: ./display_projects
+
+content:
+  - type: section
+    heading: "// AI Personalization & Revenue Workflows"
+    projects:
+      - title: "RAG Reactivation Engine"
+        order: [media, description, stack]
+        description: "Developed a RAG-based reactivation system that retrieved historical customer context from CRM, generated hyper-personalized outreach sequences, and executed automated campaigns to reactivate churned accounts and drive upsell opportunities."
+        media:
+          - type: image
+            src: "/static/images/automation/rag-reactivation-engine.png"
+            alt: "RAG Reactivation Engine"
+        stack:
+          - "Data Source: CRM"
+          - "Retrieval Layer: RAG Architecture"
+          - "AI Logic: LLM Generation"
+          - "Execution Layer: Apollo"
+      - title: "EV Feasibility Engine"
+        order: [media, description, stack]
+        description: "Developed an agentic workflow that transforms raw survey data into ROI and NOI projections, calculates asset value lift, and prioritizes state, local, and utility incentives to drive buyer confidence."
+        media:
+          - type: image
+            src: "/static/images/automation/ev-feasibility-engine.png"
+            alt: "EV Feasibility Engine"
+        stack:
+          - "Data Source: Resident Surveys"
+          - "AI Logic: Agentic Workflow"
+          - "Analysis Layer: Financial Modeling"
+
+  - type: section
+    heading: "// Internal Tools & Automation"
+    projects:
+      - title: "Custom Internal Tools"
+        order: [media, description, stack]
+        description: "Built lightweight apps to solve operational problems that previously required expensive software or went unsolved, using AI-assisted development to move from idea to working tool in hours."
+        media:
+          - type: image
+            src: "/static/images/automation/custom-internal-tools.png"
+            alt: "Custom Internal Tools"
+        stack:
+          - "Development: AI-Assisted Coding (Claude Code)"
+          - "Deployment: Local + Cloud Functions"
+          - "Use Cases: CRM Chat Interface, Video Recovery Pipeline, Data Cleanup Scripts"
+      - title: "Agentic Workflow Automation"
+        order: [description, stack]
+        description: "Identified repetitive tasks and built small agentic workflows to handle proposals, ROI calculators, incentive lookups, and other high-friction work so the team could focus on creative and strategic decisions."
+        stack:
+          - "AI Layer: Claude + MCP"
+          - "Orchestration: Zapier"
+      - title: "Process Documentation System"
+        order: [description, stack]
+        description: "Built onboarding handbooks and living wikis documenting end-to-end processes, with agents helping maintain updates where reliable. The system was used across departments and cut man-hours per project by up to 80%."
+        stack:
+          - "Format: Handbooks + Internal Wiki (Google Docs)"
+          - "Automation: Agentic Updates"

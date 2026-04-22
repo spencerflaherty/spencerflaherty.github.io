@@ -8,7 +8,7 @@ seo:
   title: About Spencer Flaherty | Marketing & AI Engineer
   description: 15 years creating at the intersection of sales, media, and AI. Baltimore-based marketing professional with expertise in automation, video, and engineering.
   url: https://spencerflaherty.com/about
-  ogImage: /static/images/collections/og/og-image.png
+  ogImage: /static/images/og/og-image.png
   ogTitle: ''
   ogDescription: ''
   twitterTitle: ''
@@ -18,9 +18,10 @@ prompt:
   command: ./display_info
 content:
   - type: image
-    src: "/static/images/collections/about/portfolio-photo.png"
-    alt: "Portrait of Spencer Flaherty in a black shirt against a neutral background"
-    width: "140px"
+    src: static/images/about/portfolio-photo (1) Medium Small.png
+    alt: Spencer Flaherty
+    caption: ''
+    width: 140px
     align: left
   - type: text
     text: |-
@@ -36,4 +37,4 @@ content:
     href: https://www.linkedin.com/in/spencer-flaherty/
   - type: buttonlink
     text: My Resume
-    href: /static/files/resume/edward-spencer-flaherty-resume.pdf
+    href: https://drive.google.com/file/d/1oyhFrIE2tdYwBczNnWckLWQ7llQzNg4G/view?usp=sharing

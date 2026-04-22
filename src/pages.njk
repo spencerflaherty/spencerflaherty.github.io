@@ -16,36 +16,24 @@ eleventyComputed:
     {%- if page.seo.description %}
     <meta name="description" content="{{ page.seo.description }}">
     {%- endif %}
-    {%- if page.seo.url %}
-    <link rel="canonical" href="{{ page.seo.url }}">
-    {%- endif %}
-    {%- if page.seo.robots %}
-    <meta name="robots" content="{{ page.seo.robots }}">
-    {%- endif %}
-    {%- if page.seo.author %}
-    <meta name="author" content="{{ page.seo.author }}">
-    {%- endif %}
     <meta property="og:title" content="{{ page.seo.ogTitle or page.seo.title }}">
     {%- if page.seo.description %}
     <meta property="og:description" content="{{ page.seo.ogDescription or page.seo.description }}">
     {%- endif %}
-    <meta property="og:type" content="{{ page.seo.ogType or 'website' }}">
+    <meta property="og:type" content="website">
     {%- if page.seo.url %}
     <meta property="og:url" content="{{ page.seo.url }}">
     {%- endif %}
     {%- if page.seo.ogImage %}
     <meta property="og:image" content="{{ page.seo.ogImage | absUrl(site.url) }}">
     {%- endif %}
-    <meta name="twitter:card" content="{{ page.seo.twitterCard or (page.seo.ogImage and 'summary_large_image' or 'summary') }}">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ page.seo.twitterTitle or page.seo.title }}">
     {%- if page.seo.description %}
     <meta name="twitter:description" content="{{ page.seo.twitterDescription or page.seo.description }}">
     {%- endif %}
     {%- if page.seo.ogImage %}
     <meta name="twitter:image" content="{{ (page.seo.twitterImage or page.seo.ogImage) | absUrl(site.url) }}">
-    {%- endif %}
-    {%- if page.seo.jsonLd %}
-    <script type="application/ld+json">{{ page.seo.jsonLd | safe }}</script>
     {%- endif %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,8 +58,8 @@ eleventyComputed:
 <body>
     <header class="site-header">
         <a href="{{ site.layout.logoLinkUrl or site.url }}" aria-label="{{ site.branding.homeAriaLabel or 'Spencer Flaherty home' }}">
-            <img src="{{ site.branding.logoDesktopSrc or '/static/images/collections/branding/spencer-flaherty-site-logo-april-22.png' }}" alt="{{ site.branding.logoAlt or 'Spencer Flaherty' }}" class="logo-desktop" width="{{ site.branding.logoDesktopWidth or 223 }}" height="{{ site.branding.logoDesktopHeight or 180 }}">
-            <img src="{{ site.branding.logoMobileSrc or '/static/images/collections/branding/spencer-flaherty-site-logo-april-22.png' }}" alt="{{ site.branding.logoAlt or 'Spencer Flaherty' }}" class="logo-mobile" width="{{ site.branding.logoMobileWidth or 180 }}" height="{{ site.branding.logoMobileHeight or 145 }}">
+            <img src="{{ site.branding.logoDesktopSrc or '/static/images/header/logo-desktop.png' }}" alt="{{ site.branding.logoAlt or 'Spencer Flaherty' }}" class="logo-desktop" width="{{ site.branding.logoDesktopWidth or 223 }}" height="{{ site.branding.logoDesktopHeight or 180 }}">
+            <img src="{{ site.branding.logoMobileSrc or '/static/images/header/logo-mobile.png' }}" alt="{{ site.branding.logoAlt or 'Spencer Flaherty' }}" class="logo-mobile" width="{{ site.branding.logoMobileWidth or 180 }}" height="{{ site.branding.logoMobileHeight or 145 }}">
         </a>
     </header>
     <div class="window-container">

@@ -3,7 +3,7 @@ windowTitle: /Paid_Ads/
 h1: PAID_ADS
 
 navigation:
-  showInNavigation: true
+  showInNavigation: false
   label: "Paid_Ads/"
   order: 4
 
@@ -11,7 +11,7 @@ seo:
   title: "Paid Advertising Campaigns Portfolio | Spencer Flaherty"
   description: "Facebook and LinkedIn ad campaigns for EV infrastructure, electrical services, and eCommerce. AI-generated creative, conversion optimization, and lead gen."
   url: "https://spencerflaherty.com/paid-ads"
-  ogImage: "/static/images/collections/og/og-image.png"
+  ogImage: "/static/images/og/og-image.png"
 
 prompt:
   cwd: paid-ads
@@ -26,8 +26,8 @@ content:
         description: "Produced a video explaining how public agencies can bypass traditional RFPs and procure EV charging through Blue Whale's Sourcewell contract—blending AI-generated visuals with traditional editing to keep it engaging while clearly communicating a complex procurement process."
         media:
           - type: image
-            src: "/static/images/collections/paid-ads/cooperative-purchasing-explainer.png"
-            alt: "Video ad storyboard frames explaining cooperative purchasing for EV charging procurement"
+            src: "/static/images/paid-ads/cooperative-purchasing-explainer.png"
+            alt: "Cooperative Purchasing Explainer"
         stack:
           - "AI Video: Kling 2.6 (start/end frame + motion control)"
           - "AI Image: Nano Banana"
@@ -54,11 +54,11 @@ content:
         description: "Achieved $20 average CPL by shooting real technicians on real job sites, overlaying authentic Google reviews, and creating dozens of photo/copy variations to let Facebook's algorithm find the winners—all targeted to specific service areas via Conversions API."
         media:
           - type: image
-            src: "/static/images/collections/paid-ads/20-cpl-photo-campaign.png"
-            alt: "Facebook ad creative featuring electrician job-site photography, review overlays, and lead-gen copy"
+            src: "/static/images/paid-ads/20-cpl-photo-campaign.png"
+            alt: "$20 CPL Photo Campaign"
           - type: image
-            src: "/static/images/collections/paid-ads/residential-fb-jamal.jpeg"
-            alt: "Electrician standing at a residential job site used in Facebook lead generation creative"
+            src: "/static/images/paid-ads/residential-fb-jamal.jpeg"
+            alt: "Real Technician on Job Site"
         stack:
           - "Platform: Facebook Ads"
           - "Creative: Real Job Site Photography + Review Overlays"
@@ -74,8 +74,8 @@ content:
         description: "Designed and ran graphic-based LinkedIn ad campaigns that converted eCommerce brands into retainer clients for a Baltimore-based digital agency—landing notable accounts including Dippin' Dots."
         media:
           - type: image
-            src: "/static/images/collections/paid-ads/bigcommerce-linkedin-ad.png"
-            alt: "LinkedIn graphic ad promoting eCommerce agency retainer services"
+            src: "/static/images/paid-ads/bigcommerce-linkedin-ad.png"
+            alt: "B2B Retainer Acquisition LinkedIn Ad"
         stack:
           - "Platform: LinkedIn Ads"
           - "Design: Adobe Photoshop + Illustrator"

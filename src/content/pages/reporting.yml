@@ -3,7 +3,7 @@ windowTitle: /Reporting/
 h1: REPORTING
 
 navigation:
-  showInNavigation: true
+  showInNavigation: false
   label: "Reporting/"
   order: 5
 
@@ -11,7 +11,7 @@ seo:
   title: "BI Dashboards & Analytics Portfolio | Spencer Flaherty"
   description: "Custom attribution models, Power BI dashboards, and automated reporting systems. Multi-touch attribution, pipeline tracking, and customer operations tools."
   url: "https://spencerflaherty.com/reporting"
-  ogImage: "/static/images/collections/og/og-image.png"
+  ogImage: "/static/images/og/og-image.png"
 
 prompt:
   cwd: reporting
@@ -26,8 +26,8 @@ content:
         description: "Built a multi-touch attribution model connecting lead sources, sales activity, and online behavior to revenue; enabling smarter ad spend and rep accountability."
         media:
           - type: image
-            src: "/static/images/collections/reporting/custom-attribution-system.png"
-            alt: "Custom attribution dashboard connecting lead sources, sales activity, and revenue"
+            src: "/static/images/reporting/custom-attribution-system.png"
+            alt: "Custom Attribution System"
         stack:
           - "BI Layer: Microsoft Power BI"
           - "Custom Tooling: Vibe-Coded Dashboard"
@@ -37,8 +37,8 @@ content:
         description: "Built Power BI dashboards with automated alerts for pipeline health, churn risk, and sales activity; delivering insights via email, Slack, and in-app notifications."
         media:
           - type: image
-            src: "/static/images/collections/reporting/pipeline-churn-dashboards.png"
-            alt: "Power BI dashboard tracking pipeline health, churn risk, and sales performance"
+            src: "/static/images/reporting/pipeline-churn-dashboards.png"
+            alt: "Pipeline & Churn Dashboards"
         stack:
           - "BI Layer: Microsoft Power BI"
           - "Notifications: Email, Slack, In-Dashboard"
@@ -52,8 +52,8 @@ content:
         description: "Pulls recent customers from CRM, filters out existing reviewers, and sends AI-varied email requests for Google reviews. Increased both review volume and average rating."
         media:
           - type: image
-            src: "/static/images/collections/reporting/automated-review-request-pipeline.png"
-            alt: "Workflow dashboard for automated review requests triggered from CRM customer data"
+            src: "/static/images/reporting/automated-review-request-pipeline.png"
+            alt: "Automated Review Request Pipeline"
         stack:
           - "Data Source: SimPro (CRM) + Power BI"
           - "Email: iContact"

@@ -3,7 +3,7 @@ windowTitle: /Resources/
 h1: RESOURCES
 
 navigation:
-  showInNavigation: true
+  showInNavigation: false
   label: "Resources/"
   order: 6
 
@@ -11,7 +11,7 @@ seo:
   title: "Content Marketing & SEO Portfolio | Spencer Flaherty"
   description: "Whitepapers, training docs, and SEO-driven blog content. Built crawlable PDFs cited by AI, managed 300%+ organic growth, and automated sales enablement tools."
   url: "https://spencerflaherty.com/resources"
-  ogImage: "/static/images/collections/og/og-image.png"
+  ogImage: "/static/images/og/og-image.png"
 
 prompt:
   cwd: resources
