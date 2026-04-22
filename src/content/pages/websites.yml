@@ -2,6 +2,10 @@ slug: websites
 windowTitle: /Websites/
 h1: WEBSITES
 
+navigation:
+  label: "Websites/"
+  order: 7
+
 seo:
   title: "Web Design & Development Portfolio | Spencer Flaherty"
   description: "Custom web projects on Squarespace, WordPress, and HubSpot. Terminal-style portfolio site, local business SEO builds, and agency redesigns that triple traffic."
@@ -22,6 +26,8 @@ content:
         media:
           - type: html
             html: "<iframe src='https://www.youtube-nocookie.com/embed/6GVVqWriwTs?si=8FbpsdTl9jvRTyBM&controls=0&rel=0&modestbranding=1' title='Splat Demo' allowfullscreen style='aspect-ratio: 9/16; max-width: 400px; margin: 0 auto;'></iframe>"
+            width: "400px"
+            align: center
         buttonlinks:
           - href: "https://splat.spencerflaherty.com/"
             text: "View Site"

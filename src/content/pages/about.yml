@@ -2,6 +2,10 @@ slug: about
 windowTitle: /About/
 h1: ABOUT
 
+navigation:
+  label: "About/"
+  order: 1
+
 seo:
   title: "About Spencer Flaherty | Marketing & AI Engineer"
   description: "15 years creating at the intersection of sales, media, and AI. Baltimore-based marketing professional with expertise in automation, video, and engineering."
@@ -16,6 +20,8 @@ content:
   - type: image
     src: "/static/images/about/portfolio-photo.png"
     alt: "Spencer Flaherty"
+    width: "140px"
+    align: left
   - type: text
     text: |
       Creating for 15 years.

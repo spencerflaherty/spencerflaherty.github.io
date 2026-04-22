@@ -2,6 +2,10 @@ slug: media
 windowTitle: /Media/
 h1: MEDIA
 
+navigation:
+  label: "Media/"
+  order: 3
+
 seo:
   title: "Video Production & Media Portfolio | Spencer Flaherty"
   description: "Commercial video production, podcast studio builds, and documentary filmmaking. From case studies to AI-enhanced archival projects in Baltimore and beyond."

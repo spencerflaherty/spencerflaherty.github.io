@@ -2,6 +2,10 @@ slug: reporting
 windowTitle: /Reporting/
 h1: REPORTING
 
+navigation:
+  label: "Reporting/"
+  order: 5
+
 seo:
   title: "BI Dashboards & Analytics Portfolio | Spencer Flaherty"
   description: "Custom attribution models, Power BI dashboards, and automated reporting systems. Multi-touch attribution, pipeline tracking, and customer operations tools."

@@ -2,49 +2,191 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 const path = require("path");
 
-const NAV_LINKS = [
-  { href: "https://spencerflaherty.com", text: "[0]  ~Root/ (Home)" },
-  { href: "https://spencerflaherty.com/about", text: "[1]  About/" },
-  { href: "https://spencerflaherty.com/automation", text: "[2]  Automation/" },
-  { href: "https://spencerflaherty.com/media", text: "[3]  Media/" },
-  { href: "https://spencerflaherty.com/paid-ads", text: "[4]  Paid_Ads/" },
-  { href: "https://spencerflaherty.com/reporting", text: "[5]  Reporting/" },
-  { href: "https://spencerflaherty.com/resources", text: "[6]  Resources/" },
-  { href: "https://spencerflaherty.com/websites", text: "[7]  Websites/" },
-];
+const MEDIA_TYPES = ["image", "youtube", "vimeo", "linkedin", "html"];
+const DEFAULT_TERMINAL = {
+  host: "root@spencer-portfolio",
+  rootPath: "~",
+  navigationCommand: "./display_categories",
+  navigationPrompt: "Enter module ID",
+};
 
-function esc(str) {
-  return String(str);
+function loadYamlFile(filePath) {
+  if (!fs.existsSync(filePath)) return {};
+  return yaml.load(fs.readFileSync(filePath, "utf8")) || {};
 }
 
-function renderMediaItem(item) {
-  const variant = item.variant ? ` media-dialup-container--${item.variant}` : "";
-  if (item.type === "image") {
-    return `<div class='media-dialup-container${variant}'><img src='${item.src}' alt='${item.alt || ""}'></div>`;
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function escapeHtmlBlock(value) {
+  return escapeHtml(value).replace(/\n/g, "<br>");
+}
+
+function buildStyleAttribute(styles) {
+  const declarations = Object.entries(styles)
+    .filter(([, value]) => value !== undefined && value !== null && value !== "")
+    .map(([property, value]) => `${property}:${String(value).trim()}`);
+
+  return declarations.length
+    ? ` style='${escapeHtml(declarations.join(";"))}'`
+    : "";
+}
+
+function getPageUrl(page) {
+  return page.slug === "home" ? "/" : `/${page.slug}/`;
+}
+
+function getDefaultNavLabel(page) {
+  if (page.slug === "home") return "~Root/ (Home)";
+  if (page.windowTitle) {
+    const normalized = page.windowTitle.replace(/^\/|\/$/g, "");
+    if (normalized) return `${normalized}/`;
   }
-  if (item.type === "youtube") {
-    return `<div class='media-dialup-container${variant}'><iframe src='https://www.youtube-nocookie.com/embed/${item.videoId}?rel=0&modestbranding=1' title='${item.title || ""}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div>`;
-  }
-  if (item.type === "vimeo") {
-    return `<div class='media-dialup-container${variant}'><div style='padding:56.25% 0 0 0;position:relative;'><iframe src='${item.src}' style='position:absolute;top:0;left:0;width:100%;height:100%;' frameborder='0' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen></iframe></div></div>`;
-  }
-  if (item.type === "linkedin") {
-    return `<div class='media-dialup-container${variant}'><iframe src='${item.src}' height='399' frameborder='0' allowfullscreen title='${item.title || ""}'></iframe></div>`;
-  }
-  if (item.type === "html") {
-    return `<div class='media-dialup-container${variant}'>${item.html}</div>`;
-  }
-  return "";
+  return `${page.slug}/`;
+}
+
+function normalizePage(rawPage) {
+  const page = rawPage || {};
+  const slug = page.slug || "page";
+
+  return {
+    ...page,
+    slug,
+    seo: page.seo || {},
+    prompt: page.prompt || {},
+    navigation: {
+      showInNavigation: true,
+      ...page.navigation,
+      label: page.navigation?.label || getDefaultNavLabel({ ...page, slug }),
+    },
+    content: Array.isArray(page.content) ? page.content : [],
+  };
+}
+
+function buildNavigationLinks(pages) {
+  return pages
+    .filter((page) => page.navigation?.showInNavigation !== false)
+    .sort((a, b) => {
+      const orderA = Number.isFinite(a.navigation?.order)
+        ? a.navigation.order
+        : Number.MAX_SAFE_INTEGER;
+      const orderB = Number.isFinite(b.navigation?.order)
+        ? b.navigation.order
+        : Number.MAX_SAFE_INTEGER;
+      if (orderA !== orderB) return orderA - orderB;
+      return a.slug.localeCompare(b.slug);
+    })
+    .map((page, index) => ({
+      id: String(index),
+      href: getPageUrl(page),
+      text: `[${index}]  ${page.navigation.label}`,
+    }));
+}
+
+function getTerminalSettings(page) {
+  return { ...DEFAULT_TERMINAL, ...(page._terminal || {}) };
 }
 
 function renderButtonLink(link) {
-  return `<a href='${link.href}' class='terminal-link' target='_blank' rel='noopener noreferrer'>${link.text}</a>`;
+  const href = escapeHtml(link.href || "#");
+  const target = link.openInNewTab === false ? "_self" : "_blank";
+  const rel = target === "_blank" ? "noopener noreferrer" : "";
+  const ariaLabel = link.ariaLabel ? ` aria-label='${escapeHtml(link.ariaLabel)}'` : "";
+  const relAttr = rel ? ` rel='${rel}'` : "";
+
+  return `<a href='${href}' class='terminal-link' target='${target}'${relAttr}${ariaLabel}>${escapeHtml(
+    link.text || "Open link",
+  )}</a>`;
 }
 
 function renderStack(stack) {
   if (!stack || !stack.length) return "";
-  const lines = stack.map((s) => `• ${s}`).join("<br>");
+  const lines = stack.map((item) => `• ${escapeHtml(item)}`).join("<br>");
   return `<strong>The Stack:</strong><br>${lines}`;
+}
+
+function renderLinkedMedia(mediaHtml, item) {
+  if (!item.linkUrl) return mediaHtml;
+
+  const href = escapeHtml(item.linkUrl);
+  const target = item.openInNewTab === false ? "_self" : "_blank";
+  const rel = target === "_blank" ? "noopener noreferrer" : "";
+  const relAttr = rel ? ` rel='${rel}'` : "";
+
+  return `<a href='${href}' class='media-link' target='${target}'${relAttr}>${mediaHtml}</a>`;
+}
+
+function renderMediaWrapper(innerHtml, item) {
+  const classes = ["media-dialup-container"];
+  if (item.variant) classes.push(`media-dialup-container--${item.variant}`);
+  if (item.align) classes.push(`media-dialup-container--align-${item.align}`);
+
+  const styleAttr = buildStyleAttribute({
+    "max-width": item.width,
+    "margin-top": item.spacingTop,
+    "margin-bottom": item.spacingBottom,
+  });
+
+  const caption = item.caption
+    ? `<figcaption class='media-caption'>${escapeHtmlBlock(item.caption)}</figcaption>`
+    : "";
+
+  return `<figure class='${classes.join(" ")}'${styleAttr}>${renderLinkedMedia(
+    innerHtml,
+    item,
+  )}${caption}</figure>`;
+}
+
+function renderFramedEmbed(iframeHtml, item, fallbackRatio) {
+  const aspectRatio = item.aspectRatio || fallbackRatio;
+  const styleAttr = buildStyleAttribute({ "aspect-ratio": aspectRatio });
+  return `<div class='media-frame'${styleAttr}>${iframeHtml}</div>`;
+}
+
+function renderMediaItem(item) {
+  if (item.type === "image") {
+    const image = `<img src='${escapeHtml(item.src || "")}' alt='${escapeHtml(
+      item.alt || "",
+    )}' loading='lazy'>`;
+    return renderMediaWrapper(image, item);
+  }
+
+  if (item.type === "youtube") {
+    const title = escapeHtml(item.title || "");
+    const iframe = `<iframe src='https://www.youtube-nocookie.com/embed/${escapeHtml(
+      item.videoId || "",
+    )}?rel=0&modestbranding=1' title='${title}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>`;
+    return renderMediaWrapper(renderFramedEmbed(iframe, item, "16 / 9"), item);
+  }
+
+  if (item.type === "vimeo") {
+    const iframe = `<iframe src='${escapeHtml(
+      item.src || "",
+    )}' title='${escapeHtml(item.title || "")}' frameborder='0' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen></iframe>`;
+    return renderMediaWrapper(renderFramedEmbed(iframe, item, "16 / 9"), item);
+  }
+
+  if (item.type === "linkedin") {
+    const iframe = `<iframe src='${escapeHtml(
+      item.src || "",
+    )}' title='${escapeHtml(item.title || "")}' frameborder='0' allowfullscreen></iframe>`;
+    return renderMediaWrapper(renderFramedEmbed(iframe, item, "4 / 5"), item);
+  }
+
+  if (item.type === "html") {
+    const html = item.aspectRatio
+      ? renderFramedEmbed(item.html || "", item, item.aspectRatio)
+      : `<div class='media-html'>${item.html || ""}</div>`;
+    return renderMediaWrapper(html, item);
+  }
+
+  return "";
 }
 
 function renderDropdownBody(project) {
@@ -58,13 +200,13 @@ function renderDropdownBody(project) {
 
   for (const key of order) {
     if (key === "description" && project.description) {
-      parts.push(esc(project.description).trim());
+      parts.push(escapeHtmlBlock(project.description).trim());
       kinds.push("text");
     } else if (key === "media") {
       if (mediaCursor < media.length) {
         parts.push(renderMediaItem(media[mediaCursor]));
         kinds.push("media");
-        mediaCursor++;
+        mediaCursor += 1;
       }
     } else if (key === "stack" && project.stack && project.stack.length) {
       parts.push(renderStack(project.stack));
@@ -73,137 +215,152 @@ function renderDropdownBody(project) {
       if (buttonCursor < buttonlinks.length) {
         parts.push(renderButtonLink(buttonlinks[buttonCursor]));
         kinds.push("button");
-        buttonCursor++;
+        buttonCursor += 1;
       }
     } else if (key === "note" && project.note) {
-      parts.push(`<em>${esc(project.note)}</em>`);
+      parts.push(`<em>${escapeHtmlBlock(project.note)}</em>`);
       kinds.push("text");
     }
   }
 
-  // Append trailing note if not in order but defined
   if (project.note && !order.includes("note")) {
-    parts.push(`<em>${esc(project.note)}</em>`);
+    parts.push(`<em>${escapeHtmlBlock(project.note)}</em>`);
     kinds.push("text");
   }
 
-  // Separators: any media boundary gets no <br> (CSS margin handles spacing).
-  // Button-to-text and text-to-button need <br><br> for readability (buttons are inline-block).
-  // Text-to-text also gets <br><br>.
-  let out = "";
-  for (let i = 0; i < parts.length; i++) {
+  let output = "";
+  for (let i = 0; i < parts.length; i += 1) {
     if (i > 0) {
       const prev = kinds[i - 1];
-      const cur = kinds[i];
-      if (prev === "media" || cur === "media") {
-        // no separator — CSS margin handles it
-      } else {
-        out += "<br><br>";
+      const current = kinds[i];
+      if (prev !== "media" && current !== "media") {
+        output += "<br><br>";
       }
     }
-    out += parts[i];
+    output += parts[i];
   }
-  return out;
+
+  return output;
 }
 
-function pushNavLinks(segs) {
-  segs.push({ type: "element", tag: "strong", text: "ID   MODULE", addBreak: true });
-  for (let i = 0; i < NAV_LINKS.length; i++) {
-    const nav = NAV_LINKS[i];
-    const seg = { type: "navlink", href: nav.href, text: nav.text };
-    if (i === NAV_LINKS.length - 1) seg.extraBreak = true;
-    segs.push(seg);
+function pushNavLinks(segments, navLinks, terminal) {
+  segments.push({ type: "element", tag: "strong", text: "ID   MODULE", addBreak: true });
+
+  for (let i = 0; i < navLinks.length; i += 1) {
+    const nav = navLinks[i];
+    const segment = { type: "navlink", href: nav.href, text: nav.text };
+    if (i === navLinks.length - 1) segment.extraBreak = true;
+    segments.push(segment);
   }
-  segs.push({ type: "type", content: "Enter module ID [0-7]:" });
+
+  const promptRange = navLinks.length ? ` [0-${navLinks.length - 1}]` : "";
+  segments.push({
+    type: "type",
+    content: `${terminal.navigationPrompt}${promptRange}:`,
+  });
+}
+
+function buildPromptLine(terminal, cwd = "") {
+  return `${terminal.host}:${terminal.rootPath}${cwd ? `/${cwd}` : ""}`;
 }
 
 function buildSegments(page) {
-  const MEDIA_TYPES = ["image", "youtube", "vimeo", "linkedin", "html"];
   const content = page.content || [];
+  const navLinks = page._navLinks || [];
+  const terminal = getTerminalSettings(page);
 
-  // Home page: custom layout — cwd → media → prompt → command → navlinks.
   if (page.slug === "home") {
-    const segs = [];
-    segs.push({ type: "type", content: "root@spencer-portfolio:~\n" });
+    const segments = [];
+    segments.push({ type: "type", content: `${buildPromptLine(terminal)}\n` });
+
     for (const item of content) {
       if (MEDIA_TYPES.includes(item.type)) {
-        segs.push({ type: "inject", html: renderMediaItem(item) });
+        segments.push({ type: "inject", html: renderMediaItem(item) });
       }
     }
-    segs.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
-    segs.push({ type: "type", content: " ./display_categories\n\n" });
-    pushNavLinks(segs);
-    return segs;
+
+    segments.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
+    segments.push({
+      type: "type",
+      content: ` ${terminal.navigationCommand}\n\n`,
+    });
+    pushNavLinks(segments, navLinks, terminal);
+    return segments;
   }
 
-  const segs = [];
   const prompt = page.prompt || {};
   const cwd = prompt.cwd !== undefined ? prompt.cwd : page.slug;
-  const cmd = prompt.command || "./display_page";
-  const cwdSuffix = cwd ? `/${cwd}` : "";
+  const command = prompt.command || "./display_page";
+  const segments = [];
 
-  segs.push({ type: "type", content: `root@spencer-portfolio:~${cwdSuffix}\n` });
-  segs.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
-  segs.push({ type: "type", content: ` ${cmd}\n\n` });
+  segments.push({ type: "type", content: `${buildPromptLine(terminal, cwd)}\n` });
+  segments.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
+  segments.push({ type: "type", content: ` ${command}\n\n` });
+
   if (page.h1) {
-    segs.push({ type: "element", tag: "h1", className: "h1", text: page.h1 });
+    segments.push({ type: "element", tag: "h1", className: "h1", text: page.h1 });
   }
 
   for (const item of content) {
     if (item.type === "text") {
-      segs.push({ type: "type", content: item.text });
+      segments.push({ type: "type", content: item.text });
     } else if (MEDIA_TYPES.includes(item.type)) {
-      segs.push({ type: "inject", html: renderMediaItem(item) });
+      segments.push({ type: "inject", html: renderMediaItem(item) });
     } else if (item.type === "buttonlink") {
-      segs.push({ type: "buttonlink", href: item.href, text: item.text });
-      if (item.newline !== false) segs.push({ type: "type", content: "\n" });
+      segments.push({
+        type: "buttonlink",
+        href: item.href,
+        text: item.text,
+        openInNewTab: item.openInNewTab !== false,
+      });
+      if (item.newline !== false) segments.push({ type: "type", content: "\n" });
     } else if (item.type === "inlinelink") {
-      segs.push({ type: "inlinelink", href: item.href, text: item.text });
+      segments.push({ type: "inlinelink", href: item.href, text: item.text });
     } else if (item.type === "linebreak") {
-      segs.push({ type: "inject", html: "<span class='line-break'></span>" });
+      segments.push({ type: "inject", html: "<span class='line-break'></span>" });
     } else if (item.type === "section") {
-      segs.push({ type: "element", tag: "h2", className: "h2", text: item.heading });
+      segments.push({ type: "element", tag: "h2", className: "h2", text: item.heading });
       if (item.intro) {
-        segs.push({ type: "type", content: item.intro });
+        segments.push({ type: "type", content: item.intro });
       }
       for (const project of item.projects || []) {
-        segs.push({ type: "dropdown", text: `[+]  ${project.title}` });
+        segments.push({ type: "dropdown", text: `[+]  ${project.title}` });
       }
       if (item.trailingLineBreak !== false) {
-        segs.push({ type: "inject", html: "<span class='line-break'></span>" });
+        segments.push({ type: "inject", html: "<span class='line-break'></span>" });
       }
     }
   }
 
-  // Standard Navigate section (auto-appended)
-  // If the content ended with a section, the line-break from that section serves as separator.
-  // Otherwise, add an explicit line-break before Navigate.
   const last = content[content.length - 1];
-  const hasTrailingBreak =
-    last && (last.type === "section" || last.type === "linebreak");
+  const hasTrailingBreak = last && (last.type === "section" || last.type === "linebreak");
   if (!hasTrailingBreak) {
-    segs.push({ type: "inject", html: "<span class='line-break'></span>" });
+    segments.push({ type: "inject", html: "<span class='line-break'></span>" });
   }
 
-  segs.push({ type: "element", tag: "h2", className: "h2", text: "Navigate" });
-  segs.push({ type: "type", content: "root@spencer-portfolio:~\n" });
-  segs.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
-  segs.push({ type: "type", content: " ./display_categories\n\n" });
-  pushNavLinks(segs);
+  segments.push({ type: "element", tag: "h2", className: "h2", text: "Navigate" });
+  segments.push({ type: "type", content: `${buildPromptLine(terminal)}\n` });
+  segments.push({ type: "element", tag: "span", className: "prompt-arrow", text: "$" });
+  segments.push({
+    type: "type",
+    content: ` ${terminal.navigationCommand}\n\n`,
+  });
+  pushNavLinks(segments, navLinks, terminal);
 
-  return segs;
+  return segments;
 }
 
 function buildDropdownBodies(page) {
   const bodies = [];
-  const content = page.content || [];
-  for (const item of content) {
+
+  for (const item of page.content || []) {
     if (item.type === "section") {
       for (const project of item.projects || []) {
         bodies.push(renderDropdownBody(project));
       }
     }
   }
+
   return bodies;
 }
 
@@ -216,7 +373,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("buildSegments", buildSegments);
   eleventyConfig.addFilter("buildDropdownBodies", buildDropdownBodies);
-  eleventyConfig.addFilter("jsonify", (v) => JSON.stringify(v));
+  eleventyConfig.addFilter("jsonify", (value) => JSON.stringify(value));
   eleventyConfig.addFilter("absUrl", (url, base) => {
     if (!url) return "";
     if (/^https?:\/\//i.test(url)) return url;
@@ -226,13 +383,21 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("pages", () => {
     const pagesDir = path.join(__dirname, "src/content/pages");
     if (!fs.existsSync(pagesDir)) return [];
-    const files = fs
+
+    const siteSettings = loadYamlFile(path.join(__dirname, "src/_data/site.yml"));
+    const terminalSettings = siteSettings.terminal || {};
+    const pages = fs
       .readdirSync(pagesDir)
-      .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"));
-    return files.map((file) => {
-      const raw = fs.readFileSync(path.join(pagesDir, file), "utf8");
-      return yaml.load(raw);
-    });
+      .filter((file) => file.endsWith(".yml") || file.endsWith(".yaml"))
+      .map((file) => normalizePage(loadYamlFile(path.join(pagesDir, file))));
+
+    const navLinks = buildNavigationLinks(pages);
+
+    return pages.map((page) => ({
+      ...page,
+      _navLinks: navLinks,
+      _terminal: terminalSettings,
+    }));
   });
 
   return {

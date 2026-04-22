@@ -2,6 +2,10 @@ slug: resources
 windowTitle: /Resources/
 h1: RESOURCES
 
+navigation:
+  label: "Resources/"
+  order: 6
+
 seo:
   title: "Content Marketing & SEO Portfolio | Spencer Flaherty"
   description: "Whitepapers, training docs, and SEO-driven blog content. Built crawlable PDFs cited by AI, managed 300%+ organic growth, and automated sales enablement tools."

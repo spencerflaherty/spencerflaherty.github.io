@@ -57,9 +57,9 @@ eleventyComputed:
 
 <body>
     <header class="site-header">
-        <a href="{{ site.layout.logoLinkUrl or site.url }}" aria-label="Spencer Flaherty home">
-            <img src="/static/images/header/logo-desktop.png" alt="Spencer Flaherty" class="logo-desktop" width="223" height="180">
-            <img src="/static/images/header/logo-mobile.png" alt="Spencer Flaherty" class="logo-mobile" width="180" height="145">
+        <a href="{{ site.layout.logoLinkUrl or site.url }}" aria-label="{{ site.branding.homeAriaLabel or 'Spencer Flaherty home' }}">
+            <img src="{{ site.branding.logoDesktopSrc or '/static/images/header/logo-desktop.png' }}" alt="{{ site.branding.logoAlt or 'Spencer Flaherty' }}" class="logo-desktop" width="{{ site.branding.logoDesktopWidth or 223 }}" height="{{ site.branding.logoDesktopHeight or 180 }}">
+            <img src="{{ site.branding.logoMobileSrc or '/static/images/header/logo-mobile.png' }}" alt="{{ site.branding.logoAlt or 'Spencer Flaherty' }}" class="logo-mobile" width="{{ site.branding.logoMobileWidth or 180 }}" height="{{ site.branding.logoMobileHeight or 145 }}">
         </a>
     </header>
     <div class="window-container">
@@ -103,12 +103,16 @@ eleventyComputed:
 
             const dropdownBodyContent = {{ page | buildDropdownBodies | jsonify | safe }};
             const contentSegments = {{ page | buildSegments | jsonify | safe }};
+            const navigationLinks = {{ page._navLinks | jsonify | safe }};
+            const navigationMap = Object.fromEntries(navigationLinks.map(function(link) {
+                return [link.id, link.href];
+            }));
 
             const terminalScreen = document.querySelector('.terminal-screen');
             const terminalText = document.getElementById('terminal-text');
 
             let currentSegment = 0;
-            const typeSpeed = 5;
+            const typeSpeed = {{ site.terminal.typeSpeed or 5 }};
 
             function processNextSegment() {
                 if (currentSegment >= contentSegments.length) {
@@ -178,8 +182,12 @@ eleventyComputed:
                     const link = document.createElement('a');
                     link.href = segment.href;
                     link.className = 'terminal-link';
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
+                    if (segment.openInNewTab === false) {
+                        link.target = '_self';
+                    } else {
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                    }
                     terminalText.appendChild(link);
                     typeIntoElement(link, segment.text, 0, 1, processNextSegment);
                 } else if (segment.type === 'inject') {
@@ -225,20 +233,9 @@ eleventyComputed:
                 terminalScreen.classList.remove('terminal-loading');
                 initDropdowns();
                 processNextSegment();
-            }, 500);
+            }, {{ site.terminal.initialDelayMs or 500 }});
 
             document.getElementById('cursor').style.display = 'none';
-
-            const navigationMap = {
-                '0': 'https://spencerflaherty.com',
-                '1': 'https://spencerflaherty.com/about',
-                '2': 'https://spencerflaherty.com/automation',
-                '3': 'https://spencerflaherty.com/media',
-                '4': 'https://spencerflaherty.com/paid-ads',
-                '5': 'https://spencerflaherty.com/reporting',
-                '6': 'https://spencerflaherty.com/resources',
-                '7': 'https://spencerflaherty.com/websites'
-            };
 
             let currentInput = "";
             const inputDisplay = document.getElementById('user-input-display');

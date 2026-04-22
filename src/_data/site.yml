@@ -1,4 +1,22 @@
 url: https://spencerflaherty.com
+
+branding:
+  homeAriaLabel: "Spencer Flaherty home"
+  logoAlt: "Spencer Flaherty"
+  logoDesktopSrc: "/static/images/header/logo-desktop.png"
+  logoDesktopWidth: 223
+  logoDesktopHeight: 180
+  logoMobileSrc: "/static/images/header/logo-mobile.png"
+  logoMobileWidth: 180
+  logoMobileHeight: 145
+
+terminal:
+  host: "root@spencer-portfolio"
+  rootPath: "~"
+  navigationCommand: "./display_categories"
+  navigationPrompt: "Enter module ID"
+  typeSpeed: 5
+  initialDelayMs: 500
 layout:
   logoLinkUrl: https://spencerflaherty.com
   paddingAboveLogo: 5px

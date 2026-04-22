@@ -1,5 +1,10 @@
 slug: home
 windowTitle: /Home/
+
+navigation:
+  label: "~Root/ (Home)"
+  order: 0
+
 seo:
   title: Spencer Flaherty | Marketing, Media & AI Portfolio
   description: Baltimore-based marketer specializing in AI automation, video production, and paid ads. Explore work spanning marketing engineering, media, and web design.
@@ -12,3 +17,5 @@ content:
   - type: image
     src: /static/images/websites/auto-international.png
     alt: Hero Image
+    width: "680px"
+    align: center

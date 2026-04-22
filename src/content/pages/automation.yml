@@ -2,6 +2,10 @@ slug: automation
 windowTitle: /Automation/
 h1: AUTOMATION
 
+navigation:
+  label: "Automation/"
+  order: 2
+
 seo:
   title: "Marketing Automation Portfolio | Spencer Flaherty"
   description: "AI-powered marketing automation: geospatial prospecting, RAG-based personalization, intent conversion engines, and custom CRM tools built to scale lead generation."

@@ -2,6 +2,10 @@ slug: paid-ads
 windowTitle: /Paid_Ads/
 h1: PAID_ADS
 
+navigation:
+  label: "Paid_Ads/"
+  order: 4
+
 seo:
   title: "Paid Advertising Campaigns Portfolio | Spencer Flaherty"
   description: "Facebook and LinkedIn ad campaigns for EV infrastructure, electrical services, and eCommerce. AI-generated creative, conversion optimization, and lead gen."
