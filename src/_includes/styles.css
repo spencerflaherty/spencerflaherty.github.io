@@ -299,6 +299,9 @@ body.classic-theme .theme-toggle {
 
 .dropdown-toggle {
     cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5ch;
 }
 
 .dropdown-content {
@@ -349,6 +352,9 @@ body.classic-theme .theme-toggle {
     color: var(--text-color);
     font-size: 16px;
     font-weight: bold;
+    display: inline;
+    margin: 0;
+    line-height: inherit;
     transition: color 0.4s ease;
 }
 
