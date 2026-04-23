@@ -11,7 +11,7 @@ seo:
   title: "BI Dashboards & Analytics Portfolio | Spencer Flaherty"
   description: "Custom attribution models, Power BI dashboards, and automated reporting systems. Multi-touch attribution, pipeline tracking, and customer operations tools."
   url: "https://spencerflaherty.com/reporting"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/collections/shared/og-image.png"
 
 prompt:
   cwd: reporting
@@ -26,7 +26,7 @@ content:
         description: "Built a multi-touch attribution model connecting lead sources, sales activity, and online behavior to revenue; enabling smarter ad spend and rep accountability."
         media:
           - type: image
-            src: "/static/images/reporting/custom-attribution-system.png"
+            src: "/static/collections/shared/custom-attribution-system.png"
             alt: "Custom Attribution System"
         stack:
           - "BI Layer: Microsoft Power BI"
@@ -37,7 +37,7 @@ content:
         description: "Built Power BI dashboards with automated alerts for pipeline health, churn risk, and sales activity; delivering insights via email, Slack, and in-app notifications."
         media:
           - type: image
-            src: "/static/images/reporting/pipeline-churn-dashboards.png"
+            src: "/static/collections/shared/pipeline-churn-dashboards.png"
             alt: "Pipeline & Churn Dashboards"
         stack:
           - "BI Layer: Microsoft Power BI"
@@ -52,7 +52,7 @@ content:
         description: "Pulls recent customers from CRM, filters out existing reviewers, and sends AI-varied email requests for Google reviews. Increased both review volume and average rating."
         media:
           - type: image
-            src: "/static/images/reporting/automated-review-request-pipeline.png"
+            src: "/static/collections/shared/automated-review-request-pipeline.png"
             alt: "Automated Review Request Pipeline"
         stack:
           - "Data Source: SimPro (CRM) + Power BI"

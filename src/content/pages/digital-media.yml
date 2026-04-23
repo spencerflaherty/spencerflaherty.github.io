@@ -10,7 +10,7 @@ seo:
   title: "Digital Media Portfolio | Spencer Flaherty"
   description: "Digital media work spanning video production, photography, websites, interactive builds, and personal experiments."
   url: "https://spencerflaherty.com/digital-media"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/collections/shared/og-image.png"
 
 prompt:
   cwd: digital-media
@@ -64,7 +64,7 @@ content:
         description: "Built an SEO-focused Squarespace site for an auto shop with no prior web presence. The site now ranks in local Google search and gives the business a credible digital home."
         media:
           - type: image
-            src: "/static/images/websites/auto-international.png"
+            src: "/static/collections/digital-media/auto-international.png"
             alt: "Auto International Website"
         buttonlinks:
           - href: "https://www.autointernationalrepair.com/"
@@ -76,7 +76,7 @@ content:
         description: "Designed a content writer portfolio with custom animations and formatting to showcase writing samples and give her a clean, confident link for job applications."
         media:
           - type: image
-            src: "/static/images/websites/annielauk.png"
+            src: "/static/collections/digital-media/annielauk.png"
             alt: "Annie Laukaitis Website"
         buttonlinks:
           - href: "https://www.annielauk.com/"
@@ -88,7 +88,7 @@ content:
         description: "Led the redesign of my employer's site, handling design, copy, structure, and functionality to create a stronger brand presence and a more effective marketing site."
         media:
           - type: image
-            src: "/static/images/websites/groove-commerce.png"
+            src: "/static/collections/digital-media/groove-commerce.png"
             alt: "Groove Commerce Website"
         buttonlinks:
           - href: "https://www.groovecommerce.com/"
@@ -100,7 +100,7 @@ content:
         description: "Made regular improvements to my current employer's website, including a live reviews carousel tied to the review-request pipeline and general performance and UX improvements."
         media:
           - type: image
-            src: "/static/images/websites/critical-peake.png"
+            src: "/static/collections/digital-media/critical-peake.png"
             alt: "Critical Peake Website"
         buttonlinks:
           - href: "https://criticalpeake.com/"

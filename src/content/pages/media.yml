@@ -11,7 +11,7 @@ seo:
   title: "Video Production & Media Portfolio | Spencer Flaherty"
   description: "Commercial video production, podcast studio builds, and documentary filmmaking. From case studies to AI-enhanced archival projects in Baltimore and beyond."
   url: "https://spencerflaherty.com/media"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/collections/shared/og-image.png"
 
 prompt:
   cwd: media

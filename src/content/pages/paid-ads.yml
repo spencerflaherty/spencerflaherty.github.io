@@ -11,7 +11,7 @@ seo:
   title: "Paid Advertising Campaigns Portfolio | Spencer Flaherty"
   description: "Facebook and LinkedIn ad campaigns for EV infrastructure, electrical services, and eCommerce. AI-generated creative, conversion optimization, and lead gen."
   url: "https://spencerflaherty.com/paid-ads"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/collections/shared/og-image.png"
 
 prompt:
   cwd: paid-ads
@@ -26,7 +26,7 @@ content:
         description: "Produced a video explaining how public agencies can bypass traditional RFPs and procure EV charging through Blue Whale's Sourcewell contract—blending AI-generated visuals with traditional editing to keep it engaging while clearly communicating a complex procurement process."
         media:
           - type: image
-            src: "/static/images/paid-ads/cooperative-purchasing-explainer.png"
+            src: "/static/collections/shared/cooperative-purchasing-explainer.png"
             alt: "Cooperative Purchasing Explainer"
         stack:
           - "AI Video: Kling 2.6 (start/end frame + motion control)"
@@ -54,10 +54,10 @@ content:
         description: "Achieved $20 average CPL by shooting real technicians on real job sites, overlaying authentic Google reviews, and creating dozens of photo/copy variations to let Facebook's algorithm find the winners—all targeted to specific service areas via Conversions API."
         media:
           - type: image
-            src: "/static/images/paid-ads/20-cpl-photo-campaign.png"
+            src: "/static/collections/shared/20-cpl-photo-campaign.png"
             alt: "$20 CPL Photo Campaign"
           - type: image
-            src: "/static/images/paid-ads/residential-fb-jamal.jpeg"
+            src: "/static/collections/shared/residential-fb-jamal.jpeg"
             alt: "Real Technician on Job Site"
         stack:
           - "Platform: Facebook Ads"
@@ -74,7 +74,7 @@ content:
         description: "Designed and ran graphic-based LinkedIn ad campaigns that converted eCommerce brands into retainer clients for a Baltimore-based digital agency—landing notable accounts including Dippin' Dots."
         media:
           - type: image
-            src: "/static/images/paid-ads/bigcommerce-linkedin-ad.png"
+            src: "/static/collections/shared/bigcommerce-linkedin-ad.png"
             alt: "B2B Retainer Acquisition LinkedIn Ad"
         stack:
           - "Platform: LinkedIn Ads"

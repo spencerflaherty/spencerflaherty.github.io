@@ -12,8 +12,8 @@ backend:
 # Sveltia supports local editing via the File System Access API.
 # Click "Work with Local Repository" on the login screen and pick this repo folder.
 
-media_folder: "src/static/images"
-public_folder: "/static/images"
+media_folder: "src/static"
+public_folder: "/static"
 
 collections:
   - name: site-settings
@@ -74,8 +74,8 @@ collections:
       - file: "src/content/pages/home.yml"
         name: home
         label: "Home"
-        media_folder: "src/static/images/home"
-        public_folder: "/static/images/home"
+        media_folder: "src/static/collections/shared"
+        public_folder: "/static/collections/shared"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: home }
           - { label: "Window title", name: windowTitle, widget: string }
@@ -212,8 +212,8 @@ collections:
       - file: "src/content/pages/about.yml"
         name: about
         label: "About"
-        media_folder: "src/static/images/about"
-        public_folder: "/static/images/about"
+        media_folder: "src/static/collections/about"
+        public_folder: "/static/collections/about"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: about }
           - { label: "Window title", name: windowTitle, widget: string }
@@ -356,8 +356,8 @@ collections:
       - file: "src/content/pages/demand-gen.yml"
         name: demand-gen
         label: "Demand Gen"
-        media_folder: "src/static/images/demand-gen"
-        public_folder: "/static/images/demand-gen"
+        media_folder: "src/static/collections/shared"
+        public_folder: "/static/collections/shared"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: demand-gen }
           - { label: "Window title", name: windowTitle, widget: string }
@@ -515,8 +515,8 @@ collections:
       - file: "src/content/pages/ai-systems.yml"
         name: ai-systems
         label: "AI Systems"
-        media_folder: "src/static/images/ai-systems"
-        public_folder: "/static/images/ai-systems"
+        media_folder: "src/static/collections/shared"
+        public_folder: "/static/collections/shared"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: ai-systems }
           - { label: "Window title", name: windowTitle, widget: string }
@@ -674,8 +674,8 @@ collections:
       - file: "src/content/pages/digital-media.yml"
         name: digital-media
         label: "Digital Media"
-        media_folder: "src/static/images/digital-media"
-        public_folder: "/static/images/digital-media"
+        media_folder: "src/static/collections/digital-media"
+        public_folder: "/static/collections/digital-media"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: digital-media }
           - { label: "Window title", name: windowTitle, widget: string }

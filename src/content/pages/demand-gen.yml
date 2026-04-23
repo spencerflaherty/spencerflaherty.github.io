@@ -10,7 +10,7 @@ seo:
   title: "Demand Generation Portfolio | Spencer Flaherty"
   description: "Demand generation systems spanning outbound prospecting, paid acquisition, attribution, SEO content, and sales enablement."
   url: "https://spencerflaherty.com/demand-gen"
-  ogImage: "/static/images/og/og-image.png"
+  ogImage: "/static/collections/shared/og-image.png"
 
 prompt:
   cwd: demand-gen
@@ -25,7 +25,7 @@ content:
         description: "Architected an end-to-end pipeline to identify high-value EV infrastructure leads by filtering physical land attributes, resolving ownership, and automating executive outreach."
         media:
           - type: image
-            src: "/static/images/automation/geospatial-prospecting.png"
+            src: "/static/collections/shared/geospatial-prospecting.png"
             alt: "Geospatial Prospecting"
         stack:
           - "AI Logic: Agentic Workflows"
@@ -38,7 +38,7 @@ content:
         description: "Engineered a public-sector lead generation engine by scraping public procurement datasets, collecting agency persona contact info, and automating high-intent outbound sequences."
         media:
           - type: image
-            src: "/static/images/automation/gov-procurement-pipeline.png"
+            src: "/static/collections/shared/gov-procurement-pipeline.png"
             alt: "Gov-Procurement Pipeline"
         stack:
           - "Ingestion Layer: Scraper Agent"
@@ -49,7 +49,7 @@ content:
         description: "Automated personalized outreach to peer properties by pulling CRM history for each contact, generating tailored emails referencing past interactions, and embedding case study links that scaled high-context outbound across the mid-Atlantic."
         media:
           - type: image
-            src: "/static/images/automation/arcadia-run-outreach-campaign.png"
+            src: "/static/collections/shared/arcadia-run-outreach-campaign.png"
             alt: "Arcadia Run Outreach Campaign"
         stack:
           - "Data Source: CRM Customer History"
@@ -61,7 +61,7 @@ content:
         description: "Built an inbound funnel that turns anonymous website traffic into qualified leads by identifying visitors through IP-to-company matching, layering in third-party intent signals, and auto-routing high-fit prospects to sales."
         media:
           - type: image
-            src: "/static/images/automation/intent-conversion-engine.png"
+            src: "/static/collections/shared/intent-conversion-engine.png"
             alt: "Intent Conversion Engine"
         stack:
           - "Identity Resolution: Visitor De-anonymization (RB2B, Warmly, etc.)"
@@ -72,7 +72,7 @@ content:
         description: "Designed a high speed-to-lead system by synchronizing Facebook and LinkedIn form submissions into CRM, routing validated leads via Zapier, and triggering instant rep notifications to maximize peak-intent conversion."
         media:
           - type: image
-            src: "/static/images/automation/paid-acquisition-engine.png"
+            src: "/static/collections/shared/paid-acquisition-engine.png"
             alt: "Paid Acquisition Engine"
         stack:
           - "Platforms: Facebook, LinkedIn"
@@ -88,7 +88,7 @@ content:
         description: "Produced a video-driven campaign explaining how public agencies can bypass traditional RFPs and procure EV charging through Blue Whale's Sourcewell contract, turning a complex buying process into a clearer offer."
         media:
           - type: image
-            src: "/static/images/paid-ads/cooperative-purchasing-explainer.png"
+            src: "/static/collections/shared/cooperative-purchasing-explainer.png"
             alt: "Cooperative Purchasing Explainer"
         stack:
           - "AI Video: Kling 2.6 (start/end frame + motion control)"
@@ -112,10 +112,10 @@ content:
         description: "Achieved a $20 average CPL by shooting real technicians on real job sites, overlaying authentic Google reviews, and creating dozens of photo/copy variations that let Facebook's algorithm find the winners."
         media:
           - type: image
-            src: "/static/images/paid-ads/20-cpl-photo-campaign.png"
+            src: "/static/collections/shared/20-cpl-photo-campaign.png"
             alt: "$20 CPL Photo Campaign"
           - type: image
-            src: "/static/images/paid-ads/residential-fb-jamal.jpeg"
+            src: "/static/collections/shared/residential-fb-jamal.jpeg"
             alt: "Real Technician on Job Site"
         stack:
           - "Platform: Facebook Ads"
@@ -128,7 +128,7 @@ content:
         description: "Designed and ran LinkedIn ad campaigns that converted eCommerce brands into retainer clients for a Baltimore-based digital agency, including marquee accounts like Dippin' Dots."
         media:
           - type: image
-            src: "/static/images/paid-ads/bigcommerce-linkedin-ad.png"
+            src: "/static/collections/shared/bigcommerce-linkedin-ad.png"
             alt: "B2B Retainer Acquisition LinkedIn Ad"
         stack:
           - "Platform: LinkedIn Ads"
@@ -143,7 +143,7 @@ content:
         description: "Built a multi-touch attribution model connecting lead sources, sales activity, and online behavior to revenue, enabling smarter ad spend and clearer rep accountability."
         media:
           - type: image
-            src: "/static/images/reporting/custom-attribution-system.png"
+            src: "/static/collections/shared/custom-attribution-system.png"
             alt: "Custom Attribution System"
         stack:
           - "BI Layer: Microsoft Power BI"
@@ -154,7 +154,7 @@ content:
         description: "Built Power BI dashboards with automated alerts for pipeline health, churn risk, and sales activity, delivering insights via email, Slack, and in-app notifications."
         media:
           - type: image
-            src: "/static/images/reporting/pipeline-churn-dashboards.png"
+            src: "/static/collections/shared/pipeline-churn-dashboards.png"
             alt: "Pipeline & Churn Dashboards"
         stack:
           - "BI Layer: Microsoft Power BI"
@@ -165,7 +165,7 @@ content:
         description: "Pulled recent customers from CRM, filtered out existing reviewers, and sent AI-varied email requests for Google reviews, increasing both review volume and average rating."
         media:
           - type: image
-            src: "/static/images/reporting/automated-review-request-pipeline.png"
+            src: "/static/collections/shared/automated-review-request-pipeline.png"
             alt: "Automated Review Request Pipeline"
         stack:
           - "Data Source: SimPro (CRM) + Power BI"
