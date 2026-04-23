@@ -12,8 +12,8 @@ backend:
 # Sveltia supports local editing via the File System Access API.
 # Click "Work with Local Repository" on the login screen and pick this repo folder.
 
-media_folder: "src/static/collections/shared"
-public_folder: "/static/collections/shared"
+media_folder: "src/static/collections"
+public_folder: "/static/collections"
 
 collections:
   - name: site-settings
