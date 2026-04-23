@@ -25,7 +25,7 @@ content:
         description: "Developed a RAG-based reactivation system that retrieved historical customer context from CRM, generated hyper-personalized outreach sequences, and executed automated campaigns to reactivate churned accounts and drive upsell opportunities."
         media:
           - type: image
-            src: "/static/collections/shared/rag-reactivation-engine.png"
+            src: "/static/collections/ai-systems/rag-reactivation-engine.png"
             alt: "RAG Reactivation Engine"
         stack:
           - "Data Source: CRM"
@@ -37,7 +37,7 @@ content:
         description: "Developed an agentic workflow that transforms raw survey data into ROI and NOI projections, calculates asset value lift, and prioritizes state, local, and utility incentives to drive buyer confidence."
         media:
           - type: image
-            src: "/static/collections/shared/ev-feasibility-engine.png"
+            src: "/static/collections/ai-systems/ev-feasibility-engine.png"
             alt: "EV Feasibility Engine"
         stack:
           - "Data Source: Resident Surveys"
@@ -52,7 +52,7 @@ content:
         description: "Built lightweight apps to solve operational problems that previously required expensive software or went unsolved, using AI-assisted development to move from idea to working tool in hours."
         media:
           - type: image
-            src: "/static/collections/shared/custom-internal-tools.png"
+            src: "/static/collections/ai-systems/custom-internal-tools.png"
             alt: "Custom Internal Tools"
         stack:
           - "Development: AI-Assisted Coding (Claude Code)"

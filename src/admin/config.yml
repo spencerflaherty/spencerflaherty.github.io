@@ -12,8 +12,8 @@ backend:
 # Sveltia supports local editing via the File System Access API.
 # Click "Work with Local Repository" on the login screen and pick this repo folder.
 
-media_folder: "src/static"
-public_folder: "/static"
+media_folder: "src/static/collections/shared"
+public_folder: "/static/collections/shared"
 
 collections:
   - name: site-settings
@@ -74,8 +74,8 @@ collections:
       - file: "src/content/pages/home.yml"
         name: home
         label: "Home"
-        media_folder: "src/static/collections/shared"
-        public_folder: "/static/collections/shared"
+        media_folder: "src/static/collections/home"
+        public_folder: "/static/collections/home"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: home }
           - { label: "Window title", name: windowTitle, widget: string }
@@ -356,8 +356,8 @@ collections:
       - file: "src/content/pages/demand-gen.yml"
         name: demand-gen
         label: "Demand Gen"
-        media_folder: "src/static/collections/shared"
-        public_folder: "/static/collections/shared"
+        media_folder: "src/static/collections/demand-gen"
+        public_folder: "/static/collections/demand-gen"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: demand-gen }
           - { label: "Window title", name: windowTitle, widget: string }
@@ -515,8 +515,8 @@ collections:
       - file: "src/content/pages/ai-systems.yml"
         name: ai-systems
         label: "AI Systems"
-        media_folder: "src/static/collections/shared"
-        public_folder: "/static/collections/shared"
+        media_folder: "src/static/collections/ai-systems"
+        public_folder: "/static/collections/ai-systems"
         fields:
           - { label: "Slug", name: slug, widget: hidden, default: ai-systems }
           - { label: "Window title", name: windowTitle, widget: string }

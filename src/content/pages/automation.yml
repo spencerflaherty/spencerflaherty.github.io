@@ -26,7 +26,7 @@ content:
         description: "Architected an end-to-end pipeline to identify high-value EV infrastructure leads by filtering physical land attributes, resolving ownership, and automating executive outreach."
         media:
           - type: image
-            src: "/static/collections/shared/geospatial-prospecting.png"
+            src: "/static/collections/demand-gen/geospatial-prospecting.png"
             alt: "Geospatial Prospecting"
         stack:
           - "AI Logic: Agentic Workflows"
@@ -39,7 +39,7 @@ content:
         description: "Engineered a public-sector lead generation engine by scraping public procurement datasets, collecting agency persona contact info, and automating high-intent outbound sequences."
         media:
           - type: image
-            src: "/static/collections/shared/gov-procurement-pipeline.png"
+            src: "/static/collections/demand-gen/gov-procurement-pipeline.png"
             alt: "Gov-Procurement Pipeline"
         stack:
           - "Ingestion Layer: Scraper Agent"
@@ -50,7 +50,7 @@ content:
         description: "Automated personalized outreach to peer properties by pulling CRM history for each contact, generating tailored emails referencing past interactions, and embedding case study links—making each message feel hand-written while scaling across the mid-Atlantic."
         media:
           - type: image
-            src: "/static/collections/shared/arcadia-run-outreach-campaign.png"
+            src: "/static/collections/demand-gen/arcadia-run-outreach-campaign.png"
             alt: "Arcadia Run Outreach Campaign"
         stack:
           - "Data Source: CRM Customer History"
@@ -66,7 +66,7 @@ content:
         description: "Built an inbound funnel that turns anonymous website traffic into qualified leads by identifying visitors through IP-to-company matching, layering in third-party intent signals to gauge buying readiness, and auto-routing high-fit prospects to sales."
         media:
           - type: image
-            src: "/static/collections/shared/intent-conversion-engine.png"
+            src: "/static/collections/demand-gen/intent-conversion-engine.png"
             alt: "Intent Conversion Engine"
         stack:
           - "Identity Resolution: Visitor De-anonymization (RB2B, Warmly, etc.)"
@@ -77,7 +77,7 @@ content:
         description: "Designed a high speed-to-lead system by synchronizing Facebook and LinkedIn form submissions into CRM, routing validated leads via Zapier, and triggering instant rep notifications to maximize peak-intent conversion."
         media:
           - type: image
-            src: "/static/collections/shared/paid-acquisition-engine.png"
+            src: "/static/collections/demand-gen/paid-acquisition-engine.png"
             alt: "Paid Acquisition Engine"
         stack:
           - "Platforms: Facebook, LinkedIn"
@@ -93,7 +93,7 @@ content:
         description: "Developed RAG-based reactivation system by retrieving historical customer context from CRM, generating hyper-personalized outreach sequences, and executing automated email campaigns via Apollo to reactivate churned accounts and drive upsell opportunities."
         media:
           - type: image
-            src: "/static/collections/shared/rag-reactivation-engine.png"
+            src: "/static/collections/ai-systems/rag-reactivation-engine.png"
             alt: "RAG Reactivation Engine"
         stack:
           - "Data Source: CRM"
@@ -105,7 +105,7 @@ content:
         description: "Built lightweight apps to solve specific operational problems that previously required expensive software or went unsolved using AI-assisted development to move from idea to working tool in hours."
         media:
           - type: image
-            src: "/static/collections/shared/custom-internal-tools.png"
+            src: "/static/collections/ai-systems/custom-internal-tools.png"
             alt: "Custom Internal Tools"
         stack:
           - "Development: AI-Assisted Coding (Claude Code)"
@@ -120,7 +120,7 @@ content:
         description: "Developed an agentic workflow that transforms raw survey data into ROI/NOI projections, calculating asset value increases, and prioritizing state/local/utility incentives to drive decision-maker buy-in."
         media:
           - type: image
-            src: "/static/collections/shared/ev-feasibility-engine.png"
+            src: "/static/collections/ai-systems/ev-feasibility-engine.png"
             alt: "EV Feasibility Engine"
         stack:
           - "Data Source: Resident Surveys"
