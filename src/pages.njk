@@ -35,6 +35,8 @@ eleventyComputed:
     {%- if page.seo.ogImage %}
     <meta name="twitter:image" content="{{ (page.seo.twitterImage or page.seo.ogImage) | absUrl(site.url) }}">
     {%- endif %}
+    <link rel="icon" type="image/png" href="{{ site.branding.faviconSrc or '/static/collections/shared/spencer-flaherty-site-logo-april-22.png' }}">
+    <link rel="apple-touch-icon" href="{{ site.branding.faviconSrc or '/static/collections/shared/spencer-flaherty-site-logo-april-22.png' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">

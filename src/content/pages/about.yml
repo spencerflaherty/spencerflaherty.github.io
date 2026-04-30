@@ -32,6 +32,7 @@ content:
       Baltimore, MD
 
       What the horse considers play, the monkey considers business.
+  - type: linebreak
   - type: buttonlink
     text: Connect on LinkedIn
     href: https://www.linkedin.com/in/spencer-flaherty/
