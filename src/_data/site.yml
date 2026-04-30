@@ -2,6 +2,7 @@ url: https://spencerflaherty.com
 branding:
   homeAriaLabel: Spencer Flaherty home
   logoAlt: Spencer Flaherty
+  faviconSrc: /static/collections/shared/favicon.png
   logoDesktopSrc: /static/collections/shared/spencer-flaherty-site-logo-april-22.png
   logoDesktopWidth: 223
   logoDesktopHeight: 180
