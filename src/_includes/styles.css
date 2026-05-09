@@ -5,22 +5,6 @@
     box-sizing: border-box;
 }
 
-/* --- SQUARESPACE CONTAINER OVERRIDES --- */
-/* Force full-width on mobile to prevent Squarespace from constraining the code block */
-body,
-.sqs-block-code,
-.sqs-block-content,
-.sqs-code-container,
-.sqs-layout .sqs-row,
-.sqs-layout .sqs-col-12 {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
 /* --- CSS VARIABLES FOR THEMING --- */
 :root {
     /* Cyberpunk Theme (default) */
@@ -178,6 +162,7 @@ body.classic-theme .green {
 .theme-toggle {
     width: 34px;
     height: 20px;
+    padding: 0;
     background-color: #ff00bb;
     border: none;
     border-radius: 10px;
@@ -189,6 +174,11 @@ body.classic-theme .green {
 
 .theme-toggle:hover {
     opacity: 0.9;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
 }
 
 .toggle-knob {

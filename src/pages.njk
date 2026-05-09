@@ -23,7 +23,10 @@ eleventyComputed:
     <meta property="og:type" content="website">
     {%- if page.seo.url %}
     <meta property="og:url" content="{{ page.seo.url }}">
+    <link rel="canonical" href="{{ page.seo.url }}">
     {%- endif %}
+    <meta name="author" content="Spencer Flaherty">
+    <meta name="generator" content="Eleventy">
     {%- if page.seo.ogImage %}
     <meta property="og:image" content="{{ page.seo.ogImage | absUrl(site.url) }}">
     {%- endif %}
@@ -75,9 +78,9 @@ eleventyComputed:
             <div class="window-title">{{ page.windowTitle }}</div>
             <div class="theme-toggle-container">
                 <span class="toggle-label">B/W</span>
-                <div class="theme-toggle" id="themeToggle">
-                    <div class="toggle-knob"></div>
-                </div>
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch theme" aria-pressed="false">
+                    <span class="toggle-knob"></span>
+                </button>
             </div>
         </div>
         <div class="terminal-screen terminal-loading"><span id="terminal-text"></span><span class="user-input" id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span id="press-enter"></span><form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="numeric" enterkeyhint="go" id="mobile-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></form></div>
@@ -93,14 +96,13 @@ eleventyComputed:
             if (savedTheme === 'classic') {
                 body.classList.add('classic-theme');
             }
+            toggle.setAttribute('aria-pressed', body.classList.contains('classic-theme') ? 'true' : 'false');
 
             toggle.addEventListener('click', function() {
                 body.classList.toggle('classic-theme');
-                if (body.classList.contains('classic-theme')) {
-                    localStorage.setItem('theme', 'classic');
-                } else {
-                    localStorage.setItem('theme', 'cyberpunk');
-                }
+                const isClassic = body.classList.contains('classic-theme');
+                localStorage.setItem('theme', isClassic ? 'classic' : 'cyberpunk');
+                toggle.setAttribute('aria-pressed', isClassic ? 'true' : 'false');
             });
 
             const dropdownBodyContent = {{ page | buildDropdownBodies | jsonify | safe }};

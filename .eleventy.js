@@ -398,6 +398,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy({ "src/static": "static" });
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
+  eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
 
   eleventyConfig.addFilter("buildSegments", buildSegments);
   eleventyConfig.addFilter("buildDropdownBodies", buildDropdownBodies);

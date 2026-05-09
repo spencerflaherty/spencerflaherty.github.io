@@ -1,0 +1,14 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in pages %}
+{%- if p.navigation.showInNavigation != false or p.slug == "home" %}
+  <url>
+    <loc>{{ p.seo.url or (site.url + (("/" if p.slug == "home" else "/" + p.slug + "/"))) }}</loc>
+  </url>
+{%- endif %}
+{%- endfor %}
+</urlset>
