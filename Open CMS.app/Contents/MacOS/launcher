@@ -1,0 +1,10 @@
+#!/bin/bash
+# Resolves to the repo root: Open CMS.app/Contents/MacOS/launcher → ../../../
+REPO="$(cd "$(dirname "$0")/../../.." && pwd)"
+
+osascript <<EOF
+tell application "Terminal"
+  activate
+  do script "cd \"$REPO\" && \"./Open CMS.command\""
+end tell
+EOF

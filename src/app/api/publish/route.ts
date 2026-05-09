@@ -29,6 +29,21 @@ export async function POST() {
       return new Response("No CMS content changes to publish.");
     }
 
+    try {
+      await command("git", ["fetch", "origin", "main"]);
+      const behind = (
+        await command("git", ["rev-list", "--count", "HEAD..origin/main"])
+      ).trim();
+      if (behind && behind !== "0") {
+        return new Response(
+          `Local main is ${behind} commit(s) behind origin/main. Pull first, then re-publish.`,
+          { status: 409 },
+        );
+      }
+    } catch {
+      // Offline or no remote — proceed; push will fail loudly if needed.
+    }
+
     await command("npm", ["run", "build"]);
     await command("git", ["add", "src/_data", "src/content", "src/static/collections"]);
     await command("git", ["commit", "-m", "Publish CMS content updates"]);
