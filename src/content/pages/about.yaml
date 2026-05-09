@@ -23,6 +23,7 @@ content:
     caption: ''
     width: 140px
     align: left
+    image: /static/collections/about/portfolio-photo.png
   - type: text
     text: |-
       Creating for 15 years.
