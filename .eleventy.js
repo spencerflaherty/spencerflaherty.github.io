@@ -176,8 +176,9 @@ function renderFramedEmbed(iframeHtml, item, fallbackRatio) {
 
 function renderMediaItem(item) {
   if (item.type === "image") {
+    const imageSrc = item.image || item.src || "";
     const styleAttr = buildMediaElementStyle(item);
-    const image = `<img src='${escapeHtml(item.src || "")}' alt='${escapeHtml(
+    const image = `<img src='${escapeHtml(imageSrc)}' alt='${escapeHtml(
       item.alt || "",
     )}' loading='lazy'${styleAttr}>`;
     return renderMediaWrapper(image, item);

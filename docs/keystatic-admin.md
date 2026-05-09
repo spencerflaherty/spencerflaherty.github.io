@@ -7,16 +7,16 @@ Keystatic is only the editing UI. It runs as a small Next.js app at `/keystatic`
 ## Local Development
 
 ```sh
-npm run admin:dev
+NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=local npm run admin:dev
 ```
 
 Open `http://127.0.0.1:3000/keystatic`.
 
-By default, the admin uses GitHub mode. To test against the local working tree instead, create `.env.local` with:
+Publish local edits at:
 
-```sh
-NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND=local
-```
+`http://127.0.0.1:3000/publish`
+
+The publish button builds the Eleventy site, commits only CMS-managed content/assets, and pushes to GitHub. GitHub Pages deploys the live site from that push.
 
 ## Production Setup
 

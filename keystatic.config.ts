@@ -14,6 +14,13 @@ const optionalLongText = (label: string, description?: string) =>
 const cssValue = (label: string) =>
   optionalText(label, "CSS value, for example 680px, 60vw, 100%, or 16 / 9.");
 
+const imageUpload = (label: string, directory = "src/static/collections/uploads") =>
+  fields.image({
+    label,
+    directory,
+    publicPath: directory.replace(/^src/, ""),
+  });
+
 const selectOptions = {
   align: [
     { label: "Default", value: "" },
@@ -52,12 +59,12 @@ const seoSchema = fields.object({
   title: fields.text({ label: "Title" }),
   description: fields.text({ label: "Description", multiline: true }),
   url: optionalText("Canonical / Open Graph URL"),
-  ogImage: optionalText("Open Graph image path"),
+  ogImage: imageUpload("Open Graph image", "src/static/collections/shared"),
   ogTitle: optionalText("Open Graph title override"),
   ogDescription: optionalLongText("Open Graph description override"),
   twitterTitle: optionalText("Twitter title override"),
   twitterDescription: optionalLongText("Twitter description override"),
-  twitterImage: optionalText("Twitter image override"),
+  twitterImage: imageUpload("Twitter image override", "src/static/collections/shared"),
 });
 
 const promptSchema = fields.object({
@@ -78,6 +85,7 @@ const mediaSchema = fields.object({
     ],
   }),
   src: optionalText("Image path or embed URL"),
+  image: imageUpload("Image upload"),
   videoId: optionalText("YouTube video ID"),
   title: optionalText("Embed title"),
   alt: optionalText("Alt text"),
@@ -170,6 +178,7 @@ const contentItemSchema = fields.object({
     itemLabel: (props) => props.fields.title.value,
   }),
   src: optionalText("Image path or embed URL"),
+  image: imageUpload("Image upload"),
   videoId: optionalText("YouTube video ID"),
   title: optionalText("Embed or link title"),
   alt: optionalText("Alt text"),
@@ -241,8 +250,8 @@ export default config({
         branding: fields.object({
           homeAriaLabel: optionalText("Home link aria label"),
           logoAlt: fields.text({ label: "Logo alt text" }),
-          faviconSrc: optionalText("Favicon path"),
-          logoDesktopSrc: fields.text({ label: "Desktop logo path" }),
+          faviconSrc: imageUpload("Favicon", "src/static/collections/shared"),
+          logoDesktopSrc: imageUpload("Desktop logo", "src/static/collections/shared"),
           logoDesktopWidth: fields.integer({
             label: "Desktop logo width",
             validation: { isRequired: true, min: 1 },
@@ -251,7 +260,7 @@ export default config({
             label: "Desktop logo height",
             validation: { isRequired: true, min: 1 },
           }),
-          logoMobileSrc: fields.text({ label: "Mobile logo path" }),
+          logoMobileSrc: imageUpload("Mobile logo", "src/static/collections/shared"),
           logoMobileWidth: fields.integer({
             label: "Mobile logo width",
             validation: { isRequired: true, min: 1 },
