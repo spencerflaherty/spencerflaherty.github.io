@@ -299,10 +299,13 @@ body.classic-theme .theme-toggle {
     transition: all 0.3s ease;
 }
 
-/* Keyboard focus: inverted block, terminal-style */
+/* Keyboard focus + active tap: inverted block, terminal-style */
 .terminal-link:focus-visible,
 .terminal-link-menu:focus-visible,
-.terminal-link-inline:focus-visible {
+.terminal-link-inline:focus-visible,
+.terminal-link:active,
+.terminal-link-menu:active,
+.terminal-link-inline:active {
     outline: none;
     background-color: var(--link-hover-bg);
     color: var(--link-hover-text);
@@ -310,7 +313,10 @@ body.classic-theme .theme-toggle {
 
 .terminal-link-menu:focus-visible strong,
 .terminal-link-menu:focus-visible .h3,
-.terminal-link:focus-visible strong {
+.terminal-link:focus-visible strong,
+.terminal-link-menu:active strong,
+.terminal-link-menu:active .h3,
+.terminal-link:active strong {
     color: var(--link-hover-text);
 }
 
