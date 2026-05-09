@@ -6,13 +6,26 @@
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
-    "dev": "eleventy --serve"
+    "dev": "eleventy --serve",
+    "admin:dev": "next dev",
+    "admin:build": "next build",
+    "admin:start": "next start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
-    "js-yaml": "^4.1.1"
+    "@keystatic/core": "^0.5.50",
+    "@keystatic/next": "^5.0.4",
+    "@markdoc/markdoc": "^0.5.7",
+    "@types/node": "^25.6.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "js-yaml": "^4.1.1",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "typescript": "^6.0.3"
   }
 }

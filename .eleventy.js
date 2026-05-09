@@ -396,7 +396,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addDataExtension("yml,yaml", (contents) => yaml.load(contents));
 
   eleventyConfig.addPassthroughCopy({ "src/static": "static" });
-  eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
   eleventyConfig.addPassthroughCopy({ "src/CNAME": "CNAME" });
 
   eleventyConfig.addFilter("buildSegments", buildSegments);
