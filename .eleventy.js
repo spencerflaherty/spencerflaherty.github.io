@@ -375,6 +375,74 @@ function renderDropdownBody(project) {
   return output;
 }
 
+function pushSearchText(values, value) {
+  if (value === undefined || value === null) return;
+  if (typeof value === "string" || typeof value === "number") {
+    const text = String(value).trim();
+    if (text) values.push(text);
+  }
+}
+
+function buildProjectSearchText(project, section, page) {
+  const values = [];
+  pushSearchText(values, page.windowTitle);
+  pushSearchText(values, page.h1);
+  pushSearchText(values, page.navigation?.label);
+  pushSearchText(values, section.heading);
+  pushSearchText(values, section.intro);
+  pushSearchText(values, project.title);
+  pushSearchText(values, project.description);
+  pushSearchText(values, project.note);
+
+  for (const item of project.stack || []) {
+    pushSearchText(values, item);
+  }
+
+  for (const item of project.media || []) {
+    pushSearchText(values, item.title);
+    pushSearchText(values, item.alt);
+    pushSearchText(values, item.caption);
+  }
+
+  for (const item of project.buttonlinks || []) {
+    pushSearchText(values, item.text);
+    pushSearchText(values, item.ariaLabel);
+  }
+
+  for (const item of project.related || []) {
+    pushSearchText(values, item.text);
+  }
+
+  return values.join(" ");
+}
+
+function buildSearchIndex(pages) {
+  const index = [];
+
+  for (const page of pages || []) {
+    if (!page || page.slug === "home") continue;
+
+    for (const section of page.content || []) {
+      if (section.type !== "section") continue;
+
+      for (const project of section.projects || []) {
+        const slug = getProjectSlug(project);
+        if (!slug) continue;
+
+        index.push({
+          title: project.title || "",
+          pageTitle: page.windowTitle ? page.windowTitle.replace(/^\/|\/$/g, "") : page.slug,
+          sectionTitle: section.heading || "",
+          href: `${getPageUrl(page)}#${slug}`,
+          text: buildProjectSearchText(project, section, page),
+        });
+      }
+    }
+  }
+
+  return index;
+}
+
 function pushNavLinks(segments, navLinks, terminal) {
   segments.push({ type: "element", tag: "strong", text: "ID   MODULE", addBreak: true });
 
@@ -476,6 +544,12 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("buildSegments", buildSegments);
   eleventyConfig.addFilter("buildDropdownBodies", buildDropdownBodies);
+  eleventyConfig.addFilter("buildSearchInputPrompt", (page) => {
+    const terminal = getTerminalSettings(page);
+    const navLinks = page._navLinks || [];
+    const promptRange = navLinks.length ? ` [0-${navLinks.length - 1}]` : "";
+    return `${terminal.navigationPrompt}${promptRange}:`;
+  });
 
   function buildProjectIndex(page) {
     const list = [];
@@ -591,9 +665,12 @@ module.exports = function (eleventyConfig) {
 
     const navLinks = buildNavigationLinks(pages);
 
+    const searchIndex = buildSearchIndex(pages);
+
     return pages.map((page) => ({
       ...page,
       _navLinks: navLinks,
+      _searchIndex: searchIndex,
       _terminal: terminalSettings,
     }));
   });

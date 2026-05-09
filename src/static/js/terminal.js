@@ -4,6 +4,8 @@
         const dropdownBodyContent = data.dropdownBodyContent || [];
         const contentSegments = data.contentSegments || [];
         const navigationLinks = data.navigationLinks || [];
+        const searchIndex = data.searchIndex || [];
+        const inputPrompt = data.inputPrompt || 'Enter module ID:';
         const typeSpeed = data.typeSpeed || 5;
         const initialDelayMs = data.initialDelayMs || 500;
 
@@ -176,27 +178,172 @@
         document.getElementById('cursor').style.display = 'none';
 
         let currentInput = "";
+        let pendingSearchResults = null;
         const inputDisplay = document.getElementById('user-input-display');
         const mobileInput = document.getElementById('mobile-input');
         const cursor = document.getElementById('cursor');
+
+        function normalizeSearchText(value) {
+            return String(value || '')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, ' ')
+                .trim();
+        }
+
+        function countOccurrences(haystack, needle) {
+            if (!needle) return 0;
+            let count = 0;
+            let index = haystack.indexOf(needle);
+            while (index !== -1) {
+                count += 1;
+                index = haystack.indexOf(needle, index + needle.length);
+            }
+            return count;
+        }
+
+        function scoreSearchResult(item, query, terms) {
+            const title = normalizeSearchText(item.title);
+            const pageTitle = normalizeSearchText(item.pageTitle);
+            const sectionTitle = normalizeSearchText(item.sectionTitle);
+            const text = normalizeSearchText(item.text);
+            const haystack = [title, pageTitle, sectionTitle, text].join(' ');
+
+            if (!terms.every(function (term) { return haystack.includes(term); })) return 0;
+
+            let score = 10;
+            if (title === query) score += 100;
+            if (title.includes(query)) score += 60;
+            if (pageTitle.includes(query)) score += 25;
+            if (sectionTitle.includes(query)) score += 20;
+            if (text.includes(query)) score += 15;
+            terms.forEach(function (term) {
+                score += countOccurrences(haystack, term);
+            });
+            return score;
+        }
+
+        function searchProjects(query) {
+            const normalizedQuery = normalizeSearchText(query);
+            if (!normalizedQuery) return [];
+            const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+
+            return searchIndex
+                .map(function (item) {
+                    return { item: item, score: scoreSearchResult(item, normalizedQuery, terms) };
+                })
+                .filter(function (result) { return result.score > 0; })
+                .sort(function (a, b) {
+                    if (b.score !== a.score) return b.score - a.score;
+                    return String(a.item.title || '').localeCompare(String(b.item.title || ''));
+                })
+                .map(function (result) { return result.item; });
+        }
+
+        function resetInput() {
+            currentInput = "";
+            inputDisplay.textContent = currentInput;
+            mobileInput.value = "";
+        }
+
+        function appendTerminalOutput(text) {
+            terminalText.appendChild(document.createTextNode(text));
+        }
+
+        function showPrompt() {
+            appendTerminalOutput('\n' + inputPrompt);
+        }
+
+        function showError(message) {
+            inputDisplay.textContent = message || 'Error';
+            inputDisplay.classList.add('error');
+            setTimeout(function () {
+                resetInput();
+                inputDisplay.classList.remove('error');
+            }, 2000);
+        }
+
+        function formatSearchResult(result, index) {
+            return '[' + index + ']  ' + result.pageTitle + ' / ' + result.title;
+        }
+
+        function handleSearchCommand(command) {
+            const query = command.replace(/^grep\s+/i, '').trim();
+            if (!query) {
+                appendTerminalOutput(command + '\ngrep: enter a search term');
+                resetInput();
+                showPrompt();
+                return;
+            }
+
+            const results = searchProjects(query);
+
+            if (results.length === 1) {
+                window.location.href = results[0].href;
+                return;
+            }
+
+            appendTerminalOutput(command + '\n');
+            resetInput();
+
+            if (!results.length) {
+                appendTerminalOutput('grep: no matches found for "' + query + '"\ntry: seo, crm, video, automation, outreach, websites');
+                showPrompt();
+                return;
+            }
+
+            const visibleResults = results.slice(0, 6);
+            pendingSearchResults = visibleResults;
+            appendTerminalOutput(results.length + ' matches found:\n');
+            visibleResults.forEach(function (result, index) {
+                appendTerminalOutput(formatSearchResult(result, index) + '\n');
+            });
+            if (results.length > visibleResults.length) {
+                appendTerminalOutput('showing first ' + visibleResults.length + '; narrow your grep for more precision\n');
+            }
+            appendTerminalOutput('enter result ID [0-' + (visibleResults.length - 1) + ']:');
+        }
+
+        function handleSearchSelection(command) {
+            const index = Number(command);
+            if (
+                Number.isInteger(index) &&
+                pendingSearchResults &&
+                pendingSearchResults[index]
+            ) {
+                window.location.href = pendingSearchResults[index].href;
+                return;
+            }
+
+            appendTerminalOutput(command + '\ninvalid result ID');
+            pendingSearchResults = null;
+            resetInput();
+            showPrompt();
+        }
+
+        function submitCurrentInput() {
+            const command = currentInput.trim();
+            if (!command) return;
+
+            if (pendingSearchResults) {
+                handleSearchSelection(command);
+                return;
+            }
+
+            if (navigationMap.hasOwnProperty(command)) {
+                window.location.href = navigationMap[command];
+            } else if (/^grep(?:\s+|$)/i.test(command)) {
+                handleSearchCommand(command);
+            } else {
+                showError('Error');
+            }
+        }
 
         function handleInput(event) {
             const key = event.key;
             if (inputDisplay.classList.contains('error')) return;
 
             if (key === 'Enter') {
-                if (navigationMap.hasOwnProperty(currentInput)) {
-                    window.location.href = navigationMap[currentInput];
-                } else if (currentInput.trim() !== "") {
-                    inputDisplay.textContent = 'Error';
-                    inputDisplay.classList.add('error');
-                    setTimeout(function () {
-                        currentInput = "";
-                        inputDisplay.textContent = currentInput;
-                        inputDisplay.classList.remove('error');
-                        mobileInput.value = "";
-                    }, 2000);
-                }
+                submitCurrentInput();
                 return;
             }
             if (key === 'Backspace') {
@@ -204,7 +351,7 @@
                 inputDisplay.textContent = currentInput;
                 return;
             }
-            if (key.length === 1 && currentInput.length < 2) {
+            if (key.length === 1 && currentInput.length < 80) {
                 currentInput += key;
                 inputDisplay.textContent = currentInput;
             }
@@ -243,8 +390,8 @@
                     this.value = "";
                     return;
                 }
-                if (this.value.length > 2) {
-                    this.value = this.value.slice(0, 2);
+                if (this.value.length > 80) {
+                    this.value = this.value.slice(0, 80);
                 }
                 currentInput = this.value;
                 inputDisplay.textContent = currentInput;
@@ -252,18 +399,7 @@
 
             function handleMobileSubmit() {
                 if (inputDisplay.classList.contains('error')) return;
-                if (navigationMap.hasOwnProperty(currentInput)) {
-                    window.location.href = navigationMap[currentInput];
-                } else if (currentInput.trim() !== "") {
-                    inputDisplay.textContent = 'Error';
-                    inputDisplay.classList.add('error');
-                    setTimeout(function () {
-                        currentInput = "";
-                        inputDisplay.textContent = currentInput;
-                        inputDisplay.classList.remove('error');
-                        mobileInput.value = "";
-                    }, 2000);
-                }
+                submitCurrentInput();
             }
 
             mobileForm.addEventListener('submit', function (e) {

@@ -88,7 +88,7 @@ eleventyComputed:
                 </button>
             </div>
         </div>
-        <main class="terminal-screen terminal-loading" aria-label="Terminal output"><span id="terminal-text"></span><span class="user-input" id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span id="press-enter"></span><form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="numeric" enterkeyhint="go" id="mobile-input" aria-label="Navigation command" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></form></main>
+        <main class="terminal-screen terminal-loading" aria-label="Terminal output"><span id="terminal-text"></span><span class="user-input" id="user-input-display"></span><span class="typed-cursor" id="cursor"></span><span id="press-enter"></span><form id="mobile-form" action="javascript:void(0);"><input type="text" inputmode="search" enterkeyhint="go" id="mobile-input" aria-label="Terminal command" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></form></main>
     </div>
     </div>
 
@@ -97,6 +97,8 @@ eleventyComputed:
             dropdownBodyContent: {{ page | buildDropdownBodies | jsonify | safe }},
             contentSegments: {{ page | buildSegments | jsonify | safe }},
             navigationLinks: {{ page._navLinks | jsonify | safe }},
+            searchIndex: {{ page._searchIndex | jsonify | safe }},
+            inputPrompt: {{ page | buildSearchInputPrompt | jsonify | safe }},
             typeSpeed: {{ site.terminal.typeSpeed or 5 }},
             initialDelayMs: {{ site.terminal.initialDelayMs or 500 }}
         };
