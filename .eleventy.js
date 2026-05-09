@@ -49,6 +49,32 @@ function getPageUrl(page) {
   return page.slug === "home" ? "/" : `/${page.slug}/`;
 }
 
+function slugify(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getProjectSlug(project) {
+  return slugify(project.slug || project.title);
+}
+
+function renderRelated(related) {
+  if (!Array.isArray(related)) return "";
+  const items = related.filter((r) => r && r.href && r.text);
+  if (!items.length) return "";
+  const links = items
+    .map((r) => {
+      const href = escapeHtml(r.href);
+      const isExternal = /^https?:\/\//i.test(r.href);
+      const target = isExternal ? " target='_blank' rel='noopener noreferrer'" : "";
+      return `<a href='${href}' class='terminal-link-inline'${target}>${escapeHtmlText(r.text)}</a>`;
+    })
+    .join(", ");
+  return `<strong>Related:</strong> ${links}`;
+}
+
 function getDefaultNavLabel(page) {
   if (page.slug === "home") return "~Root/ (Home)";
   if (page.windowTitle) {
@@ -242,7 +268,11 @@ function appendContentItem(segments, item) {
       segments.push({ type: "type", content: item.intro });
     }
     for (const project of item.projects || []) {
-      segments.push({ type: "dropdown", text: `[+]  ${project.title}` });
+      segments.push({
+        type: "dropdown",
+        text: `[+]  ${project.title}`,
+        slug: getProjectSlug(project),
+      });
     }
     if (item.trailingLineBreak !== false) {
       segments.push({ type: "inject", html: "<span class='line-break'></span>" });
@@ -281,12 +311,26 @@ function renderDropdownBody(project) {
     } else if (key === "note" && project.note) {
       parts.push(`<em>${escapeHtmlBlock(project.note)}</em>`);
       kinds.push("text");
+    } else if (key === "related") {
+      const relatedHtml = renderRelated(project.related);
+      if (relatedHtml) {
+        parts.push(relatedHtml);
+        kinds.push("text");
+      }
     }
   }
 
   if (project.note && !order.includes("note")) {
     parts.push(`<em>${escapeHtmlBlock(project.note)}</em>`);
     kinds.push("text");
+  }
+
+  if (!order.includes("related")) {
+    const relatedHtml = renderRelated(project.related);
+    if (relatedHtml) {
+      parts.push(relatedHtml);
+      kinds.push("text");
+    }
   }
 
   let output = "";
@@ -405,6 +449,101 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("buildSegments", buildSegments);
   eleventyConfig.addFilter("buildDropdownBodies", buildDropdownBodies);
+
+  function buildProjectIndex(page) {
+    const list = [];
+    for (const item of page.content || []) {
+      if (item.type === "section") {
+        for (const project of item.projects || []) {
+          list.push({
+            title: project.title || "",
+            slug: getProjectSlug(project),
+            description: project.description || "",
+          });
+        }
+      }
+    }
+    return list;
+  }
+
+  function absUrl(url, base) {
+    if (!url) return "";
+    if (/^https?:\/\//i.test(url)) return url;
+    return (base || "").replace(/\/$/, "") + url;
+  }
+
+  function buildJsonLd(page, site) {
+    site = site || {};
+    const baseUrl = (site.url || "").replace(/\/$/, "");
+    const pageUrl =
+      (page.seo && page.seo.url) ||
+      `${baseUrl}${page.slug === "home" ? "/" : `/${page.slug}/`}`;
+    const personId = `${baseUrl}/#person`;
+    const websiteId = `${baseUrl}/#website`;
+    const personImage =
+      site.branding && site.branding.logoDesktopSrc
+        ? absUrl(site.branding.logoDesktopSrc, baseUrl)
+        : undefined;
+
+    const personNode = {
+      "@type": "Person",
+      "@id": personId,
+      name: "Spencer Flaherty",
+      url: baseUrl || undefined,
+      jobTitle: "Marketing & AI Engineer",
+      sameAs: ["https://www.linkedin.com/in/spencer-flaherty/"],
+    };
+    if (personImage) personNode.image = personImage;
+
+    const websiteNode = {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: baseUrl || undefined,
+      name: "Spencer Flaherty",
+      publisher: { "@id": personId },
+    };
+
+    const isWork = ["ai-systems", "demand-gen", "digital-media"].includes(page.slug);
+    const webPageType = page.slug === "about"
+      ? "AboutPage"
+      : isWork
+      ? "CollectionPage"
+      : "WebPage";
+
+    const webPageNode = {
+      "@type": webPageType,
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: (page.seo && page.seo.title) || page.windowTitle || "Spencer Flaherty",
+      isPartOf: { "@id": websiteId },
+      about: { "@id": personId },
+    };
+    if (page.seo && page.seo.description) {
+      webPageNode.description = page.seo.description;
+    }
+
+    const graph = [personNode, websiteNode, webPageNode];
+
+    if (isWork) {
+      const projects = buildProjectIndex(page);
+      if (projects.length) {
+        graph.push({
+          "@type": "ItemList",
+          "@id": `${pageUrl}#projects`,
+          itemListElement: projects.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${pageUrl}#${p.slug}`,
+            name: p.title,
+          })),
+        });
+      }
+    }
+
+    return JSON.stringify({ "@context": "https://schema.org", "@graph": graph });
+  }
+
+  eleventyConfig.addFilter("buildJsonLd", buildJsonLd);
   eleventyConfig.addFilter("jsonify", (value) => JSON.stringify(value));
   eleventyConfig.addFilter("absUrl", (url, base) => {
     if (!url) return "";

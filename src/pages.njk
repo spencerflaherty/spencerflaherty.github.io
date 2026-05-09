@@ -41,6 +41,7 @@ eleventyComputed:
     <link rel="icon" type="image/png" href="{{ site.branding.faviconSrc or '/static/collections/shared/spencer-flaherty-site-logo-april-22.png' }}">
     <link rel="apple-touch-icon" href="{{ site.branding.faviconSrc or '/static/collections/shared/spencer-flaherty-site-logo-april-22.png' }}">
     <link rel="preload" href="/static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+    {% include "jsonld.njk" %}
     <style>
       :root {
         --padding-above-logo: {{ site.layout.paddingAboveLogo or "30px" }};

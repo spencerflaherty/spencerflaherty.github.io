@@ -268,11 +268,26 @@ function makeMediaSchema(pageSlug: string) {
 
 function makeProjectSchema(pageSlug: string) {
   const mediaSchema = makeMediaSchema(pageSlug);
+  const relatedSchema = fields.object({
+    text: fields.text({
+      label: "Anchor text",
+      description: "Link text shown in the Related: line.",
+    }),
+    href: fields.text({
+      label: "URL or anchor",
+      description:
+        "Where the link points. Use /digital-media/#project-slug to deep-link another project, or a full URL for external pages.",
+    }),
+  });
   return fields.object({
     title: fields.text({
       label: "Project title",
       description: "Shown as the dropdown header on the page.",
     }),
+    slug: optionalText(
+      "URL slug (optional)",
+      "Anchor used for deep-linking (e.g. ?...#my-project). Auto-derived from the title if blank.",
+    ),
     order: fields.array(
       fields.select({
         label: "Content part",
@@ -285,6 +300,7 @@ function makeProjectSchema(pageSlug: string) {
           { label: "Stack list", value: "stack" },
           { label: "Button link (next item)", value: "buttonlink" },
           { label: "Note", value: "note" },
+          { label: "Related projects", value: "related" },
         ],
       }),
       {
@@ -326,6 +342,12 @@ function makeProjectSchema(pageSlug: string) {
       "Note",
       "Italic note shown at the end (or wherever \"Note\" appears in Display order).",
     ),
+    related: fields.array(relatedSchema, {
+      label: "Related projects",
+      description:
+        "Optional. Renders as \"Related: link, link\" under the stack (or wherever \"Related projects\" appears in Display order). Empty = nothing renders.",
+      itemLabel: (props) => props.fields.text.value || props.fields.href.value || "(empty)",
+    }),
   });
 }
 

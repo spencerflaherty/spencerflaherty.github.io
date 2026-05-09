@@ -38,6 +38,7 @@
                 document.getElementById('cursor').style.display = 'inline-block';
                 document.addEventListener('keydown', handleInput);
                 setupMobileInput();
+                openDropdownFromHash();
                 return;
             }
 
@@ -58,6 +59,7 @@
             } else if (segment.type === 'dropdown') {
                 const dropdown = document.createElement('div');
                 dropdown.className = 'dropdown';
+                if (segment.slug) dropdown.id = segment.slug;
                 const toggleLink = document.createElement('a');
                 toggleLink.className = 'terminal-link-menu dropdown-toggle';
                 const strong = document.createElement('strong');
@@ -282,6 +284,19 @@
                 }
             });
         }
+
+        function openDropdownFromHash() {
+            const hash = window.location.hash.replace(/^#/, '');
+            if (!hash) return;
+            const target = document.getElementById(hash);
+            if (!target || !target.classList.contains('dropdown')) return;
+            const toggle = target.querySelector('.dropdown-toggle');
+            if (!toggle) return;
+            toggle.click();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        window.addEventListener('hashchange', openDropdownFromHash);
 
         function initDropdowns() {
             terminalScreen.addEventListener('click', function (e) {
