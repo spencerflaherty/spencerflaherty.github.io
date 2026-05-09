@@ -298,6 +298,16 @@
 
         window.addEventListener('hashchange', openDropdownFromHash);
 
+        function setProjectHash(dropdown, isOpen) {
+            if (!dropdown || !dropdown.id || !window.history || !window.history.replaceState) return;
+            const nextUrl = isOpen
+                ? '#' + dropdown.id
+                : window.location.pathname + window.location.search;
+            if (isOpen || window.location.hash === '#' + dropdown.id) {
+                window.history.replaceState(null, '', nextUrl);
+            }
+        }
+
         function initDropdowns() {
             terminalScreen.addEventListener('click', function (e) {
                 const dropdownToggle = e.target.closest('.dropdown-toggle');
@@ -318,6 +328,7 @@
                         content.dataset.loaded = 'true';
                         dropdown.dataset.animating = 'true';
                         dropdown.classList.add('open');
+                        setProjectHash(dropdown, true);
                         const strong = dropdownToggle.querySelector('strong');
                         if (strong) strong.textContent = '[-]';
                         document.querySelectorAll('.dropdown.open').forEach(function (openDropdown) {
@@ -344,6 +355,7 @@
                 });
 
                 dropdown.classList.toggle('open');
+                setProjectHash(dropdown, dropdown.classList.contains('open'));
                 const strong = dropdownToggle.querySelector('strong');
                 if (strong) {
                     strong.textContent = dropdown.classList.contains('open') ? '[-]' : '[+]';

@@ -122,6 +122,33 @@ function buildNavigationLinks(pages) {
     }));
 }
 
+function buildProjectRoutes(pages) {
+  const routes = [];
+
+  for (const page of pages) {
+    if (!page || page.slug === "home") continue;
+
+    for (const item of page.content || []) {
+      if (item.type !== "section") continue;
+
+      for (const project of item.projects || []) {
+        const projectSlug = getProjectSlug(project);
+        if (!projectSlug) continue;
+
+        routes.push({
+          title: project.title || "",
+          slug: projectSlug,
+          pageSlug: page.slug,
+          permalink: `/${page.slug}/${projectSlug}/`,
+          redirectUrl: `/${page.slug}/#${projectSlug}`,
+        });
+      }
+    }
+  }
+
+  return routes;
+}
+
 function getTerminalSettings(page) {
   return { ...DEFAULT_TERMINAL, ...(page._terminal || {}) };
 }
@@ -569,6 +596,18 @@ module.exports = function (eleventyConfig) {
       _navLinks: navLinks,
       _terminal: terminalSettings,
     }));
+  });
+
+  eleventyConfig.addGlobalData("projectRoutes", () => {
+    const pagesDir = path.join(__dirname, "src/content/pages");
+    if (!fs.existsSync(pagesDir)) return [];
+
+    const pages = fs
+      .readdirSync(pagesDir)
+      .filter((file) => file.endsWith(".yml") || file.endsWith(".yaml"))
+      .map((file) => normalizePage(loadYamlFile(path.join(pagesDir, file))));
+
+    return buildProjectRoutes(pages);
   });
 
   return {

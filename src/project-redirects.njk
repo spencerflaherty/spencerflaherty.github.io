@@ -1,0 +1,24 @@
+---
+pagination:
+  data: projectRoutes
+  size: 1
+  alias: projectRoute
+permalink: "{{ projectRoute.permalink }}index.html"
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ projectRoute.title }} | Spencer Flaherty</title>
+    <link rel="canonical" href="{{ site.url }}{{ projectRoute.redirectUrl }}">
+    <meta http-equiv="refresh" content="0; url={{ projectRoute.redirectUrl }}">
+    <script>
+        window.location.replace({{ projectRoute.redirectUrl | jsonify | safe }});
+    </script>
+</head>
+<body>
+    <p><a href="{{ projectRoute.redirectUrl }}">Open {{ projectRoute.title }}</a></p>
+</body>
+</html>
