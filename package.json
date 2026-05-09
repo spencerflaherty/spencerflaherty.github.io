@@ -7,8 +7,9 @@
     "build": "eleventy",
     "start": "eleventy --serve",
     "dev": "eleventy --serve",
-    "admin:dev": "next dev",
-    "admin:build": "next build",
+    "cms:options": "node scripts/generate-image-options.mjs",
+    "admin:dev": "npm run cms:options && next dev",
+    "admin:build": "npm run cms:options && next build",
     "admin:start": "next start"
   },
   "keywords": [],

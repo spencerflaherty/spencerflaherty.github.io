@@ -1,10 +1,8 @@
 import { config, fields, singleton } from "@keystatic/core";
-import { readdirSync, statSync } from "fs";
-import { join } from "path";
+import imageOptionsByPage from "./keystatic.image-options.json";
 
 const COLLECTIONS_DIR = "src/static/collections";
 const SHARED_DIR = `${COLLECTIONS_DIR}/shared`;
-const IMAGE_EXT = /\.(webp|png|jpe?g|gif|svg)$/i;
 
 const optionalText = (label: string, description?: string) =>
   fields.text({ label, description, validation: { isRequired: false } });
@@ -33,50 +31,17 @@ const imageUpload = (label: string, directory: string, description?: string) =>
 
 const pageUploadDir = (slug: string) => `${COLLECTIONS_DIR}/${slug}/_uploads`;
 
-function collectImages(dir: string, results: string[]) {
-  let entries: string[];
-  try {
-    entries = readdirSync(dir);
-  } catch {
-    return;
-  }
-  for (const entry of entries) {
-    const full = join(dir, entry);
-    let stat;
-    try {
-      stat = statSync(full);
-    } catch {
-      continue;
-    }
-    if (stat.isDirectory()) {
-      collectImages(full, results);
-    } else if (IMAGE_EXT.test(entry)) {
-      results.push(full);
-    }
-  }
-}
+const IMAGE_OPTIONS = imageOptionsByPage as Record<
+  string,
+  { label: string; value: string }[]
+>;
 
 function listExistingImageOptions(pageSlug: string) {
-  const options: { label: string; value: string }[] = [
-    { label: "— No selection (use upload or manual path) —", value: "" },
-  ];
-  const pageImages: string[] = [];
-  collectImages(`${COLLECTIONS_DIR}/${pageSlug}`, pageImages);
-  pageImages.sort();
-  for (const full of pageImages) {
-    const publicPath = full.replace(/^src/, "");
-    const display = publicPath.replace(`/static/collections/${pageSlug}/`, "");
-    options.push({ label: display, value: publicPath });
-  }
-  const sharedImages: string[] = [];
-  collectImages(SHARED_DIR, sharedImages);
-  sharedImages.sort();
-  for (const full of sharedImages) {
-    const publicPath = full.replace(/^src/, "");
-    const display = `shared/${publicPath.replace("/static/collections/shared/", "")}`;
-    options.push({ label: display, value: publicPath });
-  }
-  return options;
+  return (
+    IMAGE_OPTIONS[pageSlug] ?? [
+      { label: "— No selection (use upload or manual path) —", value: "" },
+    ]
+  );
 }
 
 const selectOptions = {

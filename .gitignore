@@ -11,6 +11,7 @@ _site/
 .cache/
 .next/
 tsconfig.tsbuildinfo
+keystatic.image-options.json
 
 # Playwright MCP test output
 .playwright-mcp/
