@@ -1,4 +1,9 @@
 url: https://spencerflaherty.com
+analytics:
+  provider: cloudflare
+  domain: spencerflaherty.com
+  cloudflareToken: c53a1f1891fe43a3a54e2a78d2d14573
+  googleSiteVerification: ''
 branding:
   homeAriaLabel: Spencer Flaherty home
   logoAlt: Spencer Flaherty
