@@ -41,6 +41,7 @@
                 document.addEventListener('keydown', handleInput);
                 setupMobileInput();
                 openDropdownFromHash();
+                setInputHint(true);
                 return;
             }
 
@@ -182,6 +183,12 @@
         const inputDisplay = document.getElementById('user-input-display');
         const mobileInput = document.getElementById('mobile-input');
         const cursor = document.getElementById('cursor');
+        const inputHint = document.getElementById('press-enter');
+
+        function setInputHint(visible) {
+            if (!inputHint) return;
+            inputHint.textContent = visible ? '\nuse grep "keyword" to search' : '';
+        }
 
         function normalizeSearchText(value) {
             return String(value || '')
@@ -243,6 +250,7 @@
             currentInput = "";
             inputDisplay.textContent = currentInput;
             mobileInput.value = "";
+            setInputHint(true);
         }
 
         function appendTerminalOutput(text) {
@@ -250,7 +258,8 @@
         }
 
         function showPrompt() {
-            appendTerminalOutput('\n' + inputPrompt);
+            appendTerminalOutput('\nSearch projects: grep "keyword"\n' + inputPrompt);
+            setInputHint(true);
         }
 
         function showError(message) {
@@ -269,7 +278,14 @@
         function handleSearchCommand(command) {
             const query = command.replace(/^grep\s+/i, '').trim();
             if (!query) {
-                appendTerminalOutput(command + '\ngrep: enter a search term');
+                appendTerminalOutput(command + '\n\nusage: grep "keyword"');
+                resetInput();
+                showPrompt();
+                return;
+            }
+
+            if (!searchIndex.length) {
+                appendTerminalOutput(command + '\n\nsearch index unavailable; refresh this page and try again');
                 resetInput();
                 showPrompt();
                 return;
@@ -282,7 +298,7 @@
                 return;
             }
 
-            appendTerminalOutput(command + '\n');
+            appendTerminalOutput(command + '\n\n');
             resetInput();
 
             if (!results.length) {
@@ -293,14 +309,15 @@
 
             const visibleResults = results.slice(0, 6);
             pendingSearchResults = visibleResults;
-            appendTerminalOutput(results.length + ' matches found:\n');
+            appendTerminalOutput(results.length + ' matches found:\n\n');
             visibleResults.forEach(function (result, index) {
                 appendTerminalOutput(formatSearchResult(result, index) + '\n');
             });
             if (results.length > visibleResults.length) {
-                appendTerminalOutput('showing first ' + visibleResults.length + '; narrow your grep for more precision\n');
+                appendTerminalOutput('\nshowing first ' + visibleResults.length + '; narrow your grep for more precision\n');
             }
-            appendTerminalOutput('enter result ID [0-' + (visibleResults.length - 1) + ']:');
+            appendTerminalOutput('\nenter result ID [0-' + (visibleResults.length - 1) + ']:');
+            setInputHint(false);
         }
 
         function handleSearchSelection(command) {
@@ -314,7 +331,7 @@
                 return;
             }
 
-            appendTerminalOutput(command + '\ninvalid result ID');
+            appendTerminalOutput(command + '\n\ninvalid result ID');
             pendingSearchResults = null;
             resetInput();
             showPrompt();
@@ -349,11 +366,13 @@
             if (key === 'Backspace') {
                 currentInput = currentInput.slice(0, -1);
                 inputDisplay.textContent = currentInput;
+                setInputHint(currentInput.length === 0);
                 return;
             }
             if (key.length === 1 && currentInput.length < 80) {
                 currentInput += key;
                 inputDisplay.textContent = currentInput;
+                setInputHint(false);
             }
         }
 
@@ -395,6 +414,7 @@
                 }
                 currentInput = this.value;
                 inputDisplay.textContent = currentInput;
+                setInputHint(currentInput.length === 0);
             });
 
             function handleMobileSubmit() {

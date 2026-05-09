@@ -456,6 +456,10 @@ function pushNavLinks(segments, navLinks, terminal) {
   const promptRange = navLinks.length ? ` [0-${navLinks.length - 1}]` : "";
   segments.push({
     type: "type",
+    content: `Search projects: grep "keyword"\n`,
+  });
+  segments.push({
+    type: "type",
     content: `${terminal.navigationPrompt}${promptRange}:`,
   });
 }
