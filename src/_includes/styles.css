@@ -290,6 +290,11 @@ body.classic-theme .theme-toggle {
     transition: all 0.3s ease;
 }
 
+.search-result-link {
+    width: auto;
+    min-width: min(100%, 36ch);
+}
+
 /* Inline text links (flow with text, no button styling) */
 .terminal-link-inline {
     color: var(--accent-color);

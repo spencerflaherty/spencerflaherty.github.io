@@ -41,7 +41,6 @@
                 document.addEventListener('keydown', handleInput);
                 setupMobileInput();
                 openDropdownFromHash();
-                setInputHint(true);
                 return;
             }
 
@@ -183,12 +182,6 @@
         const inputDisplay = document.getElementById('user-input-display');
         const mobileInput = document.getElementById('mobile-input');
         const cursor = document.getElementById('cursor');
-        const inputHint = document.getElementById('press-enter');
-
-        function setInputHint(visible) {
-            if (!inputHint) return;
-            inputHint.textContent = visible ? '\nuse grep "keyword" to search' : '';
-        }
 
         function normalizeSearchText(value) {
             return String(value || '')
@@ -250,16 +243,31 @@
             currentInput = "";
             inputDisplay.textContent = currentInput;
             mobileInput.value = "";
-            setInputHint(true);
         }
 
         function appendTerminalOutput(text) {
             terminalText.appendChild(document.createTextNode(text));
         }
 
+        function appendSearchResultLink(result, index) {
+            const link = document.createElement('a');
+            link.href = result.href;
+            link.className = 'terminal-link-menu search-result-link';
+
+            const number = document.createElement('strong');
+            number.textContent = '[' + index + ']';
+
+            const label = document.createElement('span');
+            label.textContent = '  ' + result.pageTitle + ' / ' + result.title;
+
+            link.appendChild(number);
+            link.appendChild(label);
+            terminalText.appendChild(link);
+            terminalText.appendChild(document.createElement('br'));
+        }
+
         function showPrompt() {
-            appendTerminalOutput('\nSearch projects: grep "keyword"\n' + inputPrompt);
-            setInputHint(true);
+            appendTerminalOutput('\n' + inputPrompt);
         }
 
         function showError(message) {
@@ -269,10 +277,6 @@
                 resetInput();
                 inputDisplay.classList.remove('error');
             }, 2000);
-        }
-
-        function formatSearchResult(result, index) {
-            return '[' + index + ']  ' + result.pageTitle + ' / ' + result.title;
         }
 
         function handleSearchCommand(command) {
@@ -311,13 +315,12 @@
             pendingSearchResults = visibleResults;
             appendTerminalOutput(results.length + ' matches found:\n\n');
             visibleResults.forEach(function (result, index) {
-                appendTerminalOutput(formatSearchResult(result, index) + '\n');
+                appendSearchResultLink(result, index);
             });
             if (results.length > visibleResults.length) {
                 appendTerminalOutput('\nshowing first ' + visibleResults.length + '; narrow your grep for more precision\n');
             }
             appendTerminalOutput('\nenter result ID [0-' + (visibleResults.length - 1) + ']:');
-            setInputHint(false);
         }
 
         function handleSearchSelection(command) {
@@ -366,13 +369,11 @@
             if (key === 'Backspace') {
                 currentInput = currentInput.slice(0, -1);
                 inputDisplay.textContent = currentInput;
-                setInputHint(currentInput.length === 0);
                 return;
             }
             if (key.length === 1 && currentInput.length < 80) {
                 currentInput += key;
                 inputDisplay.textContent = currentInput;
-                setInputHint(false);
             }
         }
 
@@ -414,7 +415,6 @@
                 }
                 currentInput = this.value;
                 inputDisplay.textContent = currentInput;
-                setInputHint(currentInput.length === 0);
             });
 
             function handleMobileSubmit() {

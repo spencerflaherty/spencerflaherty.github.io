@@ -456,11 +456,7 @@ function pushNavLinks(segments, navLinks, terminal) {
   const promptRange = navLinks.length ? ` [0-${navLinks.length - 1}]` : "";
   segments.push({
     type: "type",
-    content: `Search projects: grep "keyword"\n`,
-  });
-  segments.push({
-    type: "type",
-    content: `${terminal.navigationPrompt}${promptRange}:`,
+    content: `Enter ID${promptRange} or grep "keyword":`,
   });
 }
 
@@ -549,10 +545,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("buildSegments", buildSegments);
   eleventyConfig.addFilter("buildDropdownBodies", buildDropdownBodies);
   eleventyConfig.addFilter("buildSearchInputPrompt", (page) => {
-    const terminal = getTerminalSettings(page);
     const navLinks = page._navLinks || [];
     const promptRange = navLinks.length ? ` [0-${navLinks.length - 1}]` : "";
-    return `${terminal.navigationPrompt}${promptRange}:`;
+    return `Enter ID${promptRange} or grep "keyword":`;
   });
 
   function buildProjectIndex(page) {
