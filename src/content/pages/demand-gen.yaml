@@ -56,9 +56,9 @@ content:
         description: Automated personalized outreach to peer properties by pulling CRM history for each contact, generating tailored emails referencing past interactions, and embedding case study links that scaled high-context outbound across the mid-Atlantic.
         media:
           - type: image
-            src: /static/collections/demand-gen/arcadia-run-outreach-campaign.png
+            src: /static/collections/demand-gen/arcadia-run-outreach-campaign.webp
             alt: Arcadia Run Outreach Campaign
-            image: /static/collections/demand-gen/arcadia-run-outreach-campaign.png
+            image: /static/collections/demand-gen/arcadia-run-outreach-campaign.webp
         stack:
           - 'Data Source: CRM Customer History'
           - 'AI Logic: Dynamic Email Personalization'
@@ -72,9 +72,9 @@ content:
         description: Built an inbound funnel that turns anonymous website traffic into qualified leads by identifying visitors through IP-to-company matching, layering in third-party intent signals, and auto-routing high-fit prospects to sales.
         media:
           - type: image
-            src: /static/collections/demand-gen/intent-conversion-engine.png
+            src: /static/collections/demand-gen/intent-conversion-engine.webp
             alt: Intent Conversion Engine
-            image: /static/collections/demand-gen/intent-conversion-engine.png
+            image: /static/collections/demand-gen/intent-conversion-engine.webp
         stack:
           - 'Identity Resolution: Visitor De-anonymization (RB2B, Warmly, etc.)'
           - 'Intent Layer: Bidstream + Co-op Data (Bombora, Demandbase)'
@@ -87,9 +87,9 @@ content:
         description: Designed a high speed-to-lead system by synchronizing Facebook and LinkedIn form submissions into CRM, routing validated leads via Zapier, and triggering instant rep notifications to maximize peak-intent conversion.
         media:
           - type: image
-            src: /static/collections/demand-gen/paid-acquisition-engine.png
+            src: /static/collections/demand-gen/paid-acquisition-engine.webp
             alt: Paid Acquisition Engine
-            image: /static/collections/demand-gen/paid-acquisition-engine.png
+            image: /static/collections/demand-gen/paid-acquisition-engine.webp
         stack:
           - 'Platforms: Facebook, LinkedIn'
           - 'Orchestration Layer: Zapier'
@@ -106,9 +106,9 @@ content:
         description: Produced a video-driven campaign explaining how public agencies can bypass traditional RFPs and procure EV charging through Blue Whale's Sourcewell contract, turning a complex buying process into a clearer offer.
         media:
           - type: image
-            src: /static/collections/demand-gen/cooperative-purchasing-explainer.png
+            src: /static/collections/demand-gen/cooperative-purchasing-explainer.webp
             alt: Cooperative Purchasing Explainer
-            image: /static/collections/demand-gen/cooperative-purchasing-explainer.png
+            image: /static/collections/demand-gen/cooperative-purchasing-explainer.webp
         stack:
           - 'AI Video: Kling 2.6 (start/end frame + motion control)'
           - 'AI Image: Nano Banana'
@@ -138,13 +138,13 @@ content:
         description: Achieved a $20 average CPL by shooting real technicians on real job sites, overlaying authentic Google reviews, and creating dozens of photo/copy variations that let Facebook's algorithm find the winners.
         media:
           - type: image
-            src: /static/collections/demand-gen/20-cpl-photo-campaign.png
+            src: /static/collections/demand-gen/20-cpl-photo-campaign.webp
             alt: $20 CPL Photo Campaign
-            image: /static/collections/demand-gen/20-cpl-photo-campaign.png
+            image: /static/collections/demand-gen/20-cpl-photo-campaign.webp
           - type: image
-            src: /static/collections/demand-gen/residential-fb-jamal.jpeg
+            src: /static/collections/demand-gen/residential-fb-jamal.webp
             alt: Real Technician on Job Site
-            image: /static/collections/demand-gen/residential-fb-jamal.jpeg
+            image: /static/collections/demand-gen/residential-fb-jamal.webp
         stack:
           - 'Platform: Facebook Ads'
           - 'Creative: Real Job Site Photography + Review Overlays'
@@ -159,9 +159,9 @@ content:
         description: Designed and ran LinkedIn ad campaigns that converted eCommerce brands into retainer clients for a Baltimore-based digital agency, including marquee accounts like Dippin' Dots.
         media:
           - type: image
-            src: /static/collections/demand-gen/bigcommerce-linkedin-ad.png
+            src: /static/collections/demand-gen/bigcommerce-linkedin-ad.webp
             alt: B2B Retainer Acquisition LinkedIn Ad
-            image: /static/collections/demand-gen/bigcommerce-linkedin-ad.png
+            image: /static/collections/demand-gen/bigcommerce-linkedin-ad.webp
         stack:
           - 'Platform: LinkedIn Ads'
           - 'Design: Adobe Photoshop + Illustrator'
@@ -177,9 +177,9 @@ content:
         description: Built a multi-touch attribution model connecting lead sources, sales activity, and online behavior to revenue, enabling smarter ad spend and clearer rep accountability.
         media:
           - type: image
-            src: /static/collections/demand-gen/custom-attribution-system.png
+            src: /static/collections/demand-gen/custom-attribution-system.webp
             alt: Custom Attribution System
-            image: /static/collections/demand-gen/custom-attribution-system.png
+            image: /static/collections/demand-gen/custom-attribution-system.webp
         stack:
           - 'BI Layer: Microsoft Power BI'
           - 'Custom Tooling: Vibe-Coded Dashboard'
@@ -192,9 +192,9 @@ content:
         description: Built Power BI dashboards with automated alerts for pipeline health, churn risk, and sales activity, delivering insights via email, Slack, and in-app notifications.
         media:
           - type: image
-            src: /static/collections/demand-gen/pipeline-churn-dashboards.png
+            src: /static/collections/demand-gen/pipeline-churn-dashboards.webp
             alt: Pipeline & Churn Dashboards
-            image: /static/collections/demand-gen/pipeline-churn-dashboards.png
+            image: /static/collections/demand-gen/pipeline-churn-dashboards.webp
         stack:
           - 'BI Layer: Microsoft Power BI'
           - 'Notifications: Email, Slack, In-Dashboard'
@@ -207,9 +207,9 @@ content:
         description: Pulled recent customers from CRM, filtered out existing reviewers, and sent AI-varied email requests for Google reviews, increasing both review volume and average rating.
         media:
           - type: image
-            src: /static/collections/demand-gen/automated-review-request-pipeline.png
+            src: /static/collections/demand-gen/automated-review-request-pipeline.webp
             alt: Automated Review Request Pipeline
-            image: /static/collections/demand-gen/automated-review-request-pipeline.png
+            image: /static/collections/demand-gen/automated-review-request-pipeline.webp
         stack:
           - 'Data Source: SimPro (CRM) + Power BI'
           - 'Email: iContact'

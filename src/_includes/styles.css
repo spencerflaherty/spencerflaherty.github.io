@@ -1,3 +1,19 @@
+/* --- FONTS --- */
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/static/fonts/jetbrains-mono-400.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/static/fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+
 /* --- CSS RESET --- */
 * {
     margin: 0;
@@ -371,17 +387,19 @@ body.classic-theme .theme-toggle {
 }
 
 /* --- DIAL-UP STYLE REVEAL ANIMATION --- */
-.dialup-reveal {
-    clip-path: inset(0 0 100% 0);
-    animation: dialupReveal 1.5s steps(30) forwards;
-}
-
-@keyframes dialupReveal {
-    0% {
+@media (prefers-reduced-motion: no-preference) {
+    .dialup-reveal {
         clip-path: inset(0 0 100% 0);
+        animation: dialupReveal 1.5s steps(30) forwards;
     }
-    100% {
-        clip-path: inset(0 0 0% 0);
+
+    @keyframes dialupReveal {
+        0% {
+            clip-path: inset(0 0 100% 0);
+        }
+        100% {
+            clip-path: inset(0 0 0% 0);
+        }
     }
 }
 

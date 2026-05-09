@@ -20,7 +20,7 @@ content:
     newline: true
     trailingLineBreak: true
     projects: []
-    src: /static/collections/about/portfolio-photo.png
+    src: /static/collections/about/portfolio-photo.webp
     alt: Spencer Flaherty
     width: 140px
     align: left

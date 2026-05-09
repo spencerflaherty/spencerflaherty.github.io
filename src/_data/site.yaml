@@ -3,10 +3,10 @@ branding:
   homeAriaLabel: Spencer Flaherty home
   logoAlt: Spencer Flaherty
   faviconSrc: /static/collections/shared/favicon.png
-  logoDesktopSrc: /static/collections/shared/spencer-flaherty-site-logo-april-22.png
+  logoDesktopSrc: /static/collections/shared/spencer-flaherty-site-logo-april-22.webp
   logoDesktopWidth: 223
   logoDesktopHeight: 180
-  logoMobileSrc: /static/collections/shared/spencer-flaherty-site-logo-april-22.png
+  logoMobileSrc: /static/collections/shared/spencer-flaherty-site-logo-april-22.webp
   logoMobileWidth: 180
   logoMobileHeight: 145
 terminal:

@@ -24,9 +24,9 @@ content:
         description: Developed a RAG-based reactivation system that retrieved historical customer context from CRM, generated hyper-personalized outreach sequences, and executed automated campaigns to reactivate churned accounts and drive upsell opportunities.
         media:
           - type: image
-            src: /static/collections/ai-systems/rag-reactivation-engine.png
+            src: /static/collections/ai-systems/rag-reactivation-engine.webp
             alt: RAG Reactivation Engine
-            image: /static/collections/ai-systems/rag-reactivation-engine.png
+            image: /static/collections/ai-systems/rag-reactivation-engine.webp
         stack:
           - 'Data Source: CRM'
           - 'Retrieval Layer: RAG Architecture'

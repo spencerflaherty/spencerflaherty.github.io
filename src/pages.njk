@@ -40,9 +40,7 @@ eleventyComputed:
     {%- endif %}
     <link rel="icon" type="image/png" href="{{ site.branding.faviconSrc or '/static/collections/shared/spencer-flaherty-site-logo-april-22.png' }}">
     <link rel="apple-touch-icon" href="{{ site.branding.faviconSrc or '/static/collections/shared/spencer-flaherty-site-logo-april-22.png' }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/static/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
     <style>
       :root {
         --padding-above-logo: {{ site.layout.paddingAboveLogo or "30px" }};
@@ -114,6 +112,7 @@ eleventyComputed:
 
             const terminalScreen = document.querySelector('.terminal-screen');
             const terminalText = document.getElementById('terminal-text');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             let currentSegment = 0;
             const typeSpeed = {{ site.terminal.typeSpeed or 5 }};
@@ -217,6 +216,19 @@ eleventyComputed:
             }
 
             function typeContent(content, index, callback) {
+                if (reducedMotion) {
+                    const frag = document.createDocumentFragment();
+                    for (let i = index; i < content.length; i++) {
+                        if (content[i] === '\n') {
+                            frag.appendChild(document.createElement('br'));
+                        } else {
+                            frag.appendChild(document.createTextNode(content[i]));
+                        }
+                    }
+                    terminalText.appendChild(frag);
+                    callback();
+                    return;
+                }
                 if (index >= content.length) { callback(); return; }
                 const char = content[index];
                 if (char === '\n') {
@@ -228,6 +240,11 @@ eleventyComputed:
             }
 
             function typeIntoElement(element, text, index, speed, callback) {
+                if (reducedMotion) {
+                    element.textContent += text.substring(index);
+                    callback();
+                    return;
+                }
                 if (index >= text.length) { callback(); return; }
                 element.textContent += text[index];
                 setTimeout(function() { typeIntoElement(element, text, index + 1, speed, callback); }, typeSpeed * speed);
@@ -405,6 +422,14 @@ eleventyComputed:
             }
 
             function typeDropdownContent(container, htmlContent, callback) {
+                if (reducedMotion) {
+                    container.innerHTML = htmlContent;
+                    container.querySelectorAll('img, iframe').forEach(function(media) {
+                        media.classList.add('dialup-reveal');
+                    });
+                    callback();
+                    return;
+                }
                 let index = 0;
                 const dropdownTypeSpeed = 5;
 
