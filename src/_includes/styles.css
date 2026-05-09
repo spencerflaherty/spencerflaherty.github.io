@@ -250,14 +250,34 @@ body.classic-theme .theme-toggle {
     transition: all 0.3s ease;
 }
 
-.terminal-link:hover {
-    background-color: var(--link-hover-bg);
-    color: var(--link-hover-text);
-    box-shadow: 0 0 10px var(--frame-shadow);
-}
+@media (hover: hover) {
+    .terminal-link:hover {
+        background-color: var(--link-hover-bg);
+        color: var(--link-hover-text);
+        box-shadow: 0 0 10px var(--frame-shadow);
+    }
 
-.terminal-link:hover strong {
-    color: var(--link-hover-text);
+    .terminal-link:hover strong {
+        color: var(--link-hover-text);
+    }
+
+    .terminal-link-menu:hover {
+        background-color: var(--link-hover-bg);
+        color: var(--link-hover-text);
+    }
+
+    .terminal-link-menu:hover strong {
+        color: var(--link-hover-text);
+    }
+
+    .terminal-link-menu:hover .h3 {
+        color: var(--link-hover-text);
+    }
+
+    .terminal-link-inline:hover {
+        background-color: var(--link-hover-bg);
+        color: var(--link-hover-text);
+    }
 }
 
 /* Menu-style links (full width) */
@@ -270,19 +290,6 @@ body.classic-theme .theme-toggle {
     transition: all 0.3s ease;
 }
 
-.terminal-link-menu:hover {
-    background-color: var(--link-hover-bg);
-    color: var(--link-hover-text);
-}
-
-.terminal-link-menu:hover strong {
-    color: var(--link-hover-text);
-}
-
-.terminal-link-menu:hover .h3 {
-    color: var(--link-hover-text);
-}
-
 /* Inline text links (flow with text, no button styling) */
 .terminal-link-inline {
     color: var(--accent-color);
@@ -292,8 +299,18 @@ body.classic-theme .theme-toggle {
     transition: all 0.3s ease;
 }
 
-.terminal-link-inline:hover {
+/* Keyboard focus: inverted block, terminal-style */
+.terminal-link:focus-visible,
+.terminal-link-menu:focus-visible,
+.terminal-link-inline:focus-visible {
+    outline: none;
     background-color: var(--link-hover-bg);
+    color: var(--link-hover-text);
+}
+
+.terminal-link-menu:focus-visible strong,
+.terminal-link-menu:focus-visible .h3,
+.terminal-link:focus-visible strong {
     color: var(--link-hover-text);
 }
 

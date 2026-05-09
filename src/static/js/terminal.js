@@ -36,7 +36,7 @@
         function processNextSegment() {
             if (currentSegment >= contentSegments.length) {
                 document.getElementById('cursor').style.display = 'inline-block';
-                document.getElementById('press-enter').innerHTML = '<br>(Press Enter)';
+                document.getElementById('press-enter').innerHTML = '<br>(Type a number 0–7 and press Enter)';
                 document.addEventListener('keydown', handleInput);
                 setupMobileInput();
                 return;
