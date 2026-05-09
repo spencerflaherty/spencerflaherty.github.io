@@ -176,7 +176,7 @@ function renderFramedEmbed(iframeHtml, item, fallbackRatio) {
 
 function renderMediaItem(item) {
   if (item.type === "image") {
-    const imageSrc = item.image || item.src || "";
+    const imageSrc = item.image || item.pickExisting || item.src || "";
     const styleAttr = buildMediaElementStyle(item);
     const image = `<img src='${escapeHtml(imageSrc)}' alt='${escapeHtml(
       item.alt || "",

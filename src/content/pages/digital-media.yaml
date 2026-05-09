@@ -72,9 +72,9 @@ content:
         description: Built an SEO-focused Squarespace site for an auto shop with no prior web presence. The site now ranks in local Google search and gives the business a credible digital home.
         media:
           - type: image
-            src: /static/collections/digital-media/auto-international.webp
+            src: /static/collections/digital-media/auto-international/auto-international.webp
             alt: Auto International Website
-            image: /static/collections/digital-media/auto-international.webp
+            image: /static/collections/digital-media/auto-international/auto-international.webp
         buttonlinks:
           - href: https://www.autointernationalrepair.com/
             text: View Site
@@ -89,9 +89,9 @@ content:
         description: Designed a content writer portfolio with custom animations and formatting to showcase writing samples and give her a clean, confident link for job applications.
         media:
           - type: image
-            src: /static/collections/digital-media/annielauk.webp
+            src: /static/collections/digital-media/annie-laukaitis/annielauk.webp
             alt: Annie Laukaitis Website
-            image: /static/collections/digital-media/annielauk.webp
+            image: /static/collections/digital-media/annie-laukaitis/annielauk.webp
         buttonlinks:
           - href: https://www.annielauk.com/
             text: View Site
@@ -106,9 +106,9 @@ content:
         description: Led the redesign of my employer's site, handling design, copy, structure, and functionality to create a stronger brand presence and a more effective marketing site.
         media:
           - type: image
-            src: /static/collections/digital-media/groove-commerce.webp
+            src: /static/collections/digital-media/groove-commerce-website-redesign/groove-commerce.webp
             alt: Groove Commerce Website
-            image: /static/collections/digital-media/groove-commerce.webp
+            image: /static/collections/digital-media/groove-commerce-website-redesign/groove-commerce.webp
         buttonlinks:
           - href: https://www.groovecommerce.com/
             text: View Site
@@ -123,9 +123,9 @@ content:
         description: Made regular improvements to my current employer's website, including a live reviews carousel tied to the review-request pipeline and general performance and UX improvements.
         media:
           - type: image
-            src: /static/collections/digital-media/critical-peake.webp
+            src: /static/collections/digital-media/critical-peake-website-improvements/critical-peake.webp
             alt: Critical Peake Website
-            image: /static/collections/digital-media/critical-peake.webp
+            image: /static/collections/digital-media/critical-peake-website-improvements/critical-peake.webp
         buttonlinks:
           - href: https://criticalpeake.com/
             text: View Site
