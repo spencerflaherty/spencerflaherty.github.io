@@ -5,15 +5,12 @@ navigation:
   label: ~Root/ (Home)
   order: 0
 seo:
-  title: Spencer Flaherty | Demand Gen, AI Systems & Digital Media
-  description: Baltimore-based marketer and builder specializing in demand gen, AI systems, and digital media across growth, automation, and creative execution.
+  title: SSSpencer Flaherty | Demand Gen, AI Systems & Digital Media
+  description: >-
+    Baltimore-based marketer and builder specializing in demand gen, AI systems,
+    and digital media across growth, automation, and creative execution.
   url: https://spencerflaherty.com
-  ogImage: /static/collections/shared/og-image.png
-  ogTitle: ''
-  ogDescription: ''
-  twitterTitle: ''
-  twitterDescription: ''
+  ogImage: /static/collections/shared/seo/ogImage.png
 prompt:
-  cwd: ''
   command: ./display_categories
 content: []
