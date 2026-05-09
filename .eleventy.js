@@ -178,9 +178,12 @@ function renderMediaItem(item) {
   if (item.type === "image") {
     const imageSrc = item.image || item.pickExisting || item.src || "";
     const styleAttr = buildMediaElementStyle(item);
+    const loadingAttrs = item.eager
+      ? "loading='eager' fetchpriority='high'"
+      : "loading='lazy' decoding='async'";
     const image = `<img src='${escapeHtml(imageSrc)}' alt='${escapeHtml(
       item.alt || "",
-    )}' loading='lazy'${styleAttr}>`;
+    )}' ${loadingAttrs}${styleAttr}>`;
     return renderMediaWrapper(image, item);
   }
 
@@ -188,21 +191,21 @@ function renderMediaItem(item) {
     const title = escapeHtml(item.title || "");
     const iframe = `<iframe src='https://www.youtube-nocookie.com/embed/${escapeHtml(
       item.videoId || "",
-    )}?rel=0&modestbranding=1' title='${title}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>`;
+    )}?rel=0&modestbranding=1' title='${title}' loading='lazy' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>`;
     return renderMediaWrapper(renderFramedEmbed(iframe, item, "16 / 9"), item);
   }
 
   if (item.type === "vimeo") {
     const iframe = `<iframe src='${escapeHtml(
       item.src || "",
-    )}' title='${escapeHtml(item.title || "")}' frameborder='0' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen></iframe>`;
+    )}' title='${escapeHtml(item.title || "")}' loading='lazy' frameborder='0' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen></iframe>`;
     return renderMediaWrapper(renderFramedEmbed(iframe, item, "16 / 9"), item);
   }
 
   if (item.type === "linkedin") {
     const iframe = `<iframe src='${escapeHtml(
       item.src || "",
-    )}' title='${escapeHtml(item.title || "")}' frameborder='0' allowfullscreen></iframe>`;
+    )}' title='${escapeHtml(item.title || "")}' loading='lazy' frameborder='0' allowfullscreen></iframe>`;
     return renderMediaWrapper(renderFramedEmbed(iframe, item, "4 / 5"), item);
   }
 

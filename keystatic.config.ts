@@ -220,6 +220,12 @@ function makeMediaSchema(pageSlug: string) {
     videoId: optionalText("YouTube video ID", "Just the ID (e.g. dQw4w9WgXcQ), not the full URL."),
     title: optionalText("Embed title", "Used as iframe title for accessibility."),
     alt: optionalText("Alt text (image only)", "Describe the image for screen readers and SEO."),
+    eager: fields.checkbox({
+      label: "Load eagerly (above the fold)",
+      description:
+        "Image only. Skip lazy-loading and prioritize this image. Use for the hero / first visible image only.",
+      defaultValue: false,
+    }),
     html: optionalLongText(
       "Custom HTML (HTML type only)",
       "Pasted iframe or HTML snippet. Used when type = Custom HTML.",
@@ -383,6 +389,12 @@ function makeContentItemSchema(pageSlug: string) {
     videoId: optionalText("YouTube video ID", "Just the ID, not the full URL."),
     title: optionalText("Embed or link title", "Used as iframe title for accessibility."),
     alt: optionalText("Alt text", "Describe the image for screen readers."),
+    eager: fields.checkbox({
+      label: "Load eagerly (above the fold)",
+      description:
+        "Image only. Skip lazy-loading and prioritize this image. Use for the hero / first visible image only.",
+      defaultValue: false,
+    }),
     html: optionalLongText("Custom HTML (HTML only)"),
     caption: optionalLongText("Caption"),
     width: cssValue("Width"),
