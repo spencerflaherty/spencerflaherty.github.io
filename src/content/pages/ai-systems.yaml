@@ -16,37 +16,42 @@ content:
   - type: section
     heading: // AI Personalization & Revenue Workflows
     projects:
-      - title: RAG Reactivation Engine
+      - title: Customer Reactivation Engine
+        slug: customer-reactivation-engine
         order:
           - media
           - description
           - stack
-        description: Developed a RAG-based reactivation system that retrieved historical customer context from CRM, generated hyper-personalized outreach sequences, and executed automated campaigns to reactivate churned accounts and drive upsell opportunities.
+        description: Built a customer reactivation system that uses SQL to identify dormant accounts and unfinished quotes from SimPro, then combines customer, project, and quote history to generate personalized outreach for review and delivery through Outlook. The workflow has helped recover a camera quote, book an LED assessment, and reopen conversations with previous customers.
         media:
           - type: image
             src: /static/collections/ai-systems/rag-reactivation-engine/rag-reactivation-engine.webp
-            alt: RAG Reactivation Engine
+            alt: Customer Reactivation Engine
             image: /static/collections/ai-systems/rag-reactivation-engine/rag-reactivation-engine.webp
         stack:
-          - 'Data Source: CRM'
-          - 'Retrieval Layer: RAG Architecture'
-          - 'AI Logic: LLM Generation'
-          - 'Execution Layer: Apollo'
+          - 'Targeting: Custom SQL Queries'
+          - 'Data Source: SimPro CRM'
+          - 'Context: Customer, Project + Quote History'
+          - 'Personalization: AI-Generated Outreach'
+          - 'Email Workflow: Microsoft Outlook'
+          - 'Use Cases: Customer Reactivation, Quote Recovery + Cross-Sell'
       - title: EV Feasibility Engine
         order:
           - media
           - description
           - stack
-        description: Developed an agentic workflow that transforms raw survey data into ROI and NOI projections, calculates asset value lift, and prioritizes state, local, and utility incentives to drive buyer confidence.
+        description: Built an agentic reporting system that transforms resident survey responses and property data into decision-ready EV charging feasibility reports. The workflow generates property-specific maps, demand analysis, ROI and equity-uplift projections, and incentive recommendations—including a 550-response community study and a report that supported ownership approval for an EV charging project.
         media:
           - type: image
             src: /static/collections/ai-systems/ev-feasibility-engine/ev-feasibility-engine.png
             alt: EV Feasibility Engine
             image: /static/collections/ai-systems/ev-feasibility-engine/ev-feasibility-engine.png
         stack:
-          - 'Data Source: Resident Surveys'
-          - 'AI Logic: Agentic Workflow'
-          - 'Analysis Layer: Financial Modeling'
+          - 'Data Sources: Resident Surveys + SimPro'
+          - 'AI Logic: Agentic Report Generation'
+          - 'Financial Modeling: ROI, NOI + Equity Uplift'
+          - 'Outputs: Interactive Calculator + Presentation'
+          - 'Research: State, Local + Utility Incentives'
   - type: section
     heading: // Internal Tools & Automation
     projects:
@@ -55,16 +60,29 @@ content:
           - media
           - description
           - stack
-        description: Built lightweight apps to solve operational problems that previously required expensive software or went unsolved, using AI-assisted development to move from idea to working tool in hours.
+        description: Built lightweight internal applications that turn fragmented operational data into focused, actionable workflows. Projects include a broken-charger opportunity dashboard for sales teams, CRM data-cleanup utilities, and other purpose-built tools that replaced manual processes or filled gaps left by off-the-shelf software.
         media:
           - type: image
             src: /static/collections/ai-systems/custom-internal-tools/custom-internal-tools.png
             alt: Custom Internal Tools
             image: /static/collections/ai-systems/custom-internal-tools/custom-internal-tools.png
         stack:
-          - 'Development: AI-Assisted Coding (Claude Code)'
-          - 'Deployment: Local + Cloud Functions'
-          - 'Use Cases: CRM Chat Interface, Video Recovery Pipeline, Data Cleanup Scripts'
+          - 'Development: AI-Assisted Coding'
+          - 'Interfaces: Custom Web Dashboards'
+          - 'Data Sources: CRM, Operational + Marketing Data'
+          - 'Deployment: Local Apps + Secure Web Tools'
+          - 'Use Cases: Sales Intelligence, Data Cleanup + Workflow Management'
+      - title: AI Content Operations Platform
+        order:
+          - description
+          - stack
+        description: Built a secure AI-assisted content operations platform that generates, reviews, and publishes social posts, blogs, images, and video assets across multiple brands. Connected reusable brand workflows with WordPress, cloud-hosted media, and team-facing review tools to reduce repetitive production work and scale content output.
+        stack:
+          - 'AI Workflows: Claude Skills + MCP'
+          - 'Publishing: WordPress'
+          - 'Media Hosting: Cloudflare R2'
+          - 'Outputs: Social Posts, Blogs, Images + Video'
+          - 'Deployment: Secure Web Dashboard'
       - title: Agentic Workflow Automation
         order:
           - description

@@ -60,6 +60,17 @@ content:
           - 'Stabilization: Gimbal'
           - 'Audio: Wireless Lav/Receiver'
           - 'Post-Production: DaVinci Resolve'
+      - title: B2B Video Campaign Engine
+        order:
+          - description
+          - stack
+        description: Built a repeatable video campaign system for technical B2B topics including EV charging, public incentives, cooperative purchasing, and electrical services. Managed scripting, partner approval, filming, editing, vertical adaptations, branded graphics, and distribution across YouTube, LinkedIn, websites, blogs, and email.
+        stack:
+          - 'Production: Sony Cameras + Location Audio'
+          - 'Post-Production: DaVinci Resolve'
+          - 'Automation: AI-Assisted Scripts, Graphics + Social Variants'
+          - 'Formats: Long-Form, Vertical + Sales Enablement'
+          - 'Distribution: YouTube, LinkedIn, Web, Blog + Email'
   - type: section
     heading: // Websites & Interactive
     projects:

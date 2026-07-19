@@ -21,18 +21,18 @@ content:
           - media
           - description
           - stack
-        description: Architected an end-to-end pipeline to identify high-value EV infrastructure leads by filtering physical land attributes, resolving ownership, and automating executive outreach.
+        description: Built a programmatic prospecting pipeline that identifies high-value commercial properties and public-sector opportunities using location, property, ownership, CRM, and public-dataset signals. Applied the system to create targeted hotel, multifamily, commercial-property, cross-sell, and grant-recipient lists for regional sales campaigns.
         media:
           - type: image
             src: /static/collections/demand-gen/geospatial-prospecting/geospatial-prospecting.png
             alt: Geospatial Prospecting
             image: /static/collections/demand-gen/geospatial-prospecting/geospatial-prospecting.png
         stack:
-          - 'AI Logic: Agentic Workflows'
-          - 'Spatial Data: OpenStreetMap'
-          - 'Property Data: Public Land Records'
-          - 'B2B Intelligence: ZoomInfo'
-          - 'Execution Layer: Apollo'
+          - 'Location Data: Google Places API'
+          - 'Property Intelligence: Land + Ownership Data'
+          - 'Business Data: CRM + Job History'
+          - 'Public Data: Grant + Procurement Records'
+          - 'Outputs: Regional Prospecting + Cross-Sell Lists'
       - title: Gov-Procurement Pipeline
         order:
           - media
@@ -214,6 +214,18 @@ content:
           - 'Data Source: SimPro (CRM) + Power BI'
           - 'Email: iContact'
           - 'AI Layer: Claude (RAG personalization)'
+      - title: SEO Strategy & Optimization Dashboard
+        order:
+          - description
+          - stack
+        description: Built an SEO strategy and optimization dashboard to manage site-hierarchy changes, target keywords, keyword research, technical improvements, and content opportunities across multiple service brands. Used the system to coordinate ongoing SEO work, improve site structure and performance, expand local-search coverage, and give internal and agency teams a shared view of priorities and progress.
+        stack:
+          - 'Strategy Dashboard: Site Hierarchy, Keywords + Priorities'
+          - 'Research: Target Keywords, Competitors + Content Gaps'
+          - 'Technical SEO: Site Structure, Indexation + PageSpeed'
+          - 'Local Search: Google Business Profile + Business Directories'
+          - 'Authority Building: Backlink Research + Outreach'
+          - 'AI Discovery: GEO + llms.txt'
       - title: Gated Lead Magnets
         order:
           - description
